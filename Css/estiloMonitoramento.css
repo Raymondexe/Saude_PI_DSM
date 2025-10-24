@@ -1,0 +1,624 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #eef4ff;
+}
+
+/* ==== Header ==== */
+.TopoSite {
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.ImgLogo {
+    width: 120px;
+    height: auto;
+}
+
+.Navegacao ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.Navegacao li a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 5px;
+    transition: 0.3s;
+}
+
+
+.Navegacao li a:hover {
+    color: #2185f8;
+    border-bottom: 2px solid #2185f8;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: none;
+    z-index: 20;
+}
+
+
+.config-menu {
+    position: relative;
+}
+
+.config-menu button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    /* igual ao tamanho dos links */
+    cursor: pointer;
+    padding: 10px;
+    color: #fff;
+    /* ou #000 dependendo do fundo */
+}
+
+.config-menu button:hover {
+    color: #2185f8;
+}
+
+/* ==== Menu de Configurações ==== */
+.config-menu {
+    position: relative;
+}
+
+.config-menu button {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 10px;
+    color: #000000;
+    transition: color 0.3s ease;
+}
+
+.config-menu button:hover {
+    color: #2185f8;
+}
+
+/* ==== Dropdown principal ==== */
+.config-menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    padding: 8px 0;
+    flex-direction: column;
+    animation: fadeDown 0.2s ease-in-out;
+    z-index: 1001;
+}
+
+.config-menu .dropdown button {
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    color: #000000;
+    transition: background 0.2s, color 0.2s;
+}
+
+.config-menu .dropdown button:hover {
+    background: #eef4ff;
+    color: #2185f8;
+    font-weight: bold;
+}
+
+
+
+/* ==== Animações ==== */
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+/* Modo escuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #eee;
+}
+
+body.dark-mode .menu-toggle {
+    color: #fff; /* Deixa o texto/branco */
+}
+
+body.dark-mode .grid-cards .card {
+    background-color: #1e1e1e;
+    border: 2px solid #333;
+}
+
+body.dark-mode .grid-cards .card h2 {
+    color: #fff;
+}
+
+body.dark-mode .grid-cards .card p,
+body.dark-mode .grid-cards .card a {
+    color: #ccc;
+}
+
+body,
+.grid-cards .card {
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .TopoSite {
+    background: #1e1e1e;
+    box-shadow: none;
+}
+
+body.dark-mode .Navegacao li a {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu button {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu .dropdown {
+    background: #1e1e1e;
+}
+
+body.dark-mode .config-menu .dropdown button {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu .dropdown button:hover {
+    background: #2a2a2a;
+    color: #2185f8;
+}
+
+body.dark-mode .ContainerNoticias {
+    background-color: #121212;
+    color: #eee;
+}
+
+body.dark-mode .ContainerNoticias .card-item {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+}
+
+body.dark-mode .ContainerNoticias .card-item h2.card-title {
+    color: #fff;
+}
+
+body.dark-mode .ContainerNoticias .card-item p,
+body.dark-mode .ContainerNoticias .card-item .badge {
+    color: #ccc;
+}
+
+body.dark-mode .ContainerNoticias .card-button {
+    color: #eee;
+}
+
+/* Transição suave */
+body.dark-mode .ContainerNoticias,
+body.dark-mode .ContainerNoticias .card-item {
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .paragrafoS {
+    background-color: rgba(135, 233, 159, 0.6);
+}
+
+body.dark-mode .cards .card {
+    background-color: #1e1e1e;
+    border: 2px solid #333;
+    color: #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+
+body.dark-mode .cards .card h3 {
+    color: #fff;
+}
+
+body.dark-mode .cards .card p {
+    color: #ccc;
+}
+
+/* === MODO ESCURO: MONITORAMENTO EM TEMPO REAL === */
+body.dark-mode .monitoramento-container {
+    background-color: #1a1a1a;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+    color: #eee;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .monitoramento-container h2 {
+    color: #fff;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+}
+
+/* Cards do monitoramento (batimentos, glicemia, etc) */
+body.dark-mode .cards .card {
+    background-color: #1e1e1e;
+    border: 2px solid #333;
+    color: #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+body.dark-mode .cards .card h3 {
+    color: #fff;
+}
+
+body.dark-mode .cards .card p {
+    color: #ccc;
+}
+
+body.dark-mode .cards .card:hover {
+    background-color: #252525;
+    transform: scale(1.02);
+}
+
+
+/* === MODO ESCURO: HISTÓRICO DE MONITORAMENTO === */
+body.dark-mode .historico-container {
+    background: #1a1a1a;
+    box-shadow: 0 6px 14px rgba(255, 255, 255, 0.05);
+    color: #eee;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .historico-container h2 {
+    color: #fff;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+}
+
+body.dark-mode .tabela-wrapper {
+    border: 1px solid #333;
+}
+
+body.dark-mode #tabelaHistorico th {
+    background: #0a4fa3;
+    color: #fff;
+}
+
+body.dark-mode #tabelaHistorico td {
+    border-bottom: 1px solid #333;
+    color: #ddd;
+}
+
+body.dark-mode #tabelaHistorico tr:nth-child(even) {
+    background: #2a2a2a;
+}
+
+body.dark-mode #tabelaHistorico tr:hover {
+    background: #333;
+}
+
+body.dark-mode .btn-pdf {
+    background: #0a4fa3;
+    color: #fff;
+}
+
+body.dark-mode .btn-pdf:hover {
+    background: #083b7d;
+}
+
+
+/* Layout dos Cards */
+
+.conteudo h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #222;
+    text-align: center;
+}
+
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin: 24px 0;
+}
+
+.card {
+    padding: 24px;
+    border-radius: 16px;
+    text-align: center;
+    background: #ffffff;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin: 24px 0;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card h3 {
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    color: #0f6edc;
+}
+
+.card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Histórico */
+.historico-container {
+    margin: 30px 0;
+    padding: 24px;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.tabela-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+#tabelaHistorico {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+#tabelaHistorico th {
+    background: #0f6edc;
+    color: #fff;
+    padding: 12px;
+    text-align: center;
+}
+
+#tabelaHistorico td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+#tabelaHistorico tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+#tabelaHistorico tr:hover {
+    background: #eef5ff;
+}
+
+/* Botão PDF */
+.btn-pdf {
+    background: #0f6edc;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-pdf:hover {
+    background: #0c57b3;
+    transform: scale(1.05);
+}
+
+
+/* Animação de contagem */
+@keyframes countUp {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+#batimentos.animate {
+  animation: countUp 0.5s ease forwards;
+}
+
+
+
+/* ==== START Footer ==== */
+
+.footer {
+    background-color: #1565c0;
+    color: #fff;
+    padding: 3rem 2rem 1rem 2rem;
+    font-family: var(--fonte);
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    gap: 2rem;
+}
+
+.footerLogo {
+    width: 100px;
+    margin-bottom: 0.5rem;
+}
+
+.footerBrand span {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.footerContact h4 {
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+}
+
+.footerLinks ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footerLinks ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footerLinks ul li a {
+    color: #fffdfd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footerLinks ul li a:hover {
+    color: #4e4848;
+}
+
+.footerContato p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.footerSocials a {
+    display: inline-block;
+    margin-right: 0.5rem;
+
+}
+
+.footerSocials img {
+    width: 24px;
+    transition: transform 0.3s;
+}
+
+.footerSocials img:hover {
+    transform: scale(1.2);
+}
+
+.footerBottom {
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 1rem;
+    font-size: 0.85rem;
+}
+
+/* ==== END Footer ==== */
+
+
+/* ==== Responsividade ==== */
+
+
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 1.2rem;
+        top: 1rem;
+    }
+
+    .Navegacao {
+        position: absolute;
+        top: 60px;
+        /* fica logo abaixo do header */
+        right: 0;
+        background: white;
+        box-shadow: var(--sombra);
+        border-radius: 0 0 12px 12px;
+        width: 200px;
+        display: none;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .Navegacao.ativo {
+        display: flex;
+        animation: menuSlide 0.3s ease forwards;
+    }
+
+    .Navegacao ul {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .Navegacao a {
+        font-size: 1rem;
+        text-align: left;
+        padding: 8px 0;
+        display: block;
+    }
+
+    @keyframes menuSlide {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    body.dark-mode .config-menu .dropdown {
+        width: 100%;
+    }
+
+    body.dark-mode .Navegacao {
+        flex-direction: column;
+        background-color: #1e1e1e;
+    }
+
+    body.dark-mode .grid-cards {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    body.dark-mode .grid-cards .card {
+        width: 100%;
+    }
+
+    body.dark-mode .ContainerNoticias {
+        padding: 1rem;
+    }
+}

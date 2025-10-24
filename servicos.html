@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saúde 360 - Monitoramento</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="icon/icon_BemEstar360.ico">
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="./Css/estiloServico.css">
+
+
+
+</head>
+
+<body>
+    <header class="TopoSite">
+        <div class="Logo">
+            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+        </div>
+
+        <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+
+        <nav class="Navegacao">
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./monitoramento.html">Monitoramento</a></li>
+                <li><a href="#">Serviços</a></li>
+                <li><a href="#">Quem somos</a></li>
+                <li class="config-menu">
+                    <button id="config-btn">⚙️</button>
+                    <div class="dropdown">
+                        <button id="toggle-theme">🌙 Modo Escuro</button>
+                        <button id="change-lang">🌎 Trocar Idioma</button>
+                        <button id="accessibility">♿ Acessibilidade</button>
+                    </div>
+                </li>
+            </ul>
+            <script src="script.js"></script>
+        </nav>
+    </header>
+
+
+    <main class="conteudo">
+
+        <!-- GUIA RÁPIDO -->
+        <section class="guia-rapido">
+            <h2>Onde Procurar Ajuda?</h2>
+            <div class="guia-cards">
+                <div class="guia-card">
+                    <h3>🏥 UBS</h3>
+                    <p>Sintomas leves, consultas de rotina, vacinação, acompanhamento de doenças crônicas.</p>
+                </div>
+                <div class="guia-card">
+                    <h3>🚑 UPA</h3>
+                    <p>Emergências, febre alta persistente, dores intensas, acidentes, fraturas.</p>
+                </div>
+                <div class="guia-card">
+                    <h3>📱 SUS Digital</h3>
+                    <p>Agendamentos online, carteira de vacinação digital, histórico médico.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVIÇOS (ACCORDION) -->
+        <section class="servicos-container">
+            <h2>Serviços Oferecidos</h2>
+
+            <div class="accordion">
+                <button class="accordion-btn">UBS – Unidade Básica de Saúde</button>
+                <div class="accordion-content">
+                    <ul>
+                        <li>🩺 Consultas com clínico geral e especialistas</li>
+                        <li>💉 Vacinação</li>
+                        <li>🧪 Exames de rotina</li>
+                        <li>❤️‍🩹 Acompanhamento de hipertensão e diabetes</li>
+                        <li><button onclick="abrirMapa('UBS')">📍 Ver no Mapa</button></li>
+                    </ul>
+                </div>
+
+                <button class="accordion-btn">UPA – Unidade de Pronto Atendimento</button>
+                <div class="accordion-content">
+                    <ul>
+                        <li>⏱️ Atendimento emergencial 24h</li>
+                        <li>🚑 Estabilização de pacientes</li>
+                        <li>🩹 Pequenas cirurgias e suturas</li>
+                        <li>🧾 Exames rápidos e internação curta</li>
+                        <li><button onclick="abrirMapa('UPA')">📍 Ver no Mapa</button></li>
+                    </ul>
+                </div>
+
+                <button class="accordion-btn">SUS Digital</button>
+                <div class="accordion-content">
+                    <ul>
+                        <li>📅 Agendamento de consultas</li>
+                        <li>📲 Carteira de vacinação digital</li>
+                        <li>📑 Acompanhamento de exames e receitas</li>
+                        <li><a href="https://www.gov.br/saude/pt-br" target="_blank">🌐 Acessar site oficial</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <script src="./scriptAccordions.js"></script>
+        </section>
+
+
+        <br><br>
+
+        <section class="feedback-servicos">
+            <h3>Você conseguiu encontrar o serviço que procurava?</h3>
+            <div class="feedback-buttons">
+                <button class="btn-feedback" data-feedback="sim">✅ Sim</button>
+                <button class="btn-feedback" data-feedback="nao">❌ Não</button>
+                <button class="btn-feedback" data-feedback="parcial">⚠️ Parcialmente</button>
+            </div>
+            <script src="./scriptAlert.js"></script>
+            <div id="alert-container"></div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Footer -->
+        <!-- Rodapé -->
+        <footer class="footer">
+            <div class="footerContainer">
+                <!-- Logo e nome -->
+                <div class="footerBrand">
+                    <img src="Img/logo_BemEstar360.png" alt="Bem Estar 360" class="footerLogo">
+                    <span data-lang="footerBrand">Bem-Estar 360</span>
+                </div>
+
+                <div class="footerLinks">
+                    <ul>
+                        <li><a href="./index.html" data-lang="footerHome">Home</a></li>
+                        <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
+                        <li><a href="#" data-lang="footerHistory">Histórico</a></li>
+                        <li><a href="#" data-lang="footerServices">Serviços</a></li>
+                        <li><a href="#" data-lang="footerFaq">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contato -->
+                <div class="footerContato">
+                    <h4 data-lang="footerContactTitle">Contato</h4>
+                    <p data-lang="footerEmail">✉️ contato@bemestar360.com</p>
+                    <p data-lang="footerPhone">📞 (11) 1234-5678</p>
+                    <div class="footerSocials">
+                        <a href="#"><img src="./Img/face_icon.png" alt="Facebook"></a>
+                        <a href="#"><img src="./Img/insta_icon.webp" alt="Instagram"></a>
+                        <a href="#"><img src="./Img/X_icon.svg.png" alt="Twitter"></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="footerBottom">
+                <p data-lang="footerCopy">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+
+        <!-- JS do menu mobile -->
+        <script>
+            const toggle = document.querySelector(".menu-toggle");
+            const menu = document.querySelector(".Navegacao ul");
+
+            toggle.addEventListener("click", () => {
+                menu.classList.toggle("show");
+            });
+        </script>
+</body>
+
+</html>

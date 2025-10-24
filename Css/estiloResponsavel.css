@@ -1,0 +1,716 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #eef4ff;
+}
+
+.TopoSite {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 0.5rem 2rem;
+    border-radius: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: background 0.3s ease;
+}
+
+.ImgLogo {
+    width: 120px;
+    height: auto;
+}
+
+/* Menu de navegação */
+.Navegacao ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.Navegacao li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s, border-bottom 0.3s;
+    padding: 5px;
+}
+
+.Navegacao li a:hover {
+    color: #2563eb;
+    border-bottom: 2px solid #2563eb;
+}
+
+/* Botão menu mobile */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* ==== Config Menu ==== */
+.config-menu, .perfil-menu {
+    position: relative;
+}
+
+.config-menu button,
+.perfil-menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s;
+}
+
+.config-menu button:hover,
+.perfil-menu button:hover {
+    color: #2563eb;
+}
+
+/* Dropdown configuração */
+.config-menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 130%;
+    right: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    min-width: 180px;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.config-menu .dropdown button {
+    padding: 10px 15px;
+    text-align: left;
+    width: 100%;
+    font-size: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.config-menu .dropdown button:hover {
+    background: #eef2ff;
+    font-weight: bold;
+}
+
+/* Dropdown perfil */
+.foto-perfil {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #2563eb;
+    transition: transform 0.2s;
+}
+
+.foto-perfil:hover {
+    transform: scale(1.1);
+}
+
+.nome-perfil {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+}
+
+.dropdown-perfil {
+    display: none;
+    position: absolute;
+    top: 130%;
+    right: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    min-width: 150px;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.dropdown-perfil a {
+    display: block;
+    text-decoration: none;
+    color: #2563eb;
+    padding: 10px 15px;
+    font-size: 14px;
+    transition: background 0.2s, font-weight 0.2s;
+}
+
+.dropdown-perfil a:hover {
+    background: #eef2ff;
+    font-weight: bold;
+}
+
+/* Mostrar dropdowns ao clicar */
+#config-btn:focus + .dropdown,
+#config-btn:active + .dropdown,
+#perfil-btn:focus + .dropdown-perfil,
+#perfil-btn:active + .dropdown-perfil {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==== Responsividade ==== */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .Navegacao ul {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        flex-direction: column;
+        background: #fff;
+        padding: 1rem;
+        border-radius: 0 0 10px 10px;
+        display: none;
+    }
+
+    .Navegacao.ativo ul {
+        display: flex;
+    }
+}
+
+/* ==== Dark Mode ==== */
+body.dark-mode {
+    background: #121212;
+    color: #f5f5f5;
+}
+
+body.dark-mode .menu-toggle {
+    color: #fff;
+}
+
+/* Cards padrão */
+.grid-cards .card h2 {
+    color: #000;
+}
+
+.grid-cards .card p,
+.grid-cards .card a {
+    color: #333;
+}
+
+/* Modo escuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #eee;
+}
+
+body.dark-mode .grid-cards .card {
+    background-color: #1e1e1e;
+    border: 2px solid #333;
+}
+
+body.dark-mode .grid-cards .card h2 {
+    color: #fff;
+}
+
+body.dark-mode .grid-cards .card p,
+body.dark-mode .grid-cards .card a {
+    color: #ccc;
+}
+
+body,
+.grid-cards .card {
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .TopoSite {
+    background: #1e1e1e;
+    box-shadow: none;
+}
+
+body.dark-mode .Navegacao li a {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu button {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu .dropdown {
+    background: #1e1e1e;
+}
+
+body.dark-mode .config-menu .dropdown button {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu .dropdown button:hover {
+    background: #2a2a2a;
+    color: #2185f8;
+}
+
+body.dark-mode .ContainerNoticias {
+    background-color: #121212;
+    color: #eee;
+}
+
+body.dark-mode .ContainerNoticias .card-item {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+}
+
+body.dark-mode .ContainerNoticias .card-item h2.card-title {
+    color: #fff;
+}
+
+body.dark-mode .ContainerNoticias .card-item p,
+body.dark-mode .ContainerNoticias .card-item .badge {
+    color: #ccc;
+}
+
+body.dark-mode .ContainerNoticias .card-button {
+    color: #eee;
+}
+
+/* Transição suave */
+body.dark-mode .ContainerNoticias,
+body.dark-mode .ContainerNoticias .card-item {
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .paragrafoS {
+    background-color: rgba(135, 233, 159, 0.6);
+}
+
+/* ===== Seção de boas-vindas DARK MODE ===== */
+body.dark-mode .welcome-section {
+  background: #121212; /* fundo escuro suave */
+  color: #eee;
+}
+
+/* Wrapper flexível */
+body.dark-mode .welcome-wrapper {
+  z-index: 2;
+  position: relative;
+}
+
+/* Texto principal */
+body.dark-mode .welcome-text h1 {
+  color: #fff;
+}
+
+body.dark-mode .welcome-text h1 span {
+  color: #4b79a1; /* mantém destaque elegante */
+}
+
+
+body.dark-mode .welcome-text p {
+  color: #ccc;
+}
+
+/* Ilustração animada */
+body.dark-mode .welcome-illustration img {
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+/* Ondas suaves de fundo */
+body.dark-mode .wave {
+  background: rgba(75, 121, 161, 0.1); /* aumenta contraste no dark mode */
+}
+
+body.dark-mode .wave1 { top: -50%; left: -50%; }
+body.dark-mode .wave2 { top: -60%; left: -40%; animation-duration: 20s; }
+body.dark-mode .wave3 { top: -70%; left: -30%; animation-duration: 25s; }
+
+
+.mensagem-ola {
+  background: linear-gradient(135deg, #dbeafe, #eff6ff);
+  border-left: 6px solid #2563eb;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin: 1.5rem 0 2rem 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: background 0.3s ease;
+}
+
+.mensagem-ola h1 {
+  color: #1e3a8a;
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.mensagem-ola span {
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.mensagem-ola p {
+  color: #374151;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Efeito ao passar o mouse */
+.mensagem-ola:hover {
+  background: linear-gradient(135deg, #c7d2fe, #e0f2fe);
+}
+
+/* Modo escuro */
+body.dark-mode .mensagem-ola {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border-left: 6px solid #3b82f6;
+}
+
+body.dark-mode .mensagem-ola h1,
+body.dark-mode .mensagem-ola p {
+  color: #e2e8f0;
+}
+
+.painel-responsavel {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding: 1rem;
+}
+
+.dependentes {
+    flex: 1;
+}
+
+.vinculo {
+    flex: 0 0 300px; /* largura fixa para o painel de vínculo */
+    background: #f0f4ff;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.card-dependente {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    color: #1e3a8a;
+    text-decoration: none;
+}
+
+.card-dependente:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+}
+
+.foto-dependente {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.8rem;
+    border: 2px solid #2563eb;
+}
+
+.info-dependente h3 {
+    margin: 0 0 0.2rem 0;
+    font-size: 1rem;
+}
+
+.info-dependente ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.info-dependente ul li {
+    margin-bottom: 1px;
+}
+
+.acoes button {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.acoes button:hover {
+    background: #1e40af;
+}
+
+/* ===== Caixa do Código Gerado ===== */
+.codigo, .form {
+    background-color: #f5f7ff; /* fundo suave */
+    border: 1px solid #c7d2fe; /* borda leve */
+    border-radius: 10px;
+    padding: 1.5rem;
+    max-width: 350px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    font-family: Arial, sans-serif;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.codigo p, .form label {
+    font-size: 14px;
+    color: #1e3a8a;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.codigo h3 {
+    font-size: 22px;
+    color: #2563eb;
+    letter-spacing: 3px;
+    margin: 0;
+    padding: 0.5rem 0;
+    background-color: #e0e7ff; /* leve destaque atrás do código */
+    border-radius: 6px;
+    display: inline-block;
+    min-width: 100px;
+    text-align: center;
+}
+
+.form input {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 14px;
+}
+
+.form button {
+    background-color: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.form button:hover {
+    background-color: #1e40af;
+}
+
+/* Oculto (mantém funcionalidade do JS) */
+.codigo.oculto, .form.oculto {
+    display: none;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 480px) {
+    .codigo, .form {
+        max-width: 100%;
+        padding: 1rem;
+    }
+    
+    .codigo h3 {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+
+    .form button {
+        width: 100%;
+        padding: 0.7rem 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==== START Footer ==== */
+
+.footer {
+    background-color: #1565c0;
+    color: #fff;
+    padding: 3rem 2rem 1rem 2rem;
+    font-family: var(--fonte);
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    gap: 2rem;
+}
+
+.footerLogo {
+    width: 100px;
+    margin-bottom: 0.5rem;
+}
+
+.footerBrand span {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.footerContact h4 {
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+}
+
+.footerLinks ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footerLinks ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footerLinks ul li a {
+    color: #fffdfd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footerLinks ul li a:hover {
+    color: #4e4848;
+}
+
+.footerContato p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.footerSocials a {
+    display: inline-block;
+    margin-right: 0.5rem;
+
+}
+
+.footerSocials img {
+    width: 24px;
+    transition: transform 0.3s;
+}
+
+.footerSocials img:hover {
+    transform: scale(1.2);
+}
+
+.footerBottom {
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 1rem;
+    font-size: 0.85rem;
+}
+
+/* ==== END Footer ==== */
+
+
+/* ==== Responsividade ==== */
+
+
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 1.2rem;
+        top: 1rem;
+    }
+
+    .Navegacao {
+        position: absolute;
+        top: 60px;
+        /* fica logo abaixo do header */
+        right: 0;
+        background: white;
+        box-shadow: var(--sombra);
+        border-radius: 0 0 12px 12px;
+        width: 200px;
+        display: none;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .Navegacao.ativo {
+        display: flex;
+        animation: menuSlide 0.3s ease forwards;
+    }
+
+    .Navegacao ul {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .Navegacao a {
+        font-size: 1rem;
+        text-align: left;
+        padding: 8px 0;
+        display: block;
+    }
+
+    @keyframes menuSlide {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    body.dark-mode .config-menu .dropdown {
+        width: 100%;
+    }
+
+    body.dark-mode .Navegacao {
+        flex-direction: column;
+        background-color: #1e1e1e;
+    }
+
+    body.dark-mode .grid-cards {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    body.dark-mode .grid-cards .card {
+        width: 100%;
+    }
+
+    body.dark-mode .ContainerNoticias {
+        padding: 1rem;
+    }
+}

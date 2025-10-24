@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-Estar 360 - Indica</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navegacao = document.querySelector('.Navegacao');
+
+            menuToggle.addEventListener('click', () => {
+                navegacao.classList.toggle('ativo');
+            });
+
+            document.querySelectorAll('.Navegacao a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navegacao.classList.remove('ativo');
+                });
+            });
+        });
+    </script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="icon/icon_BemEstar360.ico">
+
+
+    <script src="script.js"></script>
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="./Css/estiloResponsavel.css">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="TopoSite">
+        <div class="Logo">
+            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+        </div>
+
+        <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+
+        <nav class="Navegacao">
+            <ul>
+                <!-- Navegação principal -->
+                <li><a href="./index.html">Home</a></li>
+                
+                <li><a href="./servicos.html">Registros</a></li>
+
+                <!-- Configurações -->
+                <li class="config-menu">
+                    <button id="config-btn" aria-haspopup="true" aria-expanded="false">⚙️</button>
+                    <div class="dropdown" role="menu">
+                        <button id="toggle-theme">🌙 Modo Escuro</button>
+                        <button id="change-lang">🌎 Trocar Idioma</button>
+                        <button id="accessibility" class="Aumentar">♿ Acessibilidade</button>
+                    </div>
+                </li>
+
+                <!-- Perfil do usuário -->
+                <li class="perfil-menu">
+                    <button id="perfil-btn" aria-haspopup="true" aria-expanded="false">
+                        <img src="Img/fotoPerfil.jpg" alt="Foto de perfil" class="foto-perfil">
+                        <span class="nome-perfil">Ana Beatriz</span>
+                    </button>
+                    <div class="dropdown-perfil" role="menu">
+                        <a href="./perfil.html">Meu Perfil</a>
+                        <a href="./sair.html">Sair</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <script src="script.js"></script>
+    <section class="mensagem-ola">
+        <h1>👋 Olá, <span id="nomeResponsavel">Ana Beatriz</span>!</h1>
+        <p>Bem-vindo(a) ao painel de gerenciamento dos ultimos registros dos seus dependentes registrados no <strong>Bem-Estar
+                360</strong>.</p>
+    </section>
+
+    <main class="conteudo">
+        <div class="painel-responsavel">
+
+            <!-- Dependentes -->
+            <section class="dependentes">
+                <h2>Meus Dependentes</h2>
+                <div class="lista">
+                    <a href="detalhesDependente.html" class="card-dependente">
+                        <img src="Img/idosa.jpg" alt="Maria Silva" class="foto-dependente">
+                        <div class="info-dependente">
+                            <h3>Maria Silva</h3>
+                            <ul class="indicadores">
+                                <li>Idade: 74 anos</li>
+                                <li>Pressão: 12x8</li>
+                                <li>Temperatura: 36,7°C</li>
+                                <li>Glicemia: 95 mg/dL</li>
+                                <li>Batimentos: 72 bpm</li>
+                            </ul>
+                        </div>
+                    </a>
+                    <a href="detalhesDependente.html" class="card-dependente">
+                        <img src="Img/idoso.jpg" alt="João Silva" class="foto-dependente">
+                        <div class="info-dependente">
+                            <h3>João Silva</h3>
+                            <ul class="indicadores">
+                                <li>Idade: 78 anos</li>
+                                <li>Pressão: 13x9</li>
+                                <li>Temperatura: 36,5°C</li>
+                                <li>Glicemia: 105 mg/dL</li>
+                                <li>Batimentos: 78 bpm</li>
+                            </ul>
+                        </div>
+                    </a>
+                    <a href="detalhesDependente.html" class="card-dependente">
+                        <img src="Img/crianca.jpg" alt="Foto de Otávio Silva" class="foto-dependente">
+                        <div class="info-dependente">
+                            <h3>Otávio Silva</h3>
+                            <ul class="indicadores">
+                                <li>Idade: 5 anos</li>
+                                <li>Pressão: 11x7</li>
+                                <li>Temperatura: 36,6°C</li>
+                                <li>Glicemia: 90 mg/dL</li>
+                                <li>Batimentos: 75 bpm</li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Gerenciar Vínculo -->
+            <section class="vinculo">
+                <h2>Gerenciar Vínculo</h2>
+                <div class="acoes">
+                    <button id="gerarCodigo">🔑 Gerar código para dependente</button>
+                    <br><br>
+                    <button id="inserirCodigo">🔗 Inserir código do dependente</button>
+                </div>
+                <div id="codigoGerado" class="codigo oculto">
+                    <p>Compartilhe este código com o dependente:</p>
+                    <h3 id="codigoValor">---</h3>
+                </div>
+
+                <div id="formInserir" class="form oculto">
+                    <label for="codigoInput">Digite o código fornecido pelo dependente:</label>
+                    <input type="text" id="codigoInput" maxlength="8" placeholder="Ex: AB12CD34">
+                    <br>
+                    <button id="confirmarCodigo">Confirmar</button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+
+
+        // --- Geração e Inserção de Código ---
+        const gerarBtn = document.getElementById("gerarCodigo");
+        const inserirBtn = document.getElementById("inserirCodigo");
+        const codigoBox = document.getElementById("codigoGerado");
+        const codigoValor = document.getElementById("codigoValor");
+        const formInserir = document.getElementById("formInserir");
+
+        gerarBtn.addEventListener("click", () => {
+            const codigo = Math.random().toString(36).substring(2, 10).toUpperCase();
+            codigoValor.textContent = codigo;
+            codigoBox.classList.remove("oculto");
+            formInserir.classList.add("oculto");
+        });
+
+        inserirBtn.addEventListener("click", () => {
+            codigoBox.classList.add("oculto");
+            formInserir.classList.remove("oculto");
+        });
+
+        document.getElementById("confirmarCodigo").addEventListener("click", () => {
+            const valor = document.getElementById("codigoInput").value.trim();
+            if (valor.length === 8) {
+                alert(`Código ${valor} inserido com sucesso! (Simulação)`);
+            } else {
+                alert("Digite um código válido com 8 caracteres.");
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <br><br>
+
+
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footerContainer">
+            <!-- Logo e nome -->
+            <div class="footerBrand">
+                <img src="Img/bemEstar.webp" alt="Bem Estar 360" class="footerLogo">
+                <span data-lang="footerBrand">Bem-Estar 360</span>
+            </div>
+
+            <div class="footerLinks">
+                <ul>
+                    <li><a href="./index.html" data-lang="footerHome">Home</a></li>
+                    <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
+                    <li><a href="#" data-lang="footerHistory">Histórico</a></li>
+                    <li><a href="#" data-lang="footerServices">Serviços</a></li>
+                    <li><a href="#" data-lang="footerFaq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <!-- Contato -->
+            <div class="footerContato">
+                <h4 data-lang="footerContactTitle">Contato</h4>
+                <p data-lang="footerEmail">Email: contato@bemestar360.com</p>
+                <p data-lang="footerPhone">Telefone: (11) 1234-5678</p>
+                <div class="footerSocials">
+                    <a href="#"><img src="./Img/face_icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="./Img/insta_icon.webp" alt="Instagram"></a>
+                    <a href="#"><img src="./Img/X_icon.svg.png" alt="Twitter"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footerBottom">
+            <p data-lang="footerCopy">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

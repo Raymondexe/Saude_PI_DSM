@@ -1,0 +1,829 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #eef4ff;
+}
+
+/* ==== Header ==== */
+.TopoSite {
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    box-shadow: var(--sombra);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.ImgLogo {
+    width: 120px;
+    height: auto;
+}
+
+.Navegacao ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+
+}
+
+.Navegacao li a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 5px;
+    transition: 0.3s;
+}
+
+.Navegacao li a:hover {
+    color: #2185f8;
+    border-bottom: 2px solid #2185f8;
+}
+
+
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: none;
+    color: var(--cor-primaria);
+    z-index: 20;
+}
+
+
+.config-menu {
+    position: relative;
+}
+
+.config-menu button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    /* igual ao tamanho dos links */
+    cursor: pointer;
+    padding: 10px;
+    color: #fff;
+    /* ou #000 dependendo do fundo */
+}
+
+.config-menu button:hover {
+    color: #2185f8;
+}
+
+/* Dropdown */
+.config-menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    padding: 8px 0;
+    flex-direction: column;
+    z-index: 1001;
+}
+
+/* Botões do dropdown */
+.config-menu .dropdown button {
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    color: #000;
+    transition: background 0.2s;
+}
+
+.config-menu .dropdown button:hover {
+    background: #eef4ff;
+    color: #2185f8;
+    font-weight: bold;
+}
+
+
+/* ==== Menu de Configurações ==== */
+.config-menu {
+    position: relative;
+
+}
+
+.config-menu button {
+    font-size: 1rem;
+    /* ajuste para o mesmo tamanho que os links */
+    line-height: 1.2;
+    /* alinhamento vertical consistente */
+    color: #000;
+    /* ou #fff, dependendo do fundo */
+    vertical-align: middle;
+    /* garante que o emoji fique alinhado */
+}
+
+.config-menu button:hover {
+    color: #2185f8;
+}
+
+/* Dropdown */
+.config-menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    padding: 8px 0;
+    flex-direction: column;
+    animation: fadeDown 0.2s ease-in-out;
+    z-index: 1001;
+}
+
+.config-menu .dropdown button {
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    color: #000000;
+    transition: background 0.2s;
+}
+
+.config-menu .dropdown button:hover {
+    background: #eef4ff;
+    color: #2185f8;
+    font-weight: bold;
+}
+
+/* Animação suave para o dropdown */
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==== DARK MODE ==== */
+body.dark-mode {
+    background-color: #121212;
+    color: #f5f5f5;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .menu-toggle {
+    color: #fff; /* Deixa o texto/branco */
+}
+
+/* Links */
+body.dark-mode a {
+    color: #82cfff;
+}
+
+body.dark-mode a:hover {
+    color: #4fb3ff;
+}
+
+/* Header */
+body.dark-mode .TopoSite {
+    background-color: #1e1e1e;
+    box-shadow: none;
+}
+
+body.dark-mode .Navegacao li a {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu button {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu .dropdown {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+}
+
+body.dark-mode .config-menu .dropdown button {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu .dropdown button:hover {
+    background-color: #2a2a2a;
+    color: #82cfff;
+}
+
+
+/* ==== DARK MODE PARA FORMULÁRIO E HELP ==== */
+body.dark-mode .registroIndicador {
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+}
+
+body.dark-mode .registroIndicador h1 {
+    color: #fff;
+}
+
+body.dark-mode .registroIndicador .rightForms {
+    background-color: #2a2a2a;
+    color: #f5f5f5;
+}
+
+body.dark-mode .input-group label {
+    color: #ddd;
+}
+
+body.dark-mode .input-group input,
+body.dark-mode .input-group textarea {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    border: 1px solid #444;
+}
+
+body.dark-mode .input-group input::placeholder,
+body.dark-mode .input-group textarea::placeholder {
+    color: #aaa;
+}
+
+body.dark-mode .input-group input:focus,
+body.dark-mode .input-group textarea:focus {
+    border-color: #82cfff;
+    box-shadow: 0 0 6px rgba(130, 207, 255, 0.3);
+}
+
+body.dark-mode #timerDisplay {
+    color: #fff;
+    /* cor clara para contraste em fundo escuro */
+}
+
+/* ==== HELP SECTION ==== */
+body.dark-mode .help {
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+}
+
+body.dark-mode .help h2 {
+    color: #fff;
+}
+
+body.dark-mode .help p {
+    color: #ddd;
+}
+
+body.dark-mode .help-card {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    border: 1px solid #333;
+}
+
+body.dark-mode .help-card.green {
+    border-left: 5px solid #4caf50;
+}
+
+body.dark-mode .help-card.orange {
+    border-left: 5px solid #ff9800;
+}
+
+body.dark-mode .help-card.red {
+    border-left: 5px solid #f44336;
+}
+
+body.dark-mode .help-card h3 {
+    color: #fff;
+}
+
+body.dark-mode .help-card p {
+    color: #ccc;
+}
+
+/* Forms Indicadores*/
+
+/* ====== Seção Registro ====== */
+.registroIndicador {
+    padding: 4rem 2rem;
+    background: #f9fafe;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.registroIndicador .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.registroIndicador h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #000000;
+}
+
+.registroIndicador h1 b {
+    color: #000000;
+}
+
+/* ====== Imagem ====== */
+.leftImg {
+    flex: 1;
+    text-align: center;
+}
+
+.leftImg img {
+    width: 100%;
+    width: 500px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ====== Formulário ====== */
+.rightForms {
+    flex: 1;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.rightForms form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* Inputs em linha */
+.inputs-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.input-group input,
+.input-group textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    border: 1px solid #1565c0;
+    box-shadow: 0 0 6px rgba(21, 101, 192, 0.3);
+    outline: none;
+}
+
+/* Botão */
+button[type="submit"] {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #1565c0, #1e88e5);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #0d47a1, #1565c0);
+    transform: translateY(-2px);
+}
+
+
+/* ===== Responsividade ====== */
+
+@media (max-width: 1024px) {
+    .registroIndicador .container {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .registroIndicador .container {
+        flex-direction: column; /* empilha imagem e formulário */
+        align-items: center;
+    }
+
+    .leftImg, .rightForms {
+        width: 100%;
+    }
+
+    .leftImg img {
+        max-width: 100%;
+    }
+
+    .inputs-row {
+        flex-direction: column; /* inputs em coluna */
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .registroIndicador h1 {
+        font-size: 1.6rem;
+    }
+
+    .input-group input,
+    .input-group textarea {
+        font-size: 0.95rem;
+    }
+
+    button[type="submit"] {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+}
+
+
+/* ====== BEGIN EXTRAS ====== */
+/* ====== Timer de Contagem ====== */
+.timer-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.timer-controls button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #1565c0, #1e88e5);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.timer-controls button:hover {
+
+    transform: translateY(-3px);
+    /* levanta o botão ao passar o mouse */
+}
+
+#timerDisplay {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+
+/* ===== Seção Teaching ===== */
+.teaching {
+    padding: 3rem 2rem;
+    background: #f9fafe;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container de vídeos lado a lado */
+.video-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap; /* empilha no mobile */
+}
+
+/* Cada vídeo individual */
+.video-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 560px;
+    width: 100%;
+}
+
+/* Título do vídeo */
+.video-card p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #000000;
+    text-align: center;
+}
+
+/* Iframe */
+.video-card iframe {
+    width: 100%;
+    height: 315px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover */
+.video-card iframe:hover {
+    transform: scale(1.02);
+}
+
+
+
+/* Dark Mode */
+body.dark-mode .teaching {
+    background-color: #121212;
+    
+}
+
+body.dark-mode .video-card p {
+    color: #ffffff;
+}
+
+body.dark-mode .video-card iframe {
+    box-shadow: 0 8px 20px rgba(255,255,255,0.05);
+}
+
+
+/* ===== FIM EXTRAS ====== */
+
+/* Dúvidas */
+
+.help {
+    padding: 2rem;
+    background-color: #f1f5f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.help-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.help h2 {
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.help p {
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.help-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.help-card {
+    flex: 1;
+    min-width: 250px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.3s;
+}
+
+.help-card:hover {
+    transform: translateY(-5px);
+}
+
+.help-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.help-card.green {
+    border-left: 5px solid #4caf50;
+}
+
+.help-card.orange {
+    border-left: 5px solid #ff9800;
+}
+
+.help-card.red {
+    border-left: 5px solid #f44336;
+}
+
+.help-card p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==== START Footer ==== */
+
+.footer {
+    background-color: #1565c0;
+    color: #fff;
+    padding: 3rem 2rem 1rem 2rem;
+    font-family: var(--fonte);
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    gap: 2rem;
+}
+
+.footerLogo {
+    width: 100px;
+    margin-bottom: 0.5rem;
+}
+
+.footerBrand span {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.footerContact h4 {
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+}
+
+.footerLinks ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footerLinks ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footerLinks ul li a {
+    color: #fffdfd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footerLinks ul li a:hover {
+    color: #4e4848;
+}
+
+.footerContato p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.footerSocials a {
+    display: inline-block;
+    margin-right: 0.5rem;
+
+}
+
+.footerSocials img {
+    width: 24px;
+    transition: transform 0.3s;
+}
+
+.footerSocials img:hover {
+    transform: scale(1.2);
+}
+
+.footerBottom {
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 1rem;
+    font-size: 0.85rem;
+}
+
+/* ==== END Footer ==== */
+
+
+
+/* ==== Responsividade ==== */
+
+
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 1.2rem;
+        top: 1rem;
+    }
+
+    .Navegacao {
+        position: absolute;
+        top: 60px;
+        /* fica logo abaixo do header */
+        right: 0;
+        background: white;
+        box-shadow: var(--sombra);
+        border-radius: 0 0 12px 12px;
+        width: 200px;
+        display: none;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .Navegacao.ativo {
+        display: flex;
+        animation: menuSlide 0.3s ease forwards;
+    }
+
+    .Navegacao ul {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .Navegacao a {
+        font-size: 1rem;
+        text-align: left;
+        padding: 8px 0;
+        display: block;
+    }
+
+    @keyframes menuSlide {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+body.dark-mode .config-menu .dropdown {
+        width: 100%;
+    }
+
+    body.dark-mode .Navegacao {
+        flex-direction: column;
+        background-color: #1e1e1e;
+    }
+
+    body.dark-mode .grid-cards {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    body.dark-mode .grid-cards .card {
+        width: 100%;
+    }
+
+    body.dark-mode .ContainerNoticias {
+        padding: 1rem;
+    }
+}

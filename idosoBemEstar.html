@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bem-Estar 360 - Notícias (Saúde Mental)</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="icon/icon_BemEstar360.ico" />
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="./CSS/estiloNoticias.css" />
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navegacao = document.querySelector('.navegacao');
+
+            menuToggle.addEventListener('click', () => {
+                navegacao.classList.toggle('ativo');
+            });
+
+            document.querySelectorAll('.navegacao a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navegacao.classList.remove('ativo');
+                });
+            });
+
+            // Dropdown configurações
+            const configBtn = document.getElementById('config-btn');
+            const dropdown = document.querySelector('.dropdown');
+
+            configBtn.addEventListener('click', () => {
+                const expanded = configBtn.getAttribute('aria-expanded') === 'true' || false;
+                configBtn.setAttribute('aria-expanded', !expanded);
+                dropdown.style.display = expanded ? 'none' : 'flex';
+            });
+
+            // Fecha dropdown ao clicar fora
+            document.addEventListener('click', (event) => {
+                if (!configBtn.contains(event.target) && !dropdown.contains(event.target)) {
+                    dropdown.style.display = 'none';
+                    configBtn.setAttribute('aria-expanded', false);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="TopoSite">
+        <div class="Logo">
+            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+        </div>
+
+        <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+
+        <nav class="navegacao">
+            <ul>
+                <li><a href="./index.html" data-lang="home">Home</a></li>
+                <li><a href="./monitoramento.html" data-lang="monitoring">Monitoramento</a></li>
+                <li><a href="./servicos.html">Serviços</a></li>
+                <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
+
+                <!-- Menu de Configurações -->
+                <li class="config-menu">
+                    <button id="config-btn" aria-haspopup="true" aria-expanded="false">⚙️</button>
+
+                    <div class="dropdown" role="menu">
+                        <button id="toggle-theme">🌙 Modo Escuro</button>
+                        <button id="change-lang">🌎 Trocar Idioma</button>
+                        <button id="accessibility">♿ Acessibilidade</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+    <script src="script.js"></script>
+
+    <div class="layout">
+        <!-- Coluna da Notícia Principal -->
+        <main class="principal">
+            <article>
+                <h1>Bem‑Estar 360°: aliança entre idosos, cuidadores e tecnologia</h1>
+                <h2>Como monitorar glicemia, pressão, temperatura e batimentos cardíacos pode transformar qualidade de
+                    vida</h2>
+
+                <p>No contexto de uma sociedade que envelhece rapidamente, a saúde da pessoa idosa e daqueles que vivem
+                    com comorbidades torna-se assunto de urgência. Monitorar indicadores como glicemia, pressão
+                    arterial, temperatura e batimentos cardíacos não é meramente uma atividade médica: é uma forma de
+                    prevenção, detecção precoce de agravamentos e promoção de autonomia.</p>
+
+                <p>É nesse cenário que surge o Bem‑Estar 360° — um aplicativo indicador de saúde desenvolvido para
+                    auxiliar idosos, pessoas com doenças crônicas (como diabetes e hipertensão) e seus cuidadores a
+                    acompanhar diariamente esses sinais essenciais.</p>
+
+                <p>Mas, entre a promessa da tecnologia e sua adoção plena, há desafios reais a serem vencidos —
+                    sobretudo para as gerações mais velhas e em ambientes familiares com pouca cultura de monitoramento
+                    constante.</p>
+
+                <blockquote>
+                    <h3>A importância e os benefícios do monitoramento sistemático</h3>
+                    <p>A medição frequente de sinais vitais e parâmetros glicêmicos pode:</p>
+                    <ul>
+                        <li><strong>Detectar alterações precocemente</strong> (hipertensão não controlada, hipoglicemia
+                            ou infecção), possibilitando intervenção rápida.</li>
+                        <li><strong>Promover aderência ao tratamento</strong>, permitindo que o paciente visualize sua
+                            evolução e os efeitos de medicamentos, dieta e hábitos de vida.</li>
+                        <li><strong>Fortalecer o autocuidado</strong>, incentivando a responsabilidade compartilhada
+                            entre o idoso, o cuidador e o profissional de saúde.</li>
+                        <li><strong>Apoiar decisões médicas</strong>, gerando histórico contínuo de dados que pode ser
+                            apresentado em consultas.</li>
+                        <li><strong>Reduzir hospitalizações evitáveis</strong>, se alterações forem identificadas antes
+                            que evoluam para crise.</li>
+                    </ul>
+                    <p>Entretanto, o mero desenvolvimento tecnológico não garante que ele chegue ao público mais
+                        vulnerável — é preciso vencer barreiras humanas, culturais, cognitivas e sociais.</p>
+                </blockquote>
+
+                <h2>Desafios reais na adoção do Bem‑Estar 360°</h2>
+                <ol>
+                    <li>
+                        <strong>Resistência, teimosia ou desconfiança dos idosos</strong>
+                        <p>Muitos idosos têm receio de depender de tecnologia, afirmando que “meu corpo sabe quando
+                            estou bem ou mal”. O esquecimento ou uso incorreto das medições também é um obstáculo
+                            frequente.</p>
+                    </li>
+                    <li>
+                        <strong>Dificuldades técnicas no manuseio dos dispositivos</strong>
+                        <p>Idosos podem ter dificuldade em apertar botões pequenos, interpretar telas sensíveis ao toque
+                            ou entender instruções técnicas. Medidores de glicemia exigem coordenação motora, visão e
+                            familiaridade.</p>
+                    </li>
+                    <li>
+                        <strong>Falta de apoio ou negligência de familiares e cuidadores</strong>
+                        <p>Quando familiares ou cuidadores não participam ativamente do monitoramento, o uso do app pode
+                            ser esporádico e pouco confiável.</p>
+                    </li>
+                    <li>
+                        <strong>Interpretação dos dados e confiança nos resultados</strong>
+                        <p>Usuários podem desconfiar dos valores obtidos e não tomar ações adequadas se o app não
+                            fornecer alertas claros ou contextualizados.</p>
+                    </li>
+                    <li>
+                        <strong>Barreiras de conectividade, infraestrutura ou custo</strong>
+                        <p>Falta de internet confiável, hardware limitado ou custos de tiras e sensores podem impedir o
+                            uso contínuo do aplicativo.</p>
+                    </li>
+                </ol>
+
+                <h2>Soluções práticas para superar os desafios</h2>
+                <ol>
+                    <li>
+                        <strong>Educação assistida e demonstração prática</strong>
+                        <ul>
+                            <li>Usar linguagem simples e repetir exercícios para fixação.</li>
+                            <li>Disponibilizar vídeos tutoriais acessíveis para consulta sempre que necessário.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Interface do app adaptada à faixa etária</strong>
+                        <ul>
+                            <li>Botões grandes, texto legível e contrastes visuais bem definidos.</li>
+                            <li>Uso de voz e alertas automáticos para medição.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Acompanhamento e incentivo familiar</strong>
+                        <ul>
+                            <li>Envolver familiares e cuidadores no monitoramento.</li>
+                            <li>Permitir compartilhamento de dados com profissionais de saúde.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Suporte técnico contínuo</strong>
+                        <ul>
+                            <li>Canal de ajuda direta e check-ups periódicos.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Integração com rede de saúde</strong>
+                        <ul>
+                            <li>Exportação de dados para médicos ou unidades de saúde.</li>
+                            <li>Alertas automáticos em casos críticos.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Simplificação do processo de medição</strong>
+                        <ul>
+                            <li>Dispositivos com conexão automática via Bluetooth ou Wi-Fi.</li>
+                            <li>Sensores vestíveis integrados ao app.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Sustentabilidade e acessibilidade</strong>
+                        <ul>
+                            <li>Versões gratuitas ou subsidiadas.</li>
+                            <li>Funcionamento offline ou com conectividade mínima.</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h2>Conclusão</h2>
+                <p>O Bem‑Estar 360° é uma proposta valiosa de transformação no cuidado à saúde de idosos e pessoas com
+                    comorbidades, permitindo monitoramento contínuo e integrado de indicadores essenciais.</p>
+                <p>Para atingir todo o seu potencial, é necessário:</p>
+                <ul>
+                    <li><strong>Humanização do processo:</strong> acolher medos e resistências.</li>
+                    <li><strong>Educação e suporte constantes:</strong> garantir que o usuário saiba usar o app e
+                        dispositivos.</li>
+                    <li><strong>Envolvimento dos familiares e cuidadores:</strong> como parceiros ativos no
+                        monitoramento.</li>
+                    <li><strong>Integração com o sistema de saúde:</strong> tornar os dados úteis em consultas.</li>
+                    <li><strong>Sustentabilidade e acessibilidade:</strong> custos e conectividade não devem excluir
+                        quem precisa.</li>
+                </ul>
+                <p>Se essas frentes forem trabalhadas em conjunto, o app se torna um aliado essencial na promoção de
+                    envelhecimento digno e saudável.</p>
+
+                <h2>Fontes</h2>
+                <ul>
+                    <li><a href="https://repositorio.ufsc.br/handle/123456789/249791" target="_blank">Efeito de
+                            intervenções baseadas em m‑health na pressão arterial – Repositório UFSC</a></li>
+                    <li><a href="https://lume.ufrgs.br/handle/10183/133922" target="_blank">Uso de dispositivos móveis
+                            por idosos – LUME/UFRGS</a></li>
+                    <li><a href="https://ojs.studiespublicacoes.com.br/ojs/index.php/cadped/article/view/12807"
+                            target="_blank">Aplicativos móveis em saúde: oportunidades e desafios – Studies
+                            Publicações</a></li>
+                    <li><a href="https://arxiv.org/abs/2103.01078" target="_blank">Internet das Coisas aplicada ao home
+                            care de idosos – arXiv.org</a></li>
+                    <li><a href="https://tede.bc.uepb.edu.br/jspui/handle/tede/4891" target="_blank">Monitoramento do
+                            sono em idosos com smartwatches – TEDE/UEPB</a></li>
+                    <li><a href="https://editoraintegrar.com.br/publish/index.php/rems/article/view/3914"
+                            target="_blank">Dispositivos vestíveis e saúde em idosos – Revista REMS</a></li>
+                    <li><a href="https://noticias.uol.com.br/ultimas-noticias/agencia-estado/2024/08/16/avos-digitais-idosos-estao-usando-mais-internet-do-que-nunca-no-brasil-diz-estudo.htm"
+                            target="_blank">Idosos estão mais conectados que nunca – UOL Notícias</a></li>
+                    <li><a href="https://informe.ensp.fiocruz.br/noticias/44592" target="_blank">Estudo ELSI‑Brasil
+                            sobre comorbidades em idosos – Fiocruz</a></li>
+                </ul>
+            </article>
+        </main>
+
+        <!-- Coluna das Outras Notícias -->
+        <aside class="sidebar">
+            <h2>Últimas notícias</h2>
+            <ol>
+                <li><a href="./sus.html">SUS garante atendimento de qualidade a todos os brasileiros</a></li>
+                <li><a href="./diabetes.html">Diabetes exige acompanhamento e cuidados contínuos</a></li>
+                <li><a href="./saudeMental.html">Saúde mental recebe atenção crescente no Brasil</a></li>
+                <li><a href="./saudesexual.html">Saúde sexual: importância da prevenção e bem-estar</a></li>
+                <li><a href="./glaucoma.html">Glaucoma: doença silenciosa que ameaça a visão</a></li>
+            </ol>
+        </aside>
+    </div>
+
+
+
+    </div>
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footerContainer">
+            <!-- Logo e nome -->
+            <div class="footerBrand">
+                <img src="Img/logo_BemEstar360.png" alt="Bem Estar 360" class="footerLogo">
+                <span data-lang="footerBrand">Bem-Estar 360</span>
+            </div>
+
+            <div class="footerLinks">
+                <ul>
+                    <li><a href="./index.html" data-lang="footerHome">Home</a></li>
+                    <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
+                    <li><a href="#" data-lang="footerHistory">Histórico</a></li>
+                    <li><a href="#" data-lang="footerServices">Serviços</a></li>
+                    <li><a href="#" data-lang="footerFaq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <!-- Contato -->
+            <div class="footerContato">
+                <h4 data-lang="footerContactTitle">Contato</h4>
+                <p data-lang="footerEmail">Email: contato@bemestar360.com</p>
+                <p data-lang="footerPhone">Telefone: (11) 1234-5678</p>
+                <div class="footerSocials">
+                    <a href="#"><img src="./Icon/face_icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="./Icon/insta_icon.webp" alt="Instagram"></a>
+                    <a href="#"><img src="./Icon/X_icon.svg.png" alt="Twitter"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footerBottom">
+            <p data-lang="footerCopy">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.</p>
+        </div>
+    </footer>

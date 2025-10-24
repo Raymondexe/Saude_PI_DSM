@@ -1,0 +1,544 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #eef4ff;
+}
+
+/* ==== Header ==== */
+.TopoSite {
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.ImgLogo {
+    width: 120px;
+    height: auto;
+}
+
+.Navegacao ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center; 
+}
+
+.Navegacao li a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.Navegacao li a:hover {
+    color: #2185f8;
+    border-bottom: 2px solid #2185f8;
+}
+
+
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: none;
+    z-index: 20;
+}
+
+
+.config-menu {
+    position: relative;
+}
+
+.config-menu button {
+    background: none;
+    border: none;
+    font-size: 16px; 
+    cursor: pointer;
+    padding: 10px;
+    color: #fff; 
+}
+
+.config-menu button:hover {
+    color: #2185f8;
+}
+
+/* Dropdown */
+.config-menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    padding: 8px 0;
+    flex-direction: column;
+    z-index: 1001;
+}
+
+/* Botões do dropdown */
+.config-menu .dropdown button {
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    color: #000;
+    transition: background 0.2s;
+}
+
+.config-menu .dropdown button:hover {
+    background: #eef4ff;
+    color: #2185f8;
+    font-weight: bold;
+}
+
+/* ==== Dark Mode ==== */
+/* ===== MODO CLARO (PADRÃO) ===== */
+
+
+
+/* ===== MODO ESCURO ===== */
+body.dark-mode {
+    background-color: #121212;
+    color: #eee;
+}
+
+body.dark-mode .menu-toggle {
+    color: #fff; /* Deixa o texto/branco */
+}
+
+/* ==== LOGIN ==== */
+body.dark-mode .login-box {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.05);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .login-box h1 {
+    color: #2185f8;
+}
+
+body.dark-mode .Navegacao li a {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu button {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu .dropdown {
+    background: #2a2a2a;
+    border: 1px solid #444;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .config-menu .dropdown button {
+    color: #ddd;
+}
+
+body.dark-mode .config-menu .dropdown button:hover {
+    background: #3a3a3a;
+    color: #2185f8;
+}
+
+body.dark-mode .login-box p,
+body.dark-mode .signup-text {
+    color: #ccc;
+}
+
+body.dark-mode .input-group label {
+    color: #ddd;
+}
+
+body.dark-mode .input-group input {
+    background-color: #2a2a2a;
+    border: 1px solid #555;
+    color: #f5f5f5;
+    transition: background-color 0.3s ease, border 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .input-group input:focus {
+    border: 2px solid #2185f8;
+    box-shadow: 0 0 5px rgba(33, 133, 248, 0.5);
+}
+
+body.dark-mode button[type="submit"] {
+    background-color: #2185f8;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+body.dark-mode button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+body.dark-mode .forgot a,
+body.dark-mode .signup-text a {
+    color: #2185f8;
+}
+
+body.dark-mode .forgot a:hover,
+body.dark-mode .signup-text a:hover {
+    color: #66aaff;
+}
+
+body.dark-mode .bordaLogin {
+    background-color: #1e1e1e;
+    border: 1px solid #444;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+}
+
+/* ==== CARDS ==== */
+body.dark-mode .grid-cards .card {
+    background-color: #1e1e1e;
+    border: 2px solid #333;
+}
+
+body.dark-mode .grid-cards .card h2 {
+    color: #fff;
+}
+
+body.dark-mode .grid-cards .card p,
+body.dark-mode .grid-cards .card a {
+    color: #ccc;
+}
+
+/* ==== TOPO / NAVEGAÇÃO ==== */
+body.dark-mode .TopoSite {
+    background: #1e1e1e;
+    box-shadow: non
+}
+
+
+/* ==== Container do login ==== */
+.main-login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* ==== Caixa do login ==== */
+.login-box {
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.login-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* ==== Títulos ==== */
+.login-box h1 {
+    font-size: 2rem;
+    color: #2185f8;
+    margin-bottom: 10px;
+}
+
+.login-box p {
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* ==== Campos de input ==== */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.input-group input:focus {
+    border: 2px solid #2185f8;
+    outline: none;
+    box-shadow: 0 0 5px rgba(33, 133, 248, 0.5);
+}
+
+.OpcLogin {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.bordaLogin {
+    display: flex;           
+    gap: 20px;               
+    padding: 15px 25px;      
+    border: 2px solid #ccc;  
+    border-radius: 15px;     
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
+    background-color: #fff;  
+}
+
+.imglogin {
+    width: 75px;            
+    height: auto;            
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.imglogin:hover {
+    transform: scale(1.1);   
+}
+
+.signup-text {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    text-align: center;
+    color: #333;
+}
+
+.signup-text a {
+    color: #2185f8;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.signup-text a:hover {
+    color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* ==== Botão de login ==== */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2185f8;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* ==== Link esqueci senha ==== */
+.forgot {
+    margin-top: 15px;
+}
+
+.forgot a {
+    text-decoration: none;
+    color: #2185f8;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.forgot a:hover {
+    color: #0056b3;
+}
+
+/* ==== Mensagem de erro ==== */
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    height: 18px; 
+}
+
+/* ==== Responsividade ==== */
+@media (max-width: 480px) {
+    .login-box {
+        padding: 30px 20px;
+    }
+
+    .login-box h1 {
+        font-size: 1.8rem;
+    }
+
+    button[type="submit"] {
+        font-size: 0.95rem;
+    }
+}
+
+
+/* ==== START Footer ==== */
+
+.footer {
+    background-color: #1565c0;
+    color: #fff;
+    padding: 3rem 2rem 1rem 2rem;
+    font-family: var(--fonte);
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    gap: 2rem;
+}
+
+.footerLogo {
+    width: 100px;
+    margin-bottom: 0.5rem;
+}
+
+.footerBrand span {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.footerContact h4 {
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+}
+
+.footerLinks ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footerLinks ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footerLinks ul li a {
+    color: #fffdfd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footerLinks ul li a:hover {
+    color: #4e4848;
+}
+
+.footerContato p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.footerSocials a {
+    display: inline-block;
+    margin-right: 0.5rem;
+
+}
+
+.footerSocials img {
+    width: 24px;
+    transition: transform 0.3s;
+}
+
+.footerSocials img:hover {
+    transform: scale(1.2);
+}
+
+.footerBottom {
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 1rem;
+    font-size: 0.85rem;
+}
+
+/* ==== END Footer ==== */
+
+
+/* ==== Responsividade ==== */
+
+
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 1.2rem;
+        top: 1rem;
+    }
+
+    .Navegacao {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: white;
+        border-radius: 0 0 12px 12px;
+        width: 200px;
+        display: none;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .Navegacao.ativo {
+        display: flex;
+        animation: menuSlide 0.3s ease forwards;
+    }
+
+    .Navegacao ul {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .Navegacao a {
+        font-size: 1rem;
+        text-align: left;
+        padding: 8px 0;
+        display: block;
+    }
+
+    @keyframes menuSlide {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+}
+
