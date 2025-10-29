@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 0px;
     background-color: #eef4ff;
 }
 
@@ -447,6 +447,26 @@ body.dark-mode .btn-outline:hover {
   color: #4b79a1;
 }
 
+/* ===== Dark Mode ===== */
+body.dark-mode .dropdown-perfil {
+  background: #1e1e1e;
+  border: 1px solid #4b79a1;
+  color: #ffffff;
+}
+
+body.dark-mode .dropdown-perfil a {
+  color: #ccc;
+}
+
+body.dark-mode .dropdown-perfil a:hover {
+  background-color: #4b79a1;
+  color: #ffffff;
+}
+
+body.dark-mode .nome-perfil {
+  color: #ffffff;
+}
+
 /* ===== Efeito de Clique ===== */
 .welcome-buttons a:active {
   transform: scale(0.98);
@@ -555,6 +575,121 @@ body.dark-mode .btn-outline:hover {
 }
 
 
+/* Botão menu mobile */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* ==== Config Menu ==== */
+.config-menu, .perfil-menu {
+    position: relative;
+}
+
+.config-menu button,
+.perfil-menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s;
+}
+
+.config-menu button:hover,
+.perfil-menu button:hover {
+    color: #2563eb;
+}
+
+/* Dropdown configuração */
+.config-menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 130%;
+    right: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    min-width: 180px;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.config-menu .dropdown button {
+    padding: 10px 15px;
+    text-align: left;
+    width: 100%;
+    font-size: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.config-menu .dropdown button:hover {
+    background: #eef2ff;
+    font-weight: bold;
+}
+
+/* Dropdown perfil */
+.foto-perfil {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #2563eb;
+    transition: transform 0.2s;
+}
+
+.foto-perfil:hover {
+    transform: scale(1.1);
+}
+
+.nome-perfil {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+}
+
+.dropdown-perfil {
+    display: none;
+    position: absolute;
+    top: 130%;
+    right: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    min-width: 150px;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.dropdown-perfil a {
+    display: block;
+    text-decoration: none;
+    color: #2563eb;
+    padding: 10px 15px;
+    font-size: 14px;
+    transition: background 0.2s, font-weight 0.2s;
+}
+
+.dropdown-perfil a:hover {
+    background: #eef2ff;
+    font-weight: bold;
+}
+
+/* Mostrar dropdowns ao clicar */
+#config-btn:focus + .dropdown,
+#config-btn:active + .dropdown,
+#perfil-btn:focus + .dropdown-perfil,
+#perfil-btn:active + .dropdown-perfil {
+    display: flex;
+    flex-direction: column;
+}
 
 
 

@@ -40,6 +40,7 @@
                 </li>
             </ul>
             <script src="script.js"></script>
+            <script src="scriptLogin.js"></script>
         </nav>
     </header>
 
@@ -90,7 +91,7 @@
     <footer class="footer">
         <div class="footerContainer">
             <div class="footerBrand">
-                <img src="Img/logo_BemEstar360.png" alt="Bem Estar 360" class="footerLogo">
+                <img src="Img/bemEstar.webp" alt="Bem Estar 360" class="footerLogo">
                 <span>Bem-Estar 360</span>
             </div>
 
@@ -123,7 +124,44 @@
 
     <!-- Scripts -->
     <script src="script.js"></script>
-    <script src="login.js"></script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("loginForm");
+            const emailInput = document.getElementById("email");
+            const senhaInput = document.getElementById("senha");
+            const errorMsg = document.getElementById("error-message");
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault(); // Impede o recarregamento da página
+
+                const email = emailInput.value.trim();
+                const senha = senhaInput.value.trim();
+
+                // Limpa mensagem de erro anterior
+                errorMsg.textContent = "";
+
+                // Logins válidos
+                const usuarios = [
+                    { email: "ana@gmail.com", senha: "12345", destino: "responsavelPage.html" },
+                    { email: "joseAnt@gmail.com", senha: "abc123", destino: "homeDependente.html" }
+                ];
+
+                // Verifica se o usuário existe
+                const usuarioValido = usuarios.find(u => u.email === email && u.senha === senha);
+
+                if (usuarioValido) {
+                    // Redireciona para a página específica
+                    window.location.href = usuarioValido.destino;
+                } else {
+                    // Mostra erro
+                    errorMsg.textContent = "❌ E-mail ou senha incorretos. Tente novamente.";
+                    errorMsg.style.color = "red";
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

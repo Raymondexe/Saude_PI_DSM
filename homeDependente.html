@@ -49,13 +49,22 @@
 
         <nav class="Navegacao">
             <ul>
-                <li><a href="./index.html" data-lang="home">Home</a></li>
+                <li><a href="./homeResponsavel.html" data-lang="home">Home</a></li>
                 <li><a href="./monitoramento.html" data-lang="monitoring">Monitoramento</a></li>
                 <li><a href="./servicos.html">Serviços</a></li>
                 <li><a href="#" data-lang="about">Quem somos</a></li>
-                <li><a href="./login.html">Login</a></li>
+                <!-- Perfil do usuário -->
+                <li class="perfil-menu">
+                    <button id="perfil-btn" aria-haspopup="true" aria-expanded="false">
+                        <img src="Img/idoso.jpg" alt="Foto de perfil" class="foto-perfil">
+                        <span class="nome-perfil">José Antônio</span>
+                    </button>
+                    <div class="dropdown-perfil" role="menu">
+                        <a href="./perfil.html">Meu Perfil</a>
+                        <a href="./index.html">Sair</a>
+                    </div>
 
-                <!-- Menu de Configurações -->
+                    <!-- Menu de Configurações -->
                 <li class="config-menu">
                     <button id="config-btn" aria-haspopup="true" aria-expanded="false">⚙️</button>
 
@@ -69,11 +78,7 @@
         </nav>
     </header>
 
-
-
     <script src="script.js"></script>
-
-
 
     <section class="welcome-section">
         <div class="welcome-wrapper animate-fade-in">
@@ -96,11 +101,6 @@
 
     <br><br>
 
-    <p> <a href="./responsavelPage.html"> LOGADO</a></p>
-
-    <br><br>
-
-
     <div class="titleNotices">
         <h4 data-lang="newsTitle">Últimas notícias sobre saúde</h4>
     </div>
@@ -120,7 +120,8 @@
                         tratamentos e acompanhamento em diversas áreas da saúde, reforçando seu papel essencial na vida
                         da população.
                     </p>
-                    <button class="card-button material-symbols-outlined" data-lang="newsBtn" onclick="window.location.href='sus.html'">arrow_forward</button>
+                    <button class="card-button material-symbols-outlined" data-lang="newsBtn"
+                        onclick="window.location.href='sus.html'">arrow_forward</button>
                 </li>
 
                 <li class="card-item">
@@ -134,7 +135,8 @@
                         O diabetes é uma doença crônica que exige atenção diária à alimentação, atividade física e
                         controle médico. O diagnóstico precoce é essencial para evitar complicações graves.
                     </p>
-                    <button class="card-button material-symbols-outlined" data-lang="newsBtn" onclick="window.location.href='diabetes.html'">arrow_forward</button>
+                    <button class="card-button material-symbols-outlined" data-lang="newsBtn"
+                        onclick="window.location.href='diabetes.html'">arrow_forward</button>
                 </li>
 
                 <li class="card-item">
@@ -149,7 +151,8 @@
                         físico, emocional e social, além da prevenção de doenças e promoção de relacionamentos
                         saudáveis.
                     </p>
-                    <button class="card-button material-symbols-outlined" data-lang="newsBtn" onclick="window.location.href='saudesexual.html'">arrow_forward</button>
+                    <button class="card-button material-symbols-outlined" data-lang="newsBtn"
+                        onclick="window.location.href='saudesexual.html'">arrow_forward</button>
                 </li>
 
                 <li class="card-item">
@@ -164,7 +167,8 @@
                         tratamento de transtornos psicológicos e promoção do equilíbrio emocional para uma melhor
                         qualidade de vida.
                     </p>
-                    <button class="card-button material-symbols-outlined" data-lang="newsBtn" onclick="window.location.href='saudeMental.html'">arrow_forward</button>
+                    <button class="card-button material-symbols-outlined" data-lang="newsBtn"
+                        onclick="window.location.href='saudeMental.html'">arrow_forward</button>
                 </li>
 
                 <li class="card-item">
@@ -178,7 +182,8 @@
                         O glaucoma, caracterizado pelo aumento da pressão ocular, pode levar à perda da visão se não for
                         diagnosticado precocemente. Profissionais recomendam consultas regulares para prevenção.
                     </p>
-                    <button class="card-button material-symbols-outlined" data-lang="newsBtn" onclick="window.location.href='glaucoma.html'">arrow_forward</button>
+                    <button class="card-button material-symbols-outlined" data-lang="newsBtn"
+                        onclick="window.location.href='glaucoma.html'">arrow_forward</button>
                 </li>
 
                 <li class="card-item">
@@ -192,7 +197,8 @@
                         Como monitorar glicemia, pressão, temperatura e batimentos cardíacos pode transformar qualidade
                         de vida — e quais são os obstáculos que o novo aplicativo enfrenta nesse caminho.
                     </p>
-                    <button class="card-button material-symbols-outlined" data-lang="newsBtn" onclick="window.location.href='idosoBemEstar.html'">arrow_forward</button>
+                    <button class="card-button material-symbols-outlined" data-lang="newsBtn"
+                        onclick="window.location.href='idosoBemEstar.html'">arrow_forward</button>
                 </li>
             </ul>
         </div>
