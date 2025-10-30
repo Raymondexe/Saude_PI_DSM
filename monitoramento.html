@@ -12,8 +12,9 @@
     <!-- CSS externo -->
     <link rel="stylesheet" href="./Css/estiloMonitoramento.css">
 
-    
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -44,7 +45,7 @@
     </header>
 
 
-    
+
 
     <!-- Conteúdo principal -->
     <main class="conteudo">
@@ -74,7 +75,35 @@
             <script src="./script_Registro/scriptMonitoramentoBatimentos.js"></script>
         </section>
 
-        <!-- Histórico -->
+        <br><br>
+
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button id="prevMonth">&#8249;</button>
+                <span id="monthYear"></span>
+                <button id="nextMonth">&#8250;</button>
+            </div>
+            <div class="calendar-weekdays">
+                <div>D</div>
+                <div>S</div>
+                <div>T</div>
+                <div>Q</div>
+                <div>Q</div>
+                <div>S</div>
+                <div>S</div>
+            </div>
+            <div class="calendar-days" id="calendarDays"></div>
+            <div id="dayRecords" class="day-records">Selecione um dia para ver os registros</div>
+        </div>
+
+        <script src="./script_Registro/scriptCalendario.js"></script>
+
+
+
+        <br><br>
+
+
+        <!-- Histórico
         <section class="historico-container">
             <h2>Histórico de Monitoramento</h2>
             <div class="tabela-wrapper">
@@ -88,20 +117,48 @@
                             <th>Pressão (mmHg)</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- Dados via JS -->
-                    </tbody>
+                    <tbody> -->
+        <!-- Dados via JS -->
+        <!-- </tbody>
                 </table>
             </div>
 
             <br><br>
             <button class="btn-pdf" onclick="gerarPDF()">📄 Exportar PDF</button>
-        </section>
+        </section> -->
 
     </main>
 
+    <section ng-app="monitorApp" ng-controller="monitorCtrl" class="grafico-container">
+        <h2>📊 Gráfico de Monitoramento</h2>
+
+        <div class="controle-grafico">
+            <label>Selecionar indicador:</label>
+            <select ng-model="tipoSelecionado" ng-change="atualizarGrafico()">
+                <option value="batimentos">Batimentos</option>
+                <option value="glicemia">Glicemia</option>
+                <option value="pressao">Pressão</option>
+                <option value="temperatura">Temperatura</option>
+            </select>
+        </div>
+
+        <canvas id="graficoMonitoramento"></canvas>
+    </section>
+
+    <script src="./script_Registro/monitoramentoAngular.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- Footer -->
-    <!-- Rodapé -->
     <footer class="footer">
         <div class="footerContainer">
             <!-- Logo e nome -->

@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
+    padding: 5px;
     background-color: #eef4ff;
 }
 
@@ -152,7 +153,8 @@ body.dark-mode {
 }
 
 body.dark-mode .menu-toggle {
-    color: #fff; /* Deixa o texto/branco */
+    color: #fff;
+    /* Deixa o texto/branco */
 }
 
 body.dark-mode .grid-cards .card {
@@ -447,12 +449,19 @@ body.dark-mode .btn-pdf:hover {
 
 /* Animação de contagem */
 @keyframes countUp {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 #batimentos.animate {
-  animation: countUp 0.5s ease forwards;
+    animation: countUp 0.5s ease forwards;
 }
 
 
@@ -620,4 +629,217 @@ body.dark-mode .btn-pdf:hover {
     body.dark-mode .ContainerNoticias {
         padding: 1rem;
     }
+}
+
+
+
+.calendar-container {
+    width: 350px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    margin: 20px auto;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #0f6edc;
+}
+
+.calendar-weekdays,
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendar-weekdays div {
+    font-weight: bold;
+    color: #555;
+}
+
+.calendar-days div {
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.calendar-days div:hover {
+    background: #eef4ff;
+}
+
+.calendar-days .today {
+    border: 2px solid #0f6edc;
+}
+
+.calendar-days .has-record::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #0f6edc;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.day-records {
+    margin-top: 16px;
+    background: #f1f5ff;
+    border-radius: 12px;
+    padding: 12px;
+    min-height: 60px;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+
+
+/* === Seção do Gráfico de Monitoramento === */
+.grafico-container {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    padding: 24px;
+    margin: 40px auto;
+    max-width: 900px;
+    text-align: center;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.grafico-container h2 {
+    font-size: 1.6rem;
+    color: #0f6edc;
+    margin-bottom: 20px;
+}
+
+.controle-grafico {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.controle-grafico label {
+    font-weight: bold;
+    color: #222;
+}
+
+.controle-grafico select {
+    padding: 8px 14px;
+    border: 2px solid #0f6edc;
+    border-radius: 8px;
+    background: #eef4ff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.controle-grafico select:hover {
+    background: #dbe8ff;
+    border-color: #1565c0;
+}
+
+#graficoMonitoramento {
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+/* === Modo Escuro: Gráfico === */
+body.dark-mode .grafico-container {
+    background-color: #1a1a1a;
+    color: #eee;
+    box-shadow: 0 6px 14px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .grafico-container h2 {
+    color: #fff;
+}
+
+body.dark-mode .controle-grafico label {
+    color: #ddd;
+}
+
+body.dark-mode .controle-grafico select {
+    background: #2a2a2a;
+    color: #fff;
+    border-color: #2185f8;
+}
+
+body.dark-mode .controle-grafico select:hover {
+    background: #333;
+}
+
+
+#graficoMonitoramento {
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* === Modo Escuro: Calendário === */
+body.dark-mode .calendar-container {
+    background-color: #1e1e1e;
+    color: #eee;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .calendar-header button {
+    color: #2185f8;
+}
+
+body.dark-mode .calendar-weekdays div {
+    color: #ccc;
+}
+
+body.dark-mode .calendar-days div {
+    color: #eee;
+}
+
+body.dark-mode .calendar-days div:hover {
+    background: #333;
+}
+
+body.dark-mode .calendar-days .today {
+    border: 2px solid #2185f8;
+}
+
+body.dark-mode .calendar-days .has-record::after {
+    background: #2185f8;
+}
+
+body.dark-mode .day-records {
+    background-color: #2a2a2a;
+    color: #ddd;
+    border: 1px solid #333;
 }

@@ -1,26 +1,26 @@
-/* ==== TOGGLE THEME ==== */
-const toggleTheme = document.getElementById("toggle-theme");
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleTheme = document.getElementById("toggle-theme");
 
-function setTheme(theme) {
-  if (theme === "dark") {
-    document.body.classList.add("dark-mode");
-    toggleTheme.textContent = "☀️ Modo Claro";
-  } else {
-    document.body.classList.remove("dark-mode");
-    toggleTheme.textContent = "🌙 Modo Escuro";
-  }
-  localStorage.setItem("theme", theme);
-}
+    function setTheme(theme) {
+      if (theme === "dark") {
+        document.body.classList.add("dark-mode");
+        toggleTheme.textContent = "☀️ Modo Claro";
+      } else {
+        document.body.classList.remove("dark-mode");
+        toggleTheme.textContent = "🌙 Modo Escuro";
+      }
+      localStorage.setItem("theme", theme);
+    }
 
-// Carregar tema salvo
-setTheme(localStorage.getItem("theme") || "light");
+    // Carregar tema salvo
+    setTheme(localStorage.getItem("theme") || "light");
 
-// Alternar tema
-toggleTheme.addEventListener("click", () => {
-  const isDark = document.body.classList.contains("dark-mode");
-  setTheme(isDark ? "light" : "dark");
+    // Alternar tema
+    toggleTheme.addEventListener("click", () => {
+      const isDark = document.body.classList.contains("dark-mode");
+      setTheme(isDark ? "light" : "dark");
+    });
 });
-
 /* ==== DROPDOWN MENU ==== */
 
 
@@ -289,30 +289,6 @@ langBtn.addEventListener("click", () => {
 });
 
 
-
-
-
-
-/* LOGIN */
-
-const loginForm = document.getElementById("loginForm");
-const errorMessage = document.getElementById("error-message");
-
-loginForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const email = document.getElementById("email").value.trim();
-  const senha = document.getElementById("senha").value.trim();
-
-  // Simulação de login
-  if (email === "usuario@exemplo.com" && senha === "123456") {
-    alert("Login bem-sucedido!");
-    // Aqui você pode redirecionar para o dashboard
-    window.location.href = "dashboard.html";
-  } else {
-    errorMessage.textContent = "Email ou senha incorretos!";
-  }
-});
 
 
 
