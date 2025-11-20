@@ -151,6 +151,9 @@ html {
 
 
 
+
+
+
 /* ==== Dark Mode ==== */
 body.dark-mode {
     background: #121212;
@@ -305,30 +308,29 @@ body.dark-mode .wave3 { top: -70%; left: -30%; animation-duration: 25s; }
 .welcome-section {
   position: relative;
   overflow: hidden;
-  padding: 100px 20px;
-  background: #f7f9fc; /* fundo claro e suave */
+  padding: 140px 20px;
+  background: #f7f9fc;
   color: #1a1a1a;
+
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; /* centraliza todas as linhas */
 }
 
-/* Wrapper flexível */
+/* Wrapper agora centralizado */
 .welcome-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1200px;
+  max-width: 900px;
   width: 100%;
-  gap: 40px;
-  flex-wrap: wrap;
   z-index: 2;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 /* Texto principal */
 .welcome-text {
-  flex: 1 1 400px;
+  max-width: 700px;
 }
 
 .welcome-text h1 {
@@ -339,7 +341,7 @@ body.dark-mode .wave3 { top: -70%; left: -30%; animation-duration: 25s; }
 }
 
 .welcome-text h1 span {
-  color: #4b79a1; /* destaque elegante */
+  color: #0149ab;
 }
 
 .welcome-text p {
@@ -349,45 +351,33 @@ body.dark-mode .wave3 { top: -70%; left: -30%; animation-duration: 25s; }
   color: #333;
 }
 
-/* Ilustração animada */
-.welcome-illustration {
-  flex: 1 1 400px;
-  display: flex;
-  justify-content: center;
-}
-
-.welcome-illustration img {
-  max-width: 100%;
-  border-radius: 20px;
-  transform: translateY(0);
-  animation: float 6s ease-in-out infinite;
-}
-
-/* ===== Botões de Ação ===== */
-.welcome-buttons {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: row; /* garante que fiquem lado a lado */
-  gap: 20px;
-  justify-content: center; /* centraliza no desktop */
-  flex-wrap: wrap; /* quebra em linha nova no mobile */
-}
-
-.welcome-buttons a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 220px;
-  padding: 14px 28px;
-  font-size: 1.05rem;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 14px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
+/* ===== Ondas suaves de fundo ===== */
+.welcome-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+
+.wave {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: rgba(26, 98, 161, 0.05);
+  border-radius: 50%;
+  animation: waveMove 15s infinite linear;
+}
+
+.wave1 { top: -50%; left: -50%; }
+.wave2 { top: -60%; left: -40%; animation-duration: 20s; }
+.wave3 { top: -70%; left: -30%; animation-duration: 25s; }
+
+@keyframes waveMove {
+  0% { transform: translateX(0) rotate(0deg);}
+  100% { transform: translateX(-50%) rotate(360deg);}
 }
 
 /* ===== Botão Principal ===== */
@@ -467,10 +457,29 @@ body.dark-mode .nome-perfil {
   color: #ffffff;
 }
 
-/* ===== Efeito de Clique ===== */
-.welcome-buttons a:active {
-  transform: scale(0.98);
+/* ===== Card Hospitalar no Dark Mode ===== */
+body.dark-mode .hospital-card {
+    background: #1a222e; /* card escuro elegante */
+    border: 2px solid #4b6c9b; /* azul médico escuro */
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+    color: #e5ecf4;
 }
+
+/* Texto do título */
+body.dark-mode .hospital-card h2 {
+    color: #d8e6ff;
+}
+
+/* Linha separadora */
+body.dark-mode .hospital-card h2::after {
+    background: #6b9ce8; /* azul médico claro */
+}
+
+/* Parágrafo */
+body.dark-mode .hospital-card p {
+    color: #c3cedd;
+}
+
 
 
 
@@ -493,34 +502,7 @@ body.dark-mode .nome-perfil {
   50% { transform: translateY(-20px); }
 }
 
-/* ===== Ondas suaves de fundo ===== */
-.welcome-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-}
 
-.wave {
-  position: absolute;
-  width: 200%;
-  height: 100%;
-  background: rgba(26, 98, 161, 0.05); /* cor atual */
-  border-radius: 50%;
-  animation: waveMove 15s infinite linear;
-}
-
-.wave1 { top: -50%; left: -50%; }
-.wave2 { top: -60%; left: -40%; animation-duration: 20s; }
-.wave3 { top: -70%; left: -30%; animation-duration: 25s; }
-
-@keyframes waveMove {
-  0% { transform: translateX(0) rotate(0deg);}
-  100% { transform: translateX(-50%) rotate(360deg);}
-}
 
 /* ===== Responsividade ===== */
 @media (max-width: 900px) {
@@ -547,31 +529,58 @@ body.dark-mode .nome-perfil {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 60px 20px;
-    color: #fff;
+    padding: 70px 20px;
+    
 }
 
-.Controle {
-    max-width: 800px;
+/* Card profissional estilo hospital */
+.hospital-card {
+    max-width: 950px;
     text-align: center;
-    padding: 30px;
-    background: linear-gradient(135deg, #61809b, #4b7bd6);
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    padding: 55px 45px;
+
+    background: #ffffff; /* branco limpo hospitalar */
+    border-radius: 18px;
+
+    /* borda sutil profissional */
+    border: 2px solid #97b4da;
+
+    /* sombra leve hospitalar (nada exagerado) */
+    box-shadow: 0 8px 22px rgba(33, 56, 84, 0.12);
+
+    color: #1c2a39;
 }
 
-.Controle h1 {
-    font-size: 2.8rem;
-    margin-bottom: 20px;
+/* Título */
+.hospital-card h2 {
+    font-size: 2.4rem;
     font-weight: 700;
-    line-height: 1.2;
+    color: #1d3a59; /* azul profissional */
+    margin-bottom: 15px;
+    letter-spacing: 0.3px;
 }
 
-.Controle p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 15px;
-    text-align: center;
+/* Linha separadora */
+.hospital-card h2::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 3px;
+    margin: 12px auto 0;
+    background: #3f7ccf; /* azul médico */
+    border-radius: 6px;
+}
+
+/* Texto */
+.hospital-card p {
+    margin-top: 20px;
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: #3d4f63; /* cinza-azulado profissional */
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 

@@ -1,6 +1,5 @@
 body {
     font-family: Arial, sans-serif;
-    padding: 5px;
     background-color: #eef4ff;
 }
 
@@ -329,6 +328,162 @@ body.dark-mode .wave1 { top: -50%; left: -50%; }
 body.dark-mode .wave2 { top: -60%; left: -40%; animation-duration: 20s; }
 body.dark-mode .wave3 { top: -70%; left: -30%; animation-duration: 25s; }
 
+/* Modo escuro */
+body.dark-mode .mensagem-ola {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border-left: 6px solid #3b82f6;
+}
+
+body.dark-mode .mensagem-ola h1,
+body.dark-mode .mensagem-ola p {
+  color: #e2e8f0;
+}
+
+/* */
+
+body.dark-mode .mensagem-ola {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border-left: 6px solid #3b82f6;
+    box-shadow: none;
+}
+
+body.dark-mode .mensagem-ola h1 {
+    color: #bfdbfe;
+}
+
+body.dark-mode .mensagem-ola span {
+    color: #3b82f6;
+}
+
+body.dark-mode .mensagem-ola p {
+    color: #cbd5e1;
+}
+
+/* Painel principal */
+body.dark-mode .painel-responsavel {
+    background: transparent;
+}
+
+/* Painel de vínculo */
+body.dark-mode .vinculo {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    color: #e5e5e5;
+}
+
+/* Lista */
+body.dark-mode .lista {
+    color: #ccc;
+}
+
+/* Cards de dependentes */
+body.dark-mode .card-dependente {
+    background: #1e1e1e;
+    color: #dbeafe;
+    box-shadow: none;
+    border: 1px solid #2a2a2a;
+}
+
+body.dark-mode .card-dependente:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+}
+
+/* Foto */
+body.dark-mode .foto-dependente {
+    border-color: #3b82f6;
+}
+
+/* Informações do dependente */
+body.dark-mode .info-dependente ul {
+    color: #ccc;
+}
+
+/* Botões */
+body.dark-mode .acoes button {
+    background: #3b82f6;
+    color: white;
+}
+
+body.dark-mode .acoes button:hover {
+    background: #1e40af;
+}
+
+/* Caixa do código & formulário */
+body.dark-mode .codigo,
+body.dark-mode .form {
+    background-color: #121212;
+    border: 1px solid #333;
+    box-shadow: none;
+}
+
+body.dark-mode .codigo p,
+body.dark-mode .form label {
+    color: #9cc1ff;
+}
+
+body.dark-mode .codigo h3 {
+    background-color: #1e3a5f;
+    color: #69a8ff;
+}
+
+body.dark-mode .form input {
+    background: #1e1e1e;
+    border: 1px solid #444;
+    color: #e0e0e0;
+}
+
+body.dark-mode .form input::placeholder {
+    color: #777;
+}
+
+body.dark-mode .form button {
+    background-color: #3b82f6;
+    color: #fff;
+}
+
+body.dark-mode .form button:hover {
+    background-color: #1e40af;
+}
+
+/* Transições */
+body.dark-mode .mensagem-ola,
+body.dark-mode .card-dependente,
+body.dark-mode .codigo,
+body.dark-mode .form,
+body.dark-mode .vinculo,
+body.dark-mode .acoes button {
+    transition: all 0.3s ease;
+}
+
+/* Nome do perfil */
+body.dark-mode .nome-perfil {
+    color: #e5e5e5;
+}
+
+/* Dropdown */
+body.dark-mode .dropdown-perfil {
+    background: #1e1e1e;
+    border: 1px solid #2d2d2d;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+/* Links do dropdown */
+body.dark-mode .dropdown-perfil a {
+    color: #93c5fd; /* azul claro legível */
+}
+
+body.dark-mode .dropdown-perfil a:hover {
+    background: #2a2a2a;
+    color: #3b82f6; /* azul clínico */
+    font-weight: bold;
+}
+
+/* Foto do perfil */
+body.dark-mode .foto-perfil:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
 
 .mensagem-ola {
   background: linear-gradient(135deg, #dbeafe, #eff6ff);
@@ -360,17 +515,6 @@ body.dark-mode .wave3 { top: -70%; left: -30%; animation-duration: 25s; }
 /* Efeito ao passar o mouse */
 .mensagem-ola:hover {
   background: linear-gradient(135deg, #c7d2fe, #e0f2fe);
-}
-
-/* Modo escuro */
-body.dark-mode .mensagem-ola {
-  background: linear-gradient(135deg, #1e293b, #0f172a);
-  border-left: 6px solid #3b82f6;
-}
-
-body.dark-mode .mensagem-ola h1,
-body.dark-mode .mensagem-ola p {
-  color: #e2e8f0;
 }
 
 .painel-responsavel {
@@ -518,25 +662,149 @@ body.dark-mode .mensagem-ola p {
     display: none;
 }
 
-/* ===== Responsividade ===== */
-@media (max-width: 480px) {
+
+
+/* Telas até 1024px (tablets e notebooks pequenos) */
+@media (max-width: 1024px) {
+    
+    .painel-responsavel {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .vinculo {
+        width: 100%;
+        flex: none;
+    }
+
+    .lista {
+        gap: 1rem;
+    }
+
+    .card-dependente {
+        padding: 0.8rem;
+    }
+}
+
+/* Telas até 768px (tablets menores / celulares grandes) */
+@media (max-width: 768px) {
+    
+    .mensagem-ola {
+        padding: 1.2rem;
+    }
+
+    .mensagem-ola h1 {
+        font-size: 1.4rem;
+    }
+
+    .foto-dependente {
+        width: 50px;
+        height: 50px;
+    }
+
+    .info-dependente h3 {
+        font-size: 0.95rem;
+    }
+
+    .info-dependente ul {
+        font-size: 0.8rem;
+    }
+
     .codigo, .form {
         max-width: 100%;
+        padding: 1.2rem;
+    }
+
+    .dropdown-perfil {
+        right: 0;
+        left: auto;
+        min-width: 120px;
+    }
+}
+
+/* Telas até 600px (celulares padrão) */
+@media (max-width: 600px) {
+
+    .painel-responsavel {
+        padding: 0.5rem;
+    }
+
+    .card-dependente {
+        align-items: flex-start;
+        padding: 0.7rem;
+    }
+
+    .foto-dependente {
+        width: 45px;
+        height: 45px;
+    }
+
+    .acoes button {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+
+    .mensagem-ola h1 {
+        font-size: 1.2rem;
+    }
+
+    .mensagem-ola p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Telas até 430px (celulares pequenos) */
+@media (max-width: 430px) {
+
+    .mensagem-ola {
         padding: 1rem;
     }
-    
+
+    .painel-responsavel {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .card-dependente {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .foto-dependente {
+        margin: 0 0 0.5rem 0;
+    }
+
+    .info-dependente h3 {
+        font-size: 0.9rem;
+    }
+
+    .info-dependente ul li {
+        margin-bottom: 3px;
+    }
+
     .codigo h3 {
         font-size: 18px;
-        letter-spacing: 2px;
     }
 
     .form button {
         width: 100%;
-        padding: 0.7rem 0;
     }
 }
 
+/* Telas até 360px (celulares muito pequenos) */
+@media (max-width: 360px) {
+    .mensagem-ola h1 {
+        font-size: 1rem;
+    }
+    
+    .card-dependente {
+        padding: 0.5rem;
+    }
 
+    .info-dependente ul {
+        font-size: 0.75rem;
+    }
+}
 
 
 

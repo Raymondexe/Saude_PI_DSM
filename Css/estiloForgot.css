@@ -208,6 +208,73 @@ body.dark-mode .paragrafoS {
     background-color: rgba(135, 233, 159, 0.6);
 }
 
+/* ========= DARK MODE ========= */
+
+body.dark-mode .forgot-main {
+    background: #0d0d0d; /* fundo geral dark no padrão do site */
+}
+
+/* Card */
+body.dark-mode .forgot-container {
+    background: #1e1e1e; 
+    box-shadow: none;
+}
+
+body.dark-mode .forgot-container h1 {
+    color: #f5f5f5;
+}
+
+body.dark-mode .forgot-container p {
+    color: #ccc;
+}
+
+/* Inputs */
+body.dark-mode .input-group label {
+    color: #f5f5f5;
+}
+
+body.dark-mode .input-group input[type="email"],
+body.dark-mode .input-group input[type="text"] {
+    background: #121212;
+    border: 1px solid #333;
+    color: #eee;
+}
+
+body.dark-mode .input-group input::placeholder {
+    color: #777;
+}
+
+
+
+
+body.dark-mode button:hover {
+    background: #176ac5;
+}
+
+/* Links */
+body.dark-mode .back-login a {
+    color: #2185f8;
+}
+
+/* Mensagem de sucesso */
+body.dark-mode .success-message {
+    color: #4BB543;
+}
+
+/* ALERT */
+body.dark-mode .alert-box {
+    background-color: #4BB543;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* Transições suaves – seguindo o padrão */
+body.dark-mode .forgot-container,
+body.dark-mode input,
+body.dark-mode button {
+    transition: all 0.3s ease;
+}
+
 
 
 /* Container */
@@ -217,6 +284,7 @@ body.dark-mode .paragrafoS {
   justify-content: center;
   min-height: 100vh;
   font-family: "Segoe UI", Tahoma, sans-serif;
+  
 }
 
 /* Card */
@@ -228,6 +296,7 @@ body.dark-mode .paragrafoS {
   width: 100%;
   max-width: 400px;
   text-align: center;
+  padding-bottom: -10px;
 }
 
 .forgot-container h1 {

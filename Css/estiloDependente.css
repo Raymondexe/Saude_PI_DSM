@@ -1,6 +1,5 @@
 body {
     font-family: Arial, sans-serif;
-    padding: 5px;
     background-color: #eef4ff;
 }
 
@@ -432,6 +431,202 @@ body.dark-mode .wave1 { top: -50%; left: -50%; }
 body.dark-mode .wave2 { top: -60%; left: -40%; animation-duration: 20s; }
 body.dark-mode .wave3 { top: -70%; left: -30%; animation-duration: 25s; }
 
+/* ==== DARK MODE ==== */
+body.dark-mode {
+    background-color: #121212;
+    color: #e5e5e5;
+}
+
+/* Topo / Navegação */
+body.dark-mode .TopoSite {
+    background: #1e1e1e;
+    box-shadow: none;
+}
+
+body.dark-mode .Navegacao li a {
+    color: #f5f5f5;
+}
+
+body.dark-mode .menu-toggle {
+    color: #fff;
+}
+
+/* Botões e menus de config */
+body.dark-mode .config-menu button,
+body.dark-mode .perfil-menu button {
+    color: #eaeaea;
+}
+
+body.dark-mode .config-menu button:hover {
+    background-color: rgba(37, 99, 235, 0.15);
+    color: #4fa3ff;
+}
+
+body.dark-mode .perfil-menu button:hover {
+    background-color: rgba(37, 99, 235, 0.15);
+}
+
+/* Dropdown geral */
+body.dark-mode .config-menu .dropdown,
+body.dark-mode .dropdown-perfil {
+    background: #1e1e1e;
+    border: 1px solid #333;
+}
+
+body.dark-mode .config-menu .dropdown button,
+body.dark-mode .dropdown-perfil a {
+    color: #eaeaea;
+}
+
+/* Perfil */
+body.dark-mode .nome-perfil {
+    color: #eaeaea;
+}
+
+/* ---- Cards / Grids ---- */
+body.dark-mode .grid-cards .card {
+    background-color: #1e1e1e;
+    border: 2px solid #2f2f2f;
+}
+
+body.dark-mode .grid-cards .card h2 {
+    color: #fff;
+}
+
+body.dark-mode .grid-cards .card p,
+body.dark-mode .grid-cards .card a {
+    color: #ccc;
+}
+
+/* ---- Notícias ---- */
+body.dark-mode .ContainerNoticias {
+    background-color: #121212;
+    color: #e5e5e5;
+}
+
+body.dark-mode .ContainerNoticias .card-item {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+}
+
+body.dark-mode .ContainerNoticias .card-item h2.card-title {
+    color: #fff;
+}
+
+body.dark-mode .ContainerNoticias .card-item p,
+body.dark-mode .ContainerNoticias .card-item .badge {
+    color: #ccc;
+}
+
+body.dark-mode .ContainerNoticias .card-button {
+    color: #fff;
+}
+
+/* ---- Seção de boas-vindas ---- */
+body.dark-mode .welcome-section {
+    background: #121212;
+    color: #e5e5e5;
+}
+
+body.dark-mode .welcome-text h1 {
+    color: #fff;
+}
+
+body.dark-mode .welcome-text p {
+    color: #ccc;
+}
+
+body.dark-mode .welcome-illustration img {
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .wave {
+    background: rgba(75, 121, 161, 0.1);
+}
+
+/* ---- Perfil do dependente ---- */
+body.dark-mode .perfil-dependente {
+    background: #1e1e1e;
+    box-shadow: none;
+}
+
+body.dark-mode .perfil-dependente .info p {
+    color: #ccc;
+}
+
+/* ---- Lista de remédios ---- */
+body.dark-mode .lista-remedios {
+    background: #1e1e1e;
+    box-shadow: none;
+}
+
+body.dark-mode .remedio {
+    background-color: #1b1b1b;
+    border: 2px solid #333;
+}
+
+body.dark-mode .remedio h4 {
+    color: #4fa3ff;
+}
+
+body.dark-mode .remedio p {
+    color: #cfcfcf;
+}
+
+/* Botão remover */
+body.dark-mode .remedio .btn-remover {
+    background-color: #b32626;
+}
+
+body.dark-mode .remedio .btn-remover:hover {
+    background-color: #9a1f1f;
+}
+
+/* ---- Formulário ---- */
+body.dark-mode .formulario {
+    background: #1e1e1e;
+    box-shadow: none;
+}
+
+body.dark-mode input,
+body.dark-mode select {
+    background: #2a2a2a;
+    border: 1px solid #444;
+    color: #eee;
+}
+
+body.dark-mode input:focus,
+body.dark-mode select:focus {
+    border-color: #4fa3ff;
+}
+
+body.dark-mode label {
+    color: #e5e5e5 !important; /* texto claro e totalmente legível */
+}
+
+/* ---- Footer ---- */
+body.dark-mode .footer {
+    background-color: #0f1c2e;
+    color: #ddd;
+}
+
+body.dark-mode .footerLinks ul li a {
+    color: #ddd;
+}
+
+body.dark-mode .footerLinks ul li a:hover {
+    color: #4fa3ff;
+}
+
+body.dark-mode .footerBottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Transições */
+body.dark-mode,
+body.dark-mode * {
+    transition: 0.3s ease;
+}
 
 
 main {

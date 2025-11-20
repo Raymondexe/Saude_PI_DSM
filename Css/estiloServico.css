@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #eef4ff;
+    
 }
 
 /* ==== Header ==== */
@@ -141,9 +141,6 @@ body {
         transform: translateY(0);
     }
 }
-
-
-
 
 
 /* Modo escuro */
@@ -354,6 +351,7 @@ body.dark-mode .btn-feedback[data-feedback="parcial"] {
 .guia-rapido {
   text-align: center;
   padding: 2rem 1rem;
+
 }
 
 /* ====== TÍTULOS H2 PROFISSIONAIS ====== */
@@ -401,7 +399,7 @@ body.dark-mode .btn-feedback[data-feedback="parcial"] {
   background: #f9f9f9;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
   transition: transform 0.2s ease;
 }
 
