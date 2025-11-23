@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem-Estar 360 - Indica</title>
+    <title>Bem-Estar 360 - Dependente Maria Lucia Silva</title>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const menuToggle = document.querySelector('.menu-toggle');
@@ -53,13 +53,11 @@
 
         <nav class="Navegacao">
             <ul>
-                <!-- Navegação principal -->
-                <li><a href="./index.html">Home</a></li>
-
+                <li><a href="./homeResponsavel.html">Home</a></li>
                 <li><a href="./responsavelPage.html"> Meus Dependentes</a></li>
+                <li><a href="./servicosResponsavel.html">Serviços</a></li>
+                <li><a href="./quemSomosResponsavel.html" data-lang="about">Quem somos</a></li>
 
-
-                <!-- Perfil do usuário -->
                 <li class="perfil-menu">
                     <button id="perfil-btn" aria-haspopup="true" aria-expanded="false">
                         <img src="Img/fotoPerfil.jpg" alt="Foto de perfil" class="foto-perfil">
@@ -67,13 +65,15 @@
                     </button>
                     <div class="dropdown-perfil" role="menu">
                         <a href="./perfil.html">Meu Perfil</a>
-                        <a href="./sair.html">Sair</a>
+                        <a href="./index.html">Sair</a>
                     </div>
                 </li>
 
-                <!-- Configurações -->
+
+                <!-- Menu de Configurações -->
                 <li class="config-menu">
                     <button id="config-btn" aria-haspopup="true" aria-expanded="false">⚙️</button>
+
                     <div class="dropdown" role="menu">
                         <button id="toggle-theme">🌙 Modo Escuro</button>
                         <button id="change-lang">🌎 Trocar Idioma</button>
@@ -250,22 +250,21 @@
 
 
 
-    <!-- Rodapé -->
+     <!-- Rodapé -->
     <footer class="footer">
         <div class="footerContainer">
             <!-- Logo e nome -->
             <div class="footerBrand">
-                <img src="Img/bemEstar.webp" alt="Bem Estar 360" class="footerLogo">
-                <span data-lang="footerBrand">Bem-Estar 360</span>
+                <img src="Img/2.png" alt="Bem Estar 360" class="footerLogo">
+
             </div>
 
             <div class="footerLinks">
                 <ul>
                     <li><a href="./index.html" data-lang="footerHome">Home</a></li>
                     <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
-                    <li><a href="#" data-lang="footerHistory">Histórico</a></li>
-                    <li><a href="#" data-lang="footerServices">Serviços</a></li>
-                    <li><a href="#" data-lang="footerFaq">FAQ</a></li>
+                    <li><a href="./servicos.html" data-lang="footerServices">Serviços</a></li>
+                    <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
                 </ul>
             </div>
 
@@ -284,7 +283,8 @@
 
         <!-- Copyright -->
         <div class="footerBottom">
-            <p data-lang="footerCopy">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.</p>
+            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.
+            </p>
         </div>
     </footer>
 

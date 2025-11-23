@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem-Estar 360 - Dependente Otávio Silva</title>
+    <title>Bem-Estar 360 - Paciente Otávio</title>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const menuToggle = document.querySelector('.menu-toggle');
@@ -29,7 +29,8 @@
     <script src="script.js"></script>
     <!-- CSS externo -->
 
-    <link rel="stylesheet" href="./Css/estiloDependente.css">
+    <link rel="stylesheet" href="./Css/estiloProfissionalPaciente.css">
+
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
@@ -54,14 +55,11 @@
         <nav class="Navegacao">
             <ul>
                 <li><a href="./homeResponsavel.html">Home</a></li>
-                <li><a href="./responsavelPage.html"> Meus Dependentes</a></li>
-                <li><a href="./servicosResponsavel.html">Serviços</a></li>
-                <li><a href="./quemSomosResponsavel.html" data-lang="about">Quem somos</a></li>
 
                 <li class="perfil-menu">
                     <button id="perfil-btn" aria-haspopup="true" aria-expanded="false">
-                        <img src="Img/fotoPerfil.jpg" alt="Foto de perfil" class="foto-perfil">
-                        <span class="nome-perfil">Ana Beatriz</span>
+                        <img src="Img/doutorRoger.png" alt="Foto de perfil" class="foto-perfil">
+                        <span class="nome-perfil">Dr. Roger</span>
                     </button>
                     <div class="dropdown-perfil" role="menu">
                         <a href="./perfil.html">Meu Perfil</a>
@@ -86,7 +84,7 @@
     <script src="script.js"></script>
 
     <main>
-        <!-- Perfil do Dependente -->
+       <!-- Perfil do Dependente -->
         <section class="perfil-dependente">
             <img src="Img/crianca.jpg" alt="Foto do dependente">
             <div class="info">
@@ -106,42 +104,8 @@
                     <p><strong>Horário:</strong> 19:00</p>
                 </div>
         </section>
-
-        <!-- Adicionar Novo Remédio -->
-        <section class="formulario">
-            <h3>Adicionar Novo Remédio</h3>
-            <form id="formRemedio">
-                <div>
-                    <label for="nomeRemedio">Nome do remédio:</label>
-                    <input type="text" id="nomeRemedio" required>
-                </div>
-
-                <div>
-                    <label for="categoria">Categoria:</label>
-                    <select id="categoria" required>
-                        <option value="">Selecione</option>
-                        <option>Diabetes</option>
-                        <option>Pressão Alta</option>
-                        <option>Colesterol</option>
-                        <option>Gota</option>
-                        <option>Estômago</option>
-                        <option>Suplemento</option>
-                        <option>Cardíaco</option>
-                        <option>Ansiolítico</option>
-                        <option>Antibiótico</option>
-                        <option>Outros</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="horario">Horário:</label>
-                    <input type="time" id="horario" required>
-                </div>
-
-                <button type="submit">Adicionar</button>
-            </form>
-        </section>
     </main>
+
 
 
     <script>
@@ -225,13 +189,9 @@
             });
         });
     </script>
-
-
     <br><br>
 
-
-
-     <!-- Rodapé -->
+    <!-- Rodapé -->
     <footer class="footer">
         <div class="footerContainer">
             <!-- Logo e nome -->
@@ -264,7 +224,8 @@
 
         <!-- Copyright -->
         <div class="footerBottom">
-            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.
+            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos
+                reservados.
             </p>
         </div>
     </footer>

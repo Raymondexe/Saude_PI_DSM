@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-Estar 360 - Área Profissional</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navegacao = document.querySelector('.Navegacao');
+
+            menuToggle.addEventListener('click', () => {
+                navegacao.classList.toggle('ativo');
+            });
+
+            document.querySelectorAll('.Navegacao a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navegacao.classList.remove('ativo');
+                });
+            });
+        });
+    </script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="icon/icon_BemEstar360.ico">
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="./Css/estiloProfissional.css">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+    <header class="TopoSite">
+        <div class="Logo">
+            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+        </div>
+
+        <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+
+        <nav class="Navegacao">
+            <ul>
+                <li><a href="./homeProfissional.html">Home</a></li>
+
+                <li class="perfil-menu">
+                    <button id="perfil-btn" aria-haspopup="true" aria-expanded="false">
+                        <img src="Img/doutorRoger.png" alt="Foto de perfil" class="foto-perfil">
+                        <span class="nome-perfil">Dr. Roger</span>
+                    </button>
+                    <div class="dropdown-perfil" role="menu">
+                        <a href="./perfil.html">Meu Perfil</a>
+                        <a href="./index.html">Sair</a>
+                    </div>
+                </li>
+
+
+                <!-- Menu de Configurações -->
+                <li class="config-menu">
+                    <button id="config-btn" aria-haspopup="true" aria-expanded="false">⚙️</button>
+
+                    <div class="dropdown" role="menu">
+                        <button id="toggle-theme">🌙 Modo Escuro</button>
+                        <button id="change-lang">🌎 Trocar Idioma</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <script src="./script.js"></script>
+
+    <section class="mensagem-ola">
+        <h1>👋 Olá, <span id="nomeResponsavel">Dr. Roger</span>!</h1>
+        <p>Bem-vindo(a) ao painel de gerenciamento dos pacientes que são usuários do
+            <strong>Bem-Estar 360</strong>.
+        </p>
+    </section>
+
+    <section class="buscar-dependente">
+        <div class="title-row">
+            <h2>Buscar Dependente</h2>
+            <button type="button" id="btnIDs" class="ids-btn">?</button>
+        </div>
+        <div id="boxIDs" class="ids-box">
+            <strong>IDs disponíveis para teste</strong>
+            <p>12345 — José Antônio da Silva</p>
+            <p>67890 — Maria Lucia Silva</p>
+            <p>54321 — Otávio Silva</p>
+        </div>
+
+        <div class="buscar-box">
+            <input type="text" id="inputBuscarID" placeholder="Digite o ID do Paciente..." />
+            <button id="btnBuscarID" class="btnBuscarDependente">🔍 Buscar</button>
+        </div>
+
+        <div id="msgRetornoBusca" class="retornoBusca" aria-live="polite"></div>
+    </section>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.getElementById('inputBuscarID');
+            const btn = document.getElementById('btnBuscarID');
+            const msg = document.getElementById('msgRetornoBusca');
+
+            // DEBUG: imprime no console para checar se script carregou
+            console.log('[BuscarDependente] script carregado');
+
+            // Exemplo realista de dependentes.
+            // Substitua pelo seu backend / localStorage / fetch quando estiver pronto.
+            const dependentes = {
+                "12345": { destino: "dependente1VwProfissional.html?id=12345", nome: "José Antônio da Silva" },
+                "67890": { destino: "dependente2VwProfissional.html?id=67890", nome: "Maria Lucia Silva" },
+                "54321": { destino: "dependente3VwProfissional.html?id=54321", nome: "Otávio Silva" }
+            };
+
+            function mostrarMensagem(texto, tipo) {
+                msg.textContent = texto;
+                msg.className = 'retornoBusca ' + (tipo === 'ok' ? 'ok' : 'erro');
+                msg.style.display = 'block';
+            }
+
+            function limparMensagem() {
+                msg.textContent = '';
+                msg.className = 'retornoBusca';
+                msg.style.display = 'none';
+            }
+
+            // Buscar ao clicar
+            btn.addEventListener('click', () => {
+                limparMensagem();
+                const id = input.value.trim();
+                console.log('[BuscarDependente] clicado, id=', id);
+
+                if (!id) {
+                    mostrarMensagem('Por favor, insira um ID.', 'erro');
+                    return;
+                }
+
+                const encontrado = dependentes[id];
+
+                if (!encontrado) {
+                    mostrarMensagem('Nenhum paciente encontrado com esse ID.', 'erro');
+                    return;
+                }
+
+                mostrarMensagem(`Paciente encontrado: ${encontrado.nome} — abrindo...`, 'ok');
+
+                // leve delay para o usuário ver a mensagem, depois redireciona
+                setTimeout(() => {
+                    // se você usa uma única página dependente.html?id=..., este redirecionamento já funciona
+                    window.location.href = encontrado.destino;
+                    console.log('[BuscarDependente] redirecionando para', encontrado.destino);
+                }, 700);
+            });
+
+            // Também permite pressionar Enter no campo
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    btn.click();
+                }
+            });
+        });
+
+        const btnIDs = document.getElementById("btnIDs");
+        const boxIDs = document.getElementById("boxIDs");
+
+        btnIDs.addEventListener("click", () => {
+            boxIDs.style.display = "block";
+
+            setTimeout(() => {
+                boxIDs.style.display = "none";
+            }, 4000);
+        });
+
+    </script>
+
+    <br><br>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footerContainer">
+            <!-- Logo e nome -->
+            <div class="footerBrand">
+                <img src="Img/2.png" alt="Bem Estar 360" class="footerLogo">
+
+            </div>
+
+            <div class="footerLinks">
+                <ul>
+                    <li><a href="./index.html" data-lang="footerHome">Home</a></li>
+                    <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
+                    <li><a href="./servicos.html" data-lang="footerServices">Serviços</a></li>
+                    <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
+                </ul>
+            </div>
+
+            <!-- Contato -->
+            <div class="footerContato">
+                <h4 data-lang="footerContactTitle">Contato</h4>
+                <p data-lang="footerEmail">Email: contato@bemestar360.com</p>
+                <p data-lang="footerPhone">Telefone: (11) 1234-5678</p>
+                <div class="footerSocials">
+                    <a href="#"><img src="./Img/face_icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="./Img/insta_icon.webp" alt="Instagram"></a>
+                    <a href="#"><img src="./Img/X_icon.svg.png" alt="Twitter"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footerBottom">
+            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem-Estar 360 - Indicador (Pressão) </title>
+    <title>Bem-Estar 360 - Indicador (Glicemia) </title>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const menuToggle = document.querySelector('.menu-toggle');
@@ -28,6 +28,8 @@
     <!-- CSS externo -->
     <link rel="stylesheet" href="Css/estiloIndicadores.css">
 
+
+
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
 
@@ -44,57 +46,66 @@
             <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
         </div>
 
-        <button class="menu-toggle" aria-label="Abrir menu">
-            ☰
-        </button>
+        <button class="menu-toggle" aria-label="Abrir menu">☰</button>
 
         <nav class="Navegacao">
             <ul>
-                <li><a href="./index.html" data-lang="home">Home</a></li>
-                <li><a href="./monitoramento.html" data-lang="monitoring">Monitoramento</a></li>
-                <li><a href="#" data-lang="history">Histórico</a></li>
-                <li><a href="#" data-lang="services">Serviços</a></li>
-                <li><a href="#" data-lang="about">Quem somos</a></li>
+                <li><a href="./homeResponsavel.html" data-lang="home">Home</a></li>
+                <li><a href="./responsavelPage.html" data-lang="monitoring">Meus Dependentes</a></li>
+                <li><a href="./servicosResponsavel.html">Serviços</a></li>
+                <li><a href="./quemSomosResponsavel.html" data-lang="about">Quem somos</a></li>
 
+                <!-- Perfil do usuário -->
+                <li class="perfil-menu">
+                    <button id="perfil-btn" aria-haspopup="true" aria-expanded="false">
+                        <img src="Img/fotoPerfil.jpg" alt="Foto de perfil" class="foto-perfil">
+                        <span class="nome-perfil">Ana Beatriz</span>
+                    </button>
+                    <div class="dropdown-perfil" role="menu">
+                        <a href="./perfil.html">Meu Perfil</a>
+                        <a href="./index.html">Sair</a>
+                    </div>
 
-                <!-- Menu Configurações -->
+                    <!-- Menu de Configurações -->
                 <li class="config-menu">
-                    <button id="config-btn">⚙️</button>
-                    <div class="dropdown">
+                    <button id="config-btn" aria-haspopup="true" aria-expanded="false">⚙️</button>
+
+                    <div class="dropdown" role="menu">
                         <button id="toggle-theme">🌙 Modo Escuro</button>
                         <button id="change-lang">🌎 Trocar Idioma</button>
-                        <button id="accessibility">♿ Acessibilidade</button>
                     </div>
                 </li>
             </ul>
-
         </nav>
-        <script src="script.js"></script>
     </header>
+
+    <script src="script.js"></script>
 
     <!-- Pressão Arterial -->
 
 
     <section class="registroIndicador">
         <div class="container">
-            <h1>Registre a sua pressão arterial</h1>
+            <h1>Registre a sua Glicemia</h1>
             <div class="leftImg">
-                <img src="./Img/medindoPressao.jpg" alt="Pressão">
+                <img src="./Img/medindoGlicemia.webp" alt="Glicemia">
             </div>
 
             <div class="rightForms">
-                <form id="pressaoForm">
-                    <div class="inputs-row">
-                        <div class="input-group">
-                            <label for="sistolica">Pressão Sistólica (mmHg)</label>
-                            <input type="number" id="sistolica" name="sistolica" placeholder="Ex: 120" min="0" required>
-                        </div>
+                <form id="glicemiaForm">
+                    <div class="input-group">
+                        <label for="valorGlicemia">Glicemia (mg/dL)</label>
+                        <input type="number" id="valorGlicemia" placeholder="Ex: 95" min="0">
+                    </div>
 
-                        <div class="input-group">
-                            <label for="diastolica">Pressão Diastólica (mmHg)</label>
-                            <input type="number" id="diastolica" name="diastolica" placeholder="Ex: 80" min="0"
-                                required>
-                        </div>
+                    <div class="input-group">
+                        <label for="tipoMedicao">Tipo da Medição</label>
+                        <select id="tipoMedicao" name="tipoMedicao" required>
+                            <option value="">Selecione</option>
+                            <option value="jejum">Jejum</option>
+                            <option value="pre-prandial">Pré-prandial (antes da refeição)</option>
+                            <option value="pos-prandial">Pós-prandial (1-2h após a refeição)</option>
+                        </select>
                     </div>
 
                     <div class="input-group">
@@ -110,12 +121,12 @@
                     <div class="input-group">
                         <label for="observacoes">Observações</label>
                         <textarea id="observacoes" name="observacoes" rows="3"
-                            placeholder="Ex: medi após caminhada..."></textarea>
+                            placeholder="Ex: medi após caminhada, senti tontura..."></textarea>
                     </div>
 
-                    <button type="submit" id="salvarPressao">Salvar Registro</button>
+                    <button type="submit" id="salvarGlicemia">Salvar Registro</button>
                 </form>
-                <script src="./script_Registro/scripRegistroPressao.js"></script>
+                <script src="./script_Registro/scriptRegistroGlicemia.js"></script>
             </div>
         </div>
     </section>
@@ -124,33 +135,35 @@
 
     <section class="help">
         <div class="help-container">
-            <h2>Como interpretar seus registros de pressão</h2>
-            <p>Veja abaixo como entender os valores de pressão arterial registrados:</p>
+            <h2>Como interpretar seus registros de glicemia</h2>
+            <p>Veja abaixo como entender os valores de glicemia registrados:</p>
 
             <div class="help-cards">
                 <div class="help-card green">
                     <h3>Normal</h3>
-                    <p>Pressão sistólica até <strong>120 mmHg</strong><br>
-                        Pressão diastólica até <strong>80 mmHg</strong></p>
+                    <p>Jejum: até <strong>99 mg/dL</strong><br>
+                        Pós-prandial: até <strong>140 mg/dL</strong></p>
                     <p>✅ Está dentro do esperado, continue monitorando regularmente.</p>
                 </div>
 
                 <div class="help-card orange">
-                    <h3>Atenção</h3>
-                    <p>Pressão sistólica entre <strong>121-139 mmHg</strong><br>
-                        Pressão diastólica entre <strong>81-89 mmHg</strong></p>
-                    <p>⚠️ Fique atento! Pode indicar pré-hipertensão ou necessidade de ajustes no estilo de vida.</p>
+                    <h3>Alterado / Atenção</h3>
+                    <p>Jejum: <strong>100-125 mg/dL</strong><br>
+                        Pós-prandial: <strong>141-199 mg/dL</strong></p>
+                    <p>⚠️ Fique atento! Pode indicar pré-diabetes ou necessidade de ajustes na alimentação e hábitos de
+                        vida.</p>
                 </div>
 
                 <div class="help-card red">
-                    <h3>Perigo</h3>
-                    <p>Pressão sistólica ≥ <strong>140 mmHg</strong><br>
-                        Pressão diastólica ≥ <strong>90 mmHg</strong></p>
+                    <h3>Diabetes / Perigo</h3>
+                    <p>Jejum: ≥ <strong>126 mg/dL</strong><br>
+                        Pós-prandial: ≥ <strong>200 mg/dL</strong></p>
                     <p>⛔ Procure orientação médica imediatamente!</p>
                 </div>
             </div>
         </div>
     </section>
+
 
 
 
@@ -188,7 +201,8 @@
 
         <!-- Copyright -->
         <div class="footerBottom">
-            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.</p>
+            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.
+            </p>
         </div>
     </footer>
 

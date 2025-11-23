@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem-Estar 360 - Indica</title>
+    <title>Bem-Estar 360 - Home Page</title>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const menuToggle = document.querySelector('.menu-toggle');
@@ -71,7 +71,7 @@
                     <div class="dropdown" role="menu">
                         <button id="toggle-theme">🌙 Modo Escuro</button>
                         <button id="change-lang">🌎 Trocar Idioma</button>
-                        
+
                     </div>
                 </li>
             </ul>
@@ -79,6 +79,7 @@
     </header>
 
     <script src="script.js"></script>
+    <script src="scriptTraducao.js"></script>
 
     <section class="welcome-section">
         <div class="welcome-wrapper animate-fade-in">
@@ -215,46 +216,46 @@
     <!-- Cards -->
     <section class="grid-cards">
         <div class="card">
-            <a href="./pressao.html">
+            <a href="./pressaoDependente.html">
                 <img src="./Img/pressao.jpg" alt="Ícone de Pressão" loading="lazy">
             </a>
             <div class="card-content">
                 <h2 data-lang="cardPress">Pressão Arterial</h2>
                 <p data-lang="cardPressP">Registre e acompanhe seus valores de pressão arterial.</p>
-                <a href="./pressao.html" data-lang="cardPressA">Registre sua Pressão Arterial</a>
+                <a href="./pressaoDependente.html" data-lang="cardPressA">Registre sua Pressão Arterial</a>
             </div>
         </div>
 
         <div class="card">
-            <a href="./glicemia.html">
+            <a href="./glicemiaDependente.html">
                 <img src="./Img/glicemia.jpg" alt="Ícone de Glicemia" loading="lazy">
             </a>
             <div class="card-content">
                 <h2 data-lang="cardGlicemia">Glicemia</h2>
                 <p data-lang="cardGlicemiaP">Registre e acompanhe seus níveis de glicose no sangue.</p>
-                <a href="./glicemia.html" data-lang="cardGlicemiaA">Registrar Glicemia</a>
+                <a href="./glicemiaDependente.html" data-lang="cardGlicemiaA">Registrar Glicemia</a>
             </div>
         </div>
 
         <div class="card">
-            <a href="./batimentosCardiacos.html">
+            <a href="./batimentosCardiacosDependente.html">
                 <img src="./Img/batimentos.jpg" alt="Ícone de Batimentos Cardíacos" loading="lazy">
             </a>
             <div class="card-content">
                 <h2 data-lang="cardBatimentos">Batimentos Cardíacos</h2>
                 <p data-lang="cardBatimentosP">Registre e acompanhe sua frequência cardíaca.</p>
-                <a href="./batimentosCardiacos.html" data-lang="cardBatimentosA">Registrar Batimentos</a>
+                <a href="./batimentosCardiacosDependente.html" data-lang="cardBatimentosA">Registrar Batimentos</a>
             </div>
         </div>
 
         <div class="card">
-            <a href="./temperatura.html">
+            <a href="./temperaturaDependente.html">
                 <img src="./Img/temperatura.jpg" alt="Ícone de Temperatura" loading="lazy">
             </a>
             <div class="card-content">
                 <h2 data-lang="cardTemperatura">Temperatura</h2>
                 <p data-lang="cardTemperaturaP">Registre e acompanhe sua temperatura corporal.</p>
-                <a href="./temperatura.html" data-lang="cardTemperaturaA">Registrar Temperatura</a>
+                <a href="./temperaturaDependente.html" data-lang="cardTemperaturaA">Registrar Temperatura</a>
             </div>
         </div>
     </section>
@@ -302,7 +303,8 @@
 
                 <li class="ubs-card">
                     <div class="ubs-image-wrapper">
-                        <img src="./Img/UBS_NossaSenhoraAparecida.png" alt="UBS Nossa Senhora Aparecida" class="ubs-image">
+                        <img src="./Img/UBS_NossaSenhoraAparecida.png" alt="UBS Nossa Senhora Aparecida"
+                            class="ubs-image">
                     </div>
                     <div class="ubs-content">
                         <h3 class="ubs-name">UBS Vila Nossa Senhora Aparecida</h3>
@@ -378,17 +380,16 @@
         <div class="footerContainer">
             <!-- Logo e nome -->
             <div class="footerBrand">
-                <img src="Img/bemEstar.webp" alt="Bem Estar 360" class="footerLogo">
-                <span data-lang="footerBrand">Bem-Estar 360</span>
+                <img src="Img/2.png" alt="Bem Estar 360" class="footerLogo">
+
             </div>
 
             <div class="footerLinks">
                 <ul>
                     <li><a href="./index.html" data-lang="footerHome">Home</a></li>
                     <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
-                    <li><a href="#" data-lang="footerHistory">Histórico</a></li>
-                    <li><a href="#" data-lang="footerServices">Serviços</a></li>
-                    <li><a href="#" data-lang="footerFaq">FAQ</a></li>
+                    <li><a href="./servicos.html" data-lang="footerServices">Serviços</a></li>
+                    <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
                 </ul>
             </div>
 
@@ -407,7 +408,8 @@
 
         <!-- Copyright -->
         <div class="footerBottom">
-            <p data-lang="footerCopy">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.</p>
+            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.
+            </p>
         </div>
     </footer>
 

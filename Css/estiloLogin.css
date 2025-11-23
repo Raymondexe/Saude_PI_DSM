@@ -17,7 +17,7 @@ body {
 }
 
 .ImgLogo {
-    width: 120px;
+    width: 110px;
     height: auto;
 }
 
@@ -239,6 +239,7 @@ body.dark-mode .TopoSite {
     max-width: 400px;
 }
 
+
 /* ==== Caixa do login ==== */
 .login-box {
     background-color: #ffffff;
@@ -382,6 +383,50 @@ button[type="submit"]:hover {
     font-size: 0.9rem;
     height: 18px; 
     margin-top: -50px;
+}
+
+/* Botão pequeno */
+.test-small-btn {
+    position: absolute;
+    right: -35px;
+    top: 10px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: #4a90e2;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Caixa com os logins */
+.test-accounts-box {
+    position: absolute;
+    right: -220px;
+    top: 50px;
+    width: 200px;
+    background: #222;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+}
+
+/* Mostra a caixa */
+.test-accounts-box.show {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* Dá posição relativa ao container do login */
+.login-container {
+    position: relative;
 }
 
 /* ==== Responsividade ==== */

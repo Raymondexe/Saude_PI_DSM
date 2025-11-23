@@ -44,33 +44,40 @@
             <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
         </div>
 
-        <button class="menu-toggle" aria-label="Abrir menu">
-            ☰
-        </button>
+        <button class="menu-toggle" aria-label="Abrir menu">☰</button>
 
         <nav class="Navegacao">
             <ul>
-                <li><a href="./index.html" data-lang="home">Home</a></li>
-                <li><a href="./monitoramento.html" data-lang="monitoring">Monitoramento</a></li>
-                <li><a href="#" data-lang="history">Histórico</a></li>
-                <li><a href="#" data-lang="services">Serviços</a></li>
-                <li><a href="#" data-lang="about">Quem somos</a></li>
+                <li><a href="./homeResponsavel.html" data-lang="home">Home</a></li>
+                <li><a href="./responsavelPage.html" data-lang="monitoring">Meus Dependentes</a></li>
+                <li><a href="./servicosResponsavel.html">Serviços</a></li>
+                <li><a href="./quemSomosResponsavel.html" data-lang="about">Quem somos</a></li>
 
+                <!-- Perfil do usuário -->
+                <li class="perfil-menu">
+                    <button id="perfil-btn" aria-haspopup="true" aria-expanded="false">
+                        <img src="Img/fotoPerfil.jpg" alt="Foto de perfil" class="foto-perfil">
+                        <span class="nome-perfil">Ana Beatriz</span>
+                    </button>
+                    <div class="dropdown-perfil" role="menu">
+                        <a href="./perfil.html">Meu Perfil</a>
+                        <a href="./index.html">Sair</a>
+                    </div>
 
-                <!-- Menu Configurações -->
+                    <!-- Menu de Configurações -->
                 <li class="config-menu">
-                    <button id="config-btn">⚙️</button>
-                    <div class="dropdown">
+                    <button id="config-btn" aria-haspopup="true" aria-expanded="false">⚙️</button>
+
+                    <div class="dropdown" role="menu">
                         <button id="toggle-theme">🌙 Modo Escuro</button>
                         <button id="change-lang">🌎 Trocar Idioma</button>
-                        <button id="accessibility">♿ Acessibilidade</button>
                     </div>
                 </li>
             </ul>
-
         </nav>
-        <script src="script.js"></script>
     </header>
+
+    <script src="script.js"></script>
 
     <!-- Pressão Arterial -->
 
@@ -188,7 +195,8 @@
 
         <!-- Copyright -->
         <div class="footerBottom">
-            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.</p>
+            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.
+            </p>
         </div>
     </footer>
 

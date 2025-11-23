@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem-Estar 360 - Dependente Otávio Silva</title>
+    <title>Bem-Estar 360 - Paciente José </title>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const menuToggle = document.querySelector('.menu-toggle');
@@ -29,7 +29,8 @@
     <script src="script.js"></script>
     <!-- CSS externo -->
 
-    <link rel="stylesheet" href="./Css/estiloDependente.css">
+    <link rel="stylesheet" href="./Css/estiloProfissionalPaciente.css">
+
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
@@ -54,14 +55,11 @@
         <nav class="Navegacao">
             <ul>
                 <li><a href="./homeResponsavel.html">Home</a></li>
-                <li><a href="./responsavelPage.html"> Meus Dependentes</a></li>
-                <li><a href="./servicosResponsavel.html">Serviços</a></li>
-                <li><a href="./quemSomosResponsavel.html" data-lang="about">Quem somos</a></li>
 
                 <li class="perfil-menu">
                     <button id="perfil-btn" aria-haspopup="true" aria-expanded="false">
-                        <img src="Img/fotoPerfil.jpg" alt="Foto de perfil" class="foto-perfil">
-                        <span class="nome-perfil">Ana Beatriz</span>
+                        <img src="Img/doutorRoger.png" alt="Foto de perfil" class="foto-perfil">
+                        <span class="nome-perfil">Dr. Roger</span>
                     </button>
                     <div class="dropdown-perfil" role="menu">
                         <a href="./perfil.html">Meu Perfil</a>
@@ -88,11 +86,11 @@
     <main>
         <!-- Perfil do Dependente -->
         <section class="perfil-dependente">
-            <img src="Img/crianca.jpg" alt="Foto do dependente">
+            <img src="Img/idoso.jpg" alt="Foto do dependente">
             <div class="info">
-                <h2>Otávio Silva</h2>
-                <p><strong>Idade:</strong> 5 anos</p>
-                <p><strong>Condição:</strong> Glaucoma</p>
+                <h2>José Antônio da Silva</h2>
+                <p><strong>Idade:</strong> 85 anos</p>
+                <p><strong>Condição:</strong> Hipertensão, Diabetes, Artrite Gotosa e Colesterol Alto.</p>
             </div>
         </section>
 
@@ -101,47 +99,114 @@
             <h3>💊 Lista de Remédios</h3>
             <div id="gridRemedios" class="grid-remedios">
                 <div class="remedio">
-                    <h4>Latanoprosta</h4>
-                    <p><strong>Categoria:</strong> Glaucoma</p>
-                    <p><strong>Horário:</strong> 19:00</p>
-                </div>
-        </section>
-
-        <!-- Adicionar Novo Remédio -->
-        <section class="formulario">
-            <h3>Adicionar Novo Remédio</h3>
-            <form id="formRemedio">
-                <div>
-                    <label for="nomeRemedio">Nome do remédio:</label>
-                    <input type="text" id="nomeRemedio" required>
+                    <h4>Alopurinol</h4>
+                    <p><strong>Categoria:</strong> Gota</p>
+                    <p><strong>Horário:</strong> 07:00</p>
                 </div>
 
-                <div>
-                    <label for="categoria">Categoria:</label>
-                    <select id="categoria" required>
-                        <option value="">Selecione</option>
-                        <option>Diabetes</option>
-                        <option>Pressão Alta</option>
-                        <option>Colesterol</option>
-                        <option>Gota</option>
-                        <option>Estômago</option>
-                        <option>Suplemento</option>
-                        <option>Cardíaco</option>
-                        <option>Ansiolítico</option>
-                        <option>Antibiótico</option>
-                        <option>Outros</option>
-                    </select>
+                <div class="remedio">
+                    <h4>Hidroclorotiazida</h4>
+                    <p><strong>Categoria:</strong> Pressão</p>
+                    <p><strong>Horário:</strong> 08:00 e 20:00</p>
                 </div>
 
-                <div>
-                    <label for="horario">Horário:</label>
-                    <input type="time" id="horario" required>
+                <div class="remedio">
+                    <h4>Forxiga</h4>
+                    <p><strong>Categoria:</strong> Diabete</p>
+                    <p><strong>Horário:</strong> 09:00</p>
                 </div>
 
-                <button type="submit">Adicionar</button>
-            </form>
+                <div class="remedio">
+                    <h4>Atorvastatina</h4>
+                    <p><strong>Categoria:</strong> Colesterol</p>
+                    <p><strong>Horário:</strong> 10:00</p>
+                </div>
+
+                <div class="remedio">
+                    <h4>Losartanal</h4>
+                    <p><strong>Categoria:</strong> Pressão </p>
+                    <p><strong>Horário:</strong> 13:00</p>
+                </div>
+
+                <div class="remedio">
+                    <h4>Metformina</h4>
+                    <p><strong>Categoria:</strong> Colesterol</p>
+                    <p><strong>Horário:</strong> 22:00</p>
+                </div>
+            </div>
         </section>
     </main>
+
+
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button id="prevMonth">&#8249;</button>
+            <span id="monthYear"></span>
+            <button id="nextMonth">&#8250;</button>
+        </div>
+        <div class="calendar-weekdays">
+            <div>D</div>
+            <div>S</div>
+            <div>T</div>
+            <div>Q</div>
+            <div>Q</div>
+            <div>S</div>
+            <div>S</div>
+        </div>
+        <div class="calendar-days" id="calendarDays"></div>
+        <div id="dayRecords" class="day-records">Selecione um dia para ver os registros</div>
+    </div>
+
+    <script src="./script_Registro/scriptCalendario.js"></script>
+
+
+
+    <br><br>
+
+
+    <!-- Histórico
+        <section class="historico-container">
+            <h2>Histórico de Monitoramento</h2>
+            <div class="tabela-wrapper">
+                <table id="tabelaHistorico">
+                    <thead>
+                        <tr>
+                            <th>Data/Hora</th>
+                            <th>Batimentos (bpm)</th>
+                            <th>Glicemia (mg/dL)</th>
+                            <th>Temperatura (°C)</th>
+                            <th>Pressão (mmHg)</th>
+                        </tr>
+                    </thead>
+                    <tbody> -->
+    <!-- Dados via JS -->
+    <!-- </tbody>
+                </table>
+            </div>
+
+            <br><br>
+            <button class="btn-pdf" onclick="gerarPDF()">📄 Exportar PDF</button>
+        </section> -->
+
+    </main>
+
+    <section ng-app="monitorApp" ng-controller="monitorCtrl" class="grafico-container">
+        <h2>📊 Gráfico de Monitoramento</h2>
+
+        <div class="controle-grafico">
+            <label>Selecionar indicador:</label>
+            <select ng-model="tipoSelecionado" ng-change="atualizarGrafico()">
+                <option value="batimentos">Batimentos</option>
+                <option value="glicemia">Glicemia</option>
+                <option value="pressao">Pressão</option>
+                <option value="temperatura">Temperatura</option>
+            </select>
+        </div>
+
+        <canvas id="graficoMonitoramento"></canvas>
+    </section>
+
+    <script src="./script_Registro/monitoramentoAngular.js"></script>
 
 
     <script>
@@ -225,13 +290,9 @@
             });
         });
     </script>
-
-
     <br><br>
 
-
-
-     <!-- Rodapé -->
+    <!-- Rodapé -->
     <footer class="footer">
         <div class="footerContainer">
             <!-- Logo e nome -->

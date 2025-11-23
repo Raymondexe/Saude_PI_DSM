@@ -18,7 +18,7 @@ body {
 }
 
 .ImgLogo {
-    width: 120px;
+    width: 110px;
     height: auto;
 }
 
@@ -606,7 +606,6 @@ body.dark-mode label {
 
 /* ---- Footer ---- */
 body.dark-mode .footer {
-    background-color: #0f1c2e;
     color: #ddd;
 }
 
@@ -809,7 +808,7 @@ main {
 }
 
 .footerLogo {
-    width: 100px;
+    width: 150px;
     margin-bottom: 0.5rem;
 }
 

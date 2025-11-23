@@ -27,7 +27,7 @@
             <ul>
                 <li><a href="./index.html" data-lang="home">Home</a></li>
                 <li><a href="./monitoramento.html" data-lang="monitoring">Monitoramento</a></li>
-                <li><a href="./servicos.html" data-lang="services" >Serviços</a></li>
+                <li><a href="./servicos.html" data-lang="services">Serviços</a></li>
                 <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
                 <li><a href="./login.html" data-lang="login">Login</a></li>
 
@@ -46,6 +46,7 @@
 
     <script src="script.js"></script>
     <script src="scriptTraducao.js"></script>
+    <script src="scriptShowLogin.js"></script>
 
     <!-- Login -->
     <main class="main-login">
@@ -77,19 +78,28 @@
 
                         <div class="bordaLogin">
                             <a href="#">
-                                <img class="imglogin" src="./Img/google.png">
+                                <img class="imglogin" src="./Img/google1.png">
                             </a>
                             <a href="#">
-                                <img class="imglogin" src="./Img/govbr.png">
+                                <img class="imglogin" src="./Img/govbr1.png">
                             </a>
                         </div>
                     </div>
                 </form>
+
+                <!-- Botão pequeno ao lado do formulário -->
+                <button type="button" id="btnTestAccounts" class="test-small-btn">?</button>
+
+                <!-- Box com os logins -->
+                <div id="testAccountsBox" class="test-accounts-box">
+                    <strong>Logins de Teste</strong>
+                    <p>ana@gmail.com — 12345 (Responsável)</p>
+                    <p>joseAnt@gmail.com — abc123 (Dependente)</p>
+                    <p>roger@gmail.com — med123 (Profissional)</p>
+                </div>
     </main>
 
-
-
-     <!-- Rodapé -->
+    <!-- Rodapé -->
     <footer class="footer">
         <div class="footerContainer">
             <!-- Logo e nome -->
@@ -122,7 +132,8 @@
 
         <!-- Copyright -->
         <div class="footerBottom">
-            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.</p>
+            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.
+            </p>
         </div>
     </footer>
 
@@ -149,7 +160,8 @@
                 // Logins válidos
                 const usuarios = [
                     { email: "ana@gmail.com", senha: "12345", destino: "responsavelPage.html" },
-                    { email: "joseAnt@gmail.com", senha: "abc123", destino: "homeDependente.html" }
+                    { email: "joseAnt@gmail.com", senha: "abc123", destino: "homeDependente.html" },
+                    { email: "roger@gmail.com", senha: "med123", destino: "profissionalPage.html" }
                 ];
 
                 // Verifica se o usuário existe
