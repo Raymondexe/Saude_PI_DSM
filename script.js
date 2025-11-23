@@ -53,12 +53,14 @@ document.addEventListener("click", (e) => {
   }
 });
 
-accessibilityToggle.addEventListener("click", (e) => {
-  e.stopPropagation();
-  const isOpen = subDropdown.style.display === "flex";
-  subDropdown.style.display = isOpen ? "none" : "flex";
-  accessibilityToggle.setAttribute("aria-expanded", !isOpen);
-});
+if (accessibilityToggle) {
+  accessibilityToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = subDropdown.style.display === "flex";
+    subDropdown.style.display = isOpen ? "none" : "flex";
+    accessibilityToggle.setAttribute("aria-expanded", !isOpen);
+  });
+}
 
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".config-menu")) {

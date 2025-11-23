@@ -1,73 +1,83 @@
 const app = angular.module('monitorApp', []);
 
-app.controller('monitorCtrl', function($scope) {
+app.controller('monitorCtrl', function ($scope) {
+
     const ctx = document.getElementById('graficoMonitoramento').getContext('2d');
 
-    // Tipo inicial
-    $scope.tipoSelecionado = 'batimentos';
-
+    $scope.tipoSelecionado = 'temperatura';
     let grafico = null;
 
     function carregarRegistros(tipo) {
         return JSON.parse(localStorage.getItem(tipo)) || [];
     }
 
+    function criarDataset(label, valores) {
+        return {
+            label,
+            data: valores,
+            borderWidth: 2,
+            tension: 0.3
+        };
+    }
+
     function formatarDados(tipo, registros) {
         const labels = registros.map(r => r.data || '—');
-        let valores = [];
+
+        let datasets = [];
 
         switch (tipo) {
+
             case 'batimentos':
-                valores = registros.map(r => r.valor || r);
+                datasets.push(
+                    criarDataset("Batimentos", registros.map(r => r.valor))
+                );
                 break;
+
             case 'glicemia':
-                valores = registros.map(r => r.valorGlicemia);
+                datasets.push(
+                    criarDataset("Glicemia", registros.map(r => r.valorGlicemia))
+                );
                 break;
-            case 'pressao':
-                valores = registros.map(r => `${r.sistolica}/${r.diastolica}`);
-                break;
+
             case 'temperatura':
-                valores = registros.map(r => r.valorTemperatura);
+                datasets.push(
+                    criarDataset("Temperatura", registros.map(r => r.valorTemperatura))
+                );
+                break;
+
+            case 'pressao':
+                datasets.push(
+                    criarDataset("Sistólica", registros.map(r => r.sistolica)),
+                    criarDataset("Diastólica", registros.map(r => r.diastolica))
+                );
                 break;
         }
 
-        return { labels, valores };
+        return { labels, datasets };
     }
 
-    function desenharGrafico(labels, valores, titulo) {
-        if (grafico) grafico.destroy(); // limpa gráfico anterior
+    function desenharGrafico(labels, datasets) {
+        if (grafico) grafico.destroy();
 
         grafico = new Chart(ctx, {
             type: 'line',
-            data: {
-                labels,
-                datasets: [{
-                    label: titulo,
-                    data: valores,
-                    borderWidth: 2,
-                    tension: 0.3
-                }]
-            },
+            data: { labels, datasets },
             options: {
                 responsive: true,
                 scales: {
-                    y: {
-                        beginAtZero: false
-                    }
+                    y: { beginAtZero: false }
                 }
             }
         });
     }
 
-    $scope.atualizarGrafico = function() {
+    $scope.atualizarGrafico = function () {
         const tipo = $scope.tipoSelecionado;
         const registros = carregarRegistros(tipo);
-        const { labels, valores } = formatarDados(tipo, registros);
-        desenharGrafico(labels, valores, tipo.charAt(0).toUpperCase() + tipo.slice(1));
+        const { labels, datasets } = formatarDados(tipo, registros);
+        desenharGrafico(labels, datasets);
     };
 
     // Inicializa
     $scope.atualizarGrafico();
 });
-
-
