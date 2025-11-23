@@ -51,9 +51,9 @@
             <ul>
                 <li><a href="./index.html" data-lang="home">Home</a></li>
                 <li><a href="./monitoramento.html" data-lang="monitoring">Monitoramento</a></li>
-                <li><a href="./servicos.html">Serviços</a></li>
-                <li><a href="#" data-lang="about">Quem somos</a></li>
-                <li><a href="./login.html">Login</a></li>
+                <li><a href="./servicos.html" data-lang="services" >Serviços</a></li>
+                <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
+                <li><a href="./login.html" data-lang="login">Login</a></li>
 
                 <!-- Menu de Configurações -->
                 <li class="config-menu">
@@ -68,18 +68,15 @@
         </nav>
     </header>
 
-
-
     <script src="script.js"></script>
-
-
+    <script src="scriptTraducao.js"></script>
 
     <section class="welcome-section">
         <div class="welcome-wrapper animate-fade-in">
             <div class="welcome-text centered">
-                <h1>Bem-vindo ao <span>Bem-Estar 360</span></h1>
-                <p>Monitore sua saúde diariamente e acompanhe seu bem-estar de forma simples, intuitiva e confiável.</p>
-                <p>Nosso objetivo é ajudá-lo a compreender seu corpo, adotando hábitos saudáveis e prevenindo riscos.
+                <h1 data-lang="h1BemVindo" >Bem-vindo ao <span>Bem-Estar 360</span></h1>
+                <p data-lang="pTexto1" >Monitore sua saúde diariamente e acompanhe seu bem-estar de forma simples, intuitiva e confiável.</p>
+                <p data-lang="pTexto2">Nosso objetivo é ajudá-lo a compreender seu corpo, adotando hábitos saudáveis e prevenindo riscos.
                 </p>
             </div>
         </div>
@@ -198,8 +195,8 @@
 
     <section class="ContainerControle">
         <div class="Controle hospital-card">
-            <h2>Registre seus dados de saúde</h2>
-            <p>
+            <h2 data-lang="textContainerControle" >Registre seus dados de saúde</h2>
+            <p data-lang="textPcontainer">
                 Para manter seu acompanhamento atualizado, clique nos cards abaixo e registre suas medições
                 de pressão arterial, glicemia, batimentos cardíacos e temperatura. O registro diário ajuda
                 você e os profissionais de saúde a monitorarem seu bem-estar com mais precisão.
@@ -256,7 +253,7 @@
 
 
     <section class="ubs-section">
-        <h2 class="ubs-section-title">Nossas UBS</h2>
+        <h2 class="ubs-section-title" data-lang="textUbsSection">Nossas UBS</h2>
 
         <div class="ubs-slider">
             <ul class="ubs-list">
@@ -266,11 +263,11 @@
                     </div>
                     <div class="ubs-content">
                         <h3 class="ubs-name">UBS Itaquera</h3>
-                        <p class="ubs-description">
+                        <p class="ubs-description" data-lang="ubsDesc1">
                             Localizada na Rua Américo Salvador Novelli, 265, oferece atendimento clínico, vacinação e
                             exames de rotina.
                         </p>
-                        <button onclick="abrirNoMaps(-23.539298875972847, -46.455240619332)" class="ubs-button">
+                        <button onclick="abrirNoMaps(-23.539298875972847, -46.455240619332)" class="ubs-button" data-lang="textVerRota">
                             Ver rota
                         </button>
                     </div>
@@ -282,11 +279,11 @@
                     </div>
                     <div class="ubs-content">
                         <h3 class="ubs-name">UBS Vila Carmosina</h3>
-                        <p class="ubs-description">
+                        <p class="ubs-description" data-lang="ubsDesc2">
                             Situada na Rua Ipopoca, 61, oferece atendimento clínico, vacinação e exames de rotina.
                             no centro da cidade, oferece atendimento clínico, vacinação e exames de rotina.
                         </p>
-                        <button onclick="abrirNoMaps(-23.549686649777833, -46.44868669891686)" class="ubs-button">
+                        <button onclick="abrirNoMaps(-23.549686649777833, -46.44868669891686)" class="ubs-button" data-lang="textVerRota">
                             Ver rota
                         </button>
                     </div>
@@ -298,11 +295,11 @@
                     </div>
                     <div class="ubs-content">
                         <h3 class="ubs-name">UBS Vila Nossa Senhora Aparecida</h3>
-                        <p class="ubs-description">
+                        <p class="ubs-description" data-lang="ubsDesc3">
                             Localizada na Rua Paulino Serqueira, 1, oferece atendimento clínico, vacinação e exames de
                             rotina.
                         </p>
-                        <button onclick="abrirNoMaps(-23.53414480520631, -46.4427562317228)" class="ubs-button">
+                        <button onclick="abrirNoMaps(-23.53414480520631, -46.4427562317228)" class="ubs-button" data-lang="textVerRota">
                             Ver rota
                         </button>
                     </div>
@@ -314,11 +311,11 @@
                     </div>
                     <div class="ubs-content">
                         <h3 class="ubs-name">UBS José Bonifácio II</h3>
-                        <p class="ubs-description">
+                        <p class="ubs-description" data-lang="ubsDesc4">
                             Situada na Rua Murmúrios da Tarde, oferece atendimento clínico, vacinação e exames de
                             rotina.
                         </p>
-                        <button onclick="abrirNoMaps(-23.553662524171656, -46.4446753047391)" class="ubs-button">
+                        <button onclick="abrirNoMaps(-23.553662524171656, -46.4446753047391)" class="ubs-button" data-lang="textVerRota">
                             Ver rota
                         </button>
                     </div>
@@ -330,11 +327,11 @@
                     </div>
                     <div class="ubs-content">
                         <h3 class="ubs-name">UBS/AMA José Bonifácio III</h3>
-                        <p class="ubs-description">
+                        <p class="ubs-description" data-lang="ubsDesc5">
                             Localizada na Rua Sílvio Barbini, 40, oferece atendimento clínico, vacinação e exames de
                             rotina.
                         </p>
-                        <button onclick="abrirNoMaps(-23.540641766427793, -46.4393115759034)" class="ubs-button">
+                        <button onclick="abrirNoMaps(-23.540641766427793, -46.4393115759034)" class="ubs-button" data-lang="textVerRota">
                             Ver rota
                         </button>
                     </div>
@@ -346,11 +343,11 @@
                     </div>
                     <div class="ubs-content">
                         <h3 class="ubs-name">UBS Cidade Líder</h3>
-                        <p class="ubs-description">
+                        <p class="ubs-description" data-lang="ubsDesc6">
                             Localizada na Av. Dr. Francisco Munhoz Filho, 379, oferece atendimento clínico, vacinação e
                             exames de rotina.
                         </p>
-                        <button onclick="abrirNoMaps(-23.554291369235724, -46.46517399124749)" class="ubs-button">
+                        <button onclick="abrirNoMaps(-23.554291369235724, -46.46517399124749)" class="ubs-button" data-lang="textVerRota">
                             Ver rota
                         </button>
                     </div>
@@ -368,17 +365,16 @@
         <div class="footerContainer">
             <!-- Logo e nome -->
             <div class="footerBrand">
-                <img src="Img/bemEstar.webp" alt="Bem Estar 360" class="footerLogo">
-                <span data-lang="footerBrand">Bem-Estar 360</span>
+                <img src="Img/2.png" alt="Bem Estar 360" class="footerLogo">
+
             </div>
 
             <div class="footerLinks">
                 <ul>
                     <li><a href="./index.html" data-lang="footerHome">Home</a></li>
                     <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
-                    <li><a href="#" data-lang="footerHistory">Histórico</a></li>
-                    <li><a href="#" data-lang="footerServices">Serviços</a></li>
-                    <li><a href="#" data-lang="footerFaq">FAQ</a></li>
+                    <li><a href="./servicos.html" data-lang="footerServices">Serviços</a></li>
+                    <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
                 </ul>
             </div>
 
@@ -397,7 +393,7 @@
 
         <!-- Copyright -->
         <div class="footerBottom">
-            <p data-lang="footerCopy">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.</p>
+            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.</p>
         </div>
     </footer>
 

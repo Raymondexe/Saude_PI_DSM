@@ -1117,7 +1117,6 @@ body.dark-mode .ubs-slider::-webkit-scrollbar-track {
     background-color: #1565c0;
     color: #fff;
     padding: 3rem 2rem 1rem 2rem;
-    font-family: var(--fonte);
 }
 
 .footerContainer {
@@ -1130,7 +1129,7 @@ body.dark-mode .ubs-slider::-webkit-scrollbar-track {
 }
 
 .footerLogo {
-    width: 100px;
+    width: 150px;
     margin-bottom: 0.5rem;
 }
 

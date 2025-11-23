@@ -606,76 +606,6 @@ body.dark-mode .alert-feedback.nao { background-color: #dc3545; }
 body.dark-mode .alert-feedback.parcial { background-color: #ffc107; color: #212529; }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ==== START Footer ==== */
 
 .footer {
@@ -695,7 +625,7 @@ body.dark-mode .alert-feedback.parcial { background-color: #ffc107; color: #2125
 }
 
 .footerLogo {
-    width: 100px;
+    width: 150px;
     margin-bottom: 0.5rem;
 }
 
