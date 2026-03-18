@@ -63,23 +63,40 @@
     </header>
 
 
-    <!-- CALENDÁRIO -->
 
     <div class="app">
 
-        <!-- SIDEBAR -->
         <aside class="sidebar">
 
-            <button class="btn-roxo">+ Create Schedule</button>
-
-            <div class="mini-calendar"></div>
-
             <div class="dependentes">
+
                 <h4>Dependentes</h4>
-                <input type="text" placeholder="Procure seus dependentes">
-                <div class="person"> <img class="img" src="Img/idosa.jpg"> <p>Clotide</p></div>
-                <div class="person"> <img class="img" src="Img/idosa.jpg"> <p>Clotide</p></div>
-                <div class="person"> <img class="img" src="Img/idosa.jpg"> <p>Clotide</p></div>
+
+                <input type="text" placeholder="Buscar...">
+
+                <div class="lista-pessoas">
+
+                    <div class="person">
+                        <img class="img" src="Img/idosa.jpg">
+                        <p>Clotide</p>
+                    </div>
+
+                    <div class="person">
+                        <img class="img" src="Img/idoso.jpg">
+                        <p>José</p>
+                    </div>
+
+                    <div class="person">
+                        <img class="img" src="Img/crianca.jpg">
+                        <p>Henrique</p>
+                    </div>
+
+                </div>
+
+                <button class="btn-add">
+                    + Adicionar dependente
+                </button>
+
             </div>
 
         </aside>
@@ -110,19 +127,11 @@
 
                 </div>
 
-                <div class="actions">
-                    <button class="cancel">Cancel</button>
-                    <button class="apply">Apply</button>
-                </div>
-
             </div>
 
         </main>
 
     </div>
-
-    </div>
-
 
     <!-- MODAL -->
 
@@ -131,48 +140,80 @@
         <div class="modal-card">
 
             <div class="modal-header">
-                <h3 id="dataSelecionada"></h3>
+                <div>
+                    <span class="modal-sub">Novo evento</span>
+                    <h2 id="dataSelecionada"></h2>
+                </div>
                 <button class="btn-fechar" onclick="fecharModal()">✕</button>
             </div>
 
             <div class="modal-body">
 
-                <label>Tipo de consulta</label>
-                <select id="tipo">
-                    <option value="">Selecione</option>
-                    <option>Consulta</option>
-                    <option>Retorno</option>
-                    <option>Exame</option>
-                    <option>Cirurgia</option>
-                </select>
+                <div class="input-group">
+                    <label>Local</label>
+                    <input type="text" id="local" placeholder="Ex: Hospital São Paulo">
+                </div>
 
-                <label>Médico</label>
-                <input type="text" id="medico" placeholder="Dr. João">
+                <div class="input-group">
+                    <label>Tipo</label>
+                    <select id="tipo">
+                        <option value="">Selecione</option>
+                        <option value="Consulta">Consulta</option>
+                        <option value="Exame">Exame</option>
+                        <option value="Retorno">Retorno</option>
+                    </select>
+                </div>
 
-                <label>Local</label>
-                <input type="text" id="local" placeholder="Hospital / Clínica">
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Médico</label>
+                        <input type="text" id="medico" placeholder="Dr. João">
+                    </div>
 
-                <label>Horário</label>
-                <input type="time" id="horario">
+                    <div class="input-group">
+                        <label>Horário</label>
+                        <input type="time" id="horario">
+                    </div>
+                </div>
 
-                <label>Levar</label>
-                <select id="levar">
-                    <option value="">Nada específico</option>
-                    <option>Documento com foto</option>
-                    <option>Carteirinha do convênio</option>
-                    <option>Exames anteriores</option>
-                    <option>Jejum necessário</option>
-                </select>
+                <div class="input-group">
+                    <label>O que levar</label>
 
+                    <div class="check-list">
+                        <label><input type="checkbox" value="Documento"> Documento</label>
+                        <label><input type="checkbox" value="Carteirinha SUS"> Carteirinha SUS</label>
+                        <label><input type="checkbox" value="Exames anteriores"> Exames anteriores</label>
+                        <label><input type="checkbox" value="Receita médica"> Receita médica</label>
+                    </div>
+                </div>
+
+                <button id="btnSalvar" class="btn-salvar" onclick="salvarExame()">
+                    Salvar evento
+                </button>
             </div>
-
-            <button class="btn-salvar" onclick="salvarExame()">Salvar</button>
 
         </div>
 
     </div>
 
+    <div id="modalLista" class="modal-exame">
 
+        <div class="modal-card grande">
+
+            <div class="modal-header">
+                <h2 id="tituloLista"></h2>
+                <button class="btn-fechar" onclick="fecharLista()">✕</button>
+            </div>
+
+            <div id="listaEventos"></div>
+
+            <button id="btnNovo" class="btn-salvar" onclick="abrirNovoEvento()">
+                + Novo evento
+            </button>
+
+        </div>
+
+    </div>
 
     <br><br>
 
