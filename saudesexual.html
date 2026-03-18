@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bem-Estar 360 - Notícia (Saúde Sexual)</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="icon/icon_BemEstar360.ico" />
+
+    <!-- CSS externo -->
+
+    <link rel="stylesheet" href="./CSS/estiloNoticias.css" />
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navegacao = document.querySelector('.navegacao');
+
+            menuToggle.addEventListener('click', () => {
+                navegacao.classList.toggle('ativo');
+            });
+
+            document.querySelectorAll('.navegacao a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navegacao.classList.remove('ativo');
+                });
+            });
+
+            // Dropdown configurações
+            const configBtn = document.getElementById('config-btn');
+            const dropdown = document.querySelector('.dropdown');
+
+            configBtn.addEventListener('click', () => {
+                const expanded = configBtn.getAttribute('aria-expanded') === 'true' || false;
+                configBtn.setAttribute('aria-expanded', !expanded);
+                dropdown.style.display = expanded ? 'none' : 'flex';
+            });
+
+            // Fecha dropdown ao clicar fora
+            document.addEventListener('click', (event) => {
+                if (!configBtn.contains(event.target) && !dropdown.contains(event.target)) {
+                    dropdown.style.display = 'none';
+                    configBtn.setAttribute('aria-expanded', false);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="TopoSite">
+        <div class="Logo">
+            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+        </div>
+
+        <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+
+        <nav class="navegacao">
+            <ul>
+                <li><a href="./index.html" data-lang="home">Home</a></li>
+                <li><a href="./monitoramento.html" data-lang="monitoring">Monitoramento</a></li>
+                <li><a href="./servicos.html">Serviços</a></li>
+                <li><a href="#" data-lang="about">Quem somos</a></li>
+
+
+                <!-- Menu de Configurações -->
+                <li class="config-menu">
+                    <button id="config-btn" aria-haspopup="true" aria-expanded="false">⚙️</button>
+
+                    <div class="dropdown" role="menu">
+                        <button id="toggle-theme">🌙 Modo Escuro</button>
+                        <button id="change-lang">🌎 Trocar Idioma</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+    <script src="script.js"></script>
+
+    <div class="layout">
+        <!-- Coluna da Notícia Principal -->
+        <main class="principal">
+            <img src="./Img/saudeSexualNotice.jpg" alt="Imagem ilustrativa do SUS"
+                style="max-width:100%; height:auto; margin:15px 0; border-radius:10px;">
+            <article>
+                <h1>Saúde sexual: importância da prevenção e bem-estar</h1>
+
+                <p><strong>Especialistas alertam sobre a necessidade de cuidados com a saúde sexual, que envolve
+                        bem-estar físico, emocional e social, além da prevenção de doenças e promoção de relacionamentos
+                        saudáveis.</strong></p>
+
+                <h2>O que é saúde sexual</h2>
+                <p>A saúde sexual vai além da ausência de doenças. Envolve o direito de homens e mulheres desfrutarem e
+                    expressarem sua sexualidade de forma segura, respeitosa e satisfatória, com liberdade de escolha e
+                    informação adequada.</p>
+                <p>Fonte: <a
+                        href="https://www.gov.br/saudedigital/pt-br/assuntos/saude-de-a-a-z/s/saude-do-adolescente/saude-sexual-e-reprodutiva"
+                        target="_blank">Ministério da Saúde</a></p>
+
+                <h2>Por que a prevenção é fundamental</h2>
+                <ul>
+                    <li>O uso de preservativos protege contra ISTs como HIV e sífilis.</li>
+                    <li>Vacinas como HPV e hepatites A e B evitam doenças graves.</li>
+                    <li>Exames periódicos são essenciais, já que muitas ISTs são silenciosas.</li>
+                    <li>A prevenção combinada — que inclui diversos métodos — é mais eficaz.</li>
+                </ul>
+                <p>Fontes:
+                    <a href="https://www.gov.br/saude-de-a-z-/pt-br/assuntos/noticias/2023/fevereiro/camisinha-e-o-metodo-mais-eficaz-para-protecao-contra-o-hiv-e-outras-infeccoes-sexualmente-transmissiveis"
+                        target="_blank">GOV.BR</a>,
+                    <a href="https://saude.se.gov.br/secretaria-de-estado-da-saude-destaca-importancia-de-prevencao-e-cuidado-com-saude-sexual/"
+                        target="_blank">Saúde-SE</a>
+                </p>
+
+                <h2>Bem-estar emocional e social</h2>
+                <p>Saúde sexual também significa estar bem emocionalmente. Relacionamentos baseados em respeito,
+                    confiança e comunicação aberta fortalecem o bem-estar sexual e mental.</p>
+                <ul>
+                    <li>Relacionamentos saudáveis reduzem estigmas e melhoram a autoestima.</li>
+                    <li>Educação sexual desde cedo promove autonomia e decisões conscientes.</li>
+                    <li>Ambientes seguros favorecem o respeito às diversidades e ao consentimento.</li>
+                </ul>
+
+
+                <h2>Desafios atuais</h2>
+                <ul>
+                    <li>Acesso desigual a métodos preventivos e vacinas.</li>
+                    <li>Tabus e preconceitos dificultam o diálogo e o cuidado.</li>
+                    <li>Falta de comunicação entre parceiros e com profissionais de saúde.</li>
+                    <li>Desigualdades sociais limitam o acesso à informação e atendimento.</li>
+                </ul>
+
+
+                <h2>O que os especialistas recomendam</h2>
+                <ul>
+                    <li>Usar preservativos e fazer testagens regulares.</li>
+                    <li>Estimular a educação sexual em escolas e famílias.</li>
+                    <li>Valorizar o consentimento e a comunicação nas relações.</li>
+                    <li>Garantir políticas públicas de acesso gratuito à saúde sexual e reprodutiva.</li>
+                    <li>Combater estigmas ligados à sexualidade.</li>
+                </ul>
+
+                <h2>Conclusão</h2>
+                <p>Cuidar da saúde sexual é um passo essencial para uma vida mais saudável, segura e feliz. Envolve não
+                    apenas prevenção de doenças, mas também o fortalecimento da autoestima, do respeito e de vínculos
+                    positivos. A informação, o diálogo e o acesso aos serviços de saúde são pilares fundamentais para o
+                    bem-estar sexual de todos.</p>
+
+                <h3>Fontes</h3>
+                <p>Fonte: <a
+                        href="https://agenciabrasil.ebc.com.br/saude/noticia/2024-01/campanha-alerta-sobre-importancia-da-prevencao-do-cancer-de-penis"
+                        target="_blank">Agência Brasil</a></p>
+                <p>Fonte: <a
+                        href="https://www.gov.br/ebserh-intensifica-assistencia-a-distancia-como-estrategia-de-/pt-br/comunicacao/noticias/relacionamentos-positivos-o-alicerce-da-saude-sexual"
+                        target="_blank">EBSERH - Rede Ebserh</a></p>
+            </article>
+
+
+        </main>
+
+        <!-- Coluna das Outras Notícias -->
+        <aside class="sidebar">
+            <h2>Últimas noticias</h2>
+            <ol>
+                <li><a href="./sus.html">SUS garante atendimento de qualidade a todos os brasileiros</a></li>
+                <li><a href="./diabetes.html">Diabetes exige acompanhamento e cuidados contínuos</a></li>
+                <li><a href="./saudeMental.html">Saúde mental recebe atenção crescente no Brasil</a></li>
+                <li><a href="./glaucoma.html">Glaucoma: doença silenciosa que ameaça a visão</a></li>
+                <li><a href="./idosoBemEstar.html">Bem‑Estar 360°: aliança entre idosos, cuidadores e tecnologia</a>
+                </li>
+            </ol>
+        </aside>
+    </div>
+
+     <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footerContainer">
+            <!-- Logo e nome -->
+            <div class="footerBrand">
+                <img src="Img/2.png" alt="Bem Estar 360" class="footerLogo">
+
+            </div>
+
+            <div class="footerLinks">
+                <ul>
+                    <li><a href="./index.html" data-lang="footerHome">Home</a></li>
+                    <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
+                    <li><a href="./servicos.html" data-lang="footerServices">Serviços</a></li>
+                    <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
+                </ul>
+            </div>
+
+            <!-- Contato -->
+            <div class="footerContato">
+                <h4 data-lang="footerContactTitle">Contato</h4>
+                <p data-lang="footerEmail">Email: contato@bemestar360.com</p>
+                <p data-lang="footerPhone">Telefone: (11) 1234-5678</p>
+                <div class="footerSocials">
+                    <a href="#"><img src="./Img/face_icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="./Img/insta_icon.webp" alt="Instagram"></a>
+                    <a href="#"><img src="./Img/X_icon.svg.png" alt="Twitter"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footerBottom">
+            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.</p>
+        </div>
+    </footer>
