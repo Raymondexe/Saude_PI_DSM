@@ -48,56 +48,29 @@
     <script src="scriptTraducao.js"></script>
     <script src="scriptShowLogin.js"></script>
 
-    <!-- Login -->
-    <main class="main-login">
-        <div class="login-container">
-            <div class="login-box">
-                <h1>Bem-Estar 360</h1>
-                <p>Faça login para acessar seu painel de saúde</p>
+    <form action="php/usuario/cadastrar.php" method="POST" id="formCadastro">
+        <input type="text" name="nomeUsuario" placeholder="Nome completo" required>
+        <input type="date" name="dataNascimento" required>
+        <select name="sexo" required>
+            <option value="">Sexo</option>
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+        </select>
+        <input type="text" name="enderecoUsuario" placeholder="Endereço" required>
+        <input type="text" name="telefoneUsuario" placeholder="Telefone" required>
+        <input type="email" name="emailUsuario" placeholder="Email" required>
 
-                <form id="loginForm">
-                    <div class="input-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="seu@email.com" required>
-                    </div>
+        <input type="text" name="usuario" placeholder="Usuário" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <select name="tipoUsuario" required>
+            <option value="">Tipo</option>
+            <option value="1">Dependente</option>
+            <option value="2">Responsável</option>
+            <option value="3">Profissional</option>
+        </select>
 
-                    <div class="input-group">
-                        <label for="senha">Senha</label>
-                        <input type="password" id="senha" placeholder="********" required>
-                    </div>
-
-                    <button type="submit">Login</button>
-
-                    <p class="forgot"><a href="./forgotSenha.html">Esqueci minha senha</a></p>
-                    <p class="signup-text">
-                        Não possui uma conta? <a href="./newAccount.html">Crie a sua agora!</a>
-                    </p>
-                    <p class="error-message" id="error-message"></p>
-                    <p>Faça login de outras maneiras</p>
-                    <div class="OpcLogin">
-
-                        <div class="bordaLogin">
-                            <a href="#">
-                                <img class="imglogin" src="./Img/google1.png">
-                            </a>
-                            <a href="#">
-                                <img class="imglogin" src="./Img/govbr1.png">
-                            </a>
-                        </div>
-                    </div>
-                </form>
-
-                <!-- Botão pequeno ao lado do formulário -->
-                <button type="button" id="btnTestAccounts" class="test-small-btn">?</button>
-
-                <!-- Box com os logins -->
-                <div id="testAccountsBox" class="test-accounts-box">
-                    <strong>Logins de Teste</strong>
-                    <p>ana@gmail.com — 12345 (Responsável)</p>
-                    <p>joseAnt@gmail.com — abc123 (Dependente)</p>
-                    <p>roger@gmail.com — med123 (Profissional)</p>
-                </div>
-    </main>
+        <button type="submit">Cadastrar</button>
+    </form>
 
     <!-- Rodapé -->
     <footer class="footer">
