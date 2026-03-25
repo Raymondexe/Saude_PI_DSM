@@ -10,13 +10,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['nomeUsuario'] ?? null;
     $email = $_POST['emailUsuario'] ?? null;
     $phone = $_POST['telefoneUsuario'] ?? null;
+    
 
-    $sql = "UPDATE tblUsuario SET nomeUsuario='$name', emailUsuario='$email', telefoneUsuario='$phone' WHERE idUsuario='$id'";
+    // Debug: confirma os valores antes de executar
+    echo "ID: $id | Nome: $name | Email: $email | Telefone: $phone <br>";
 
-    if ($conn->query($sql) === TRUE) {
+    if (!$id) {
+        echo "Erro: ID do usuário não recebido.";
+        exit;
+    }
+    
+    $stmt = $conn->prepare("UPDATE tblUsuario SET nomeUsuario=?, emailUsuario=?, telefoneUsuario=? WHERE idUsuario=?");
+    $stmt->bind_param("sssi", $name, $email, $phone, $id);
+
+    if ($stmt->execute()) {
         echo "Record updated successfully";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        //echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $stmt->error;
     }
 }
 
