@@ -9,7 +9,5 @@ $sql = "DELETE FROM tblUsuario WHERE idUsuario=%id";
 if ($conn->query($sql) === TRUE){
     header("Location: ler.php");
 }
-else echo "Erro: " . $conn->error:
-
-
+else echo "Erro: " . $conn->error
 ?>

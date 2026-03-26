@@ -1,0 +1,275 @@
+/* Container */
+#formCadastro {
+    background: rgba(255, 255, 255, 0.97);
+    padding: 50px;
+    width: 600px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.6s ease;
+    margin: auto;
+    margin-bottom: 50px;
+    margin-top: 25px;
+}
+
+/* Título */
+#formCadastro h1 {
+    font-size: 28px;
+    text-align: center;
+    color: #0f172a;
+    margin-bottom: 5px;
+}
+
+/* Subtítulo */
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+/* Grid layout */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Campo ocupa linha inteira */
+.full {
+    grid-column: span 2;
+}
+
+/* Input group */
+.input-group {
+    position: relative;
+}
+
+/* Inputs */
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 14px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+    transition: 0.3s;
+}
+
+/* Hover elegante */
+.input-group input:hover,
+.input-group select:hover {
+    border-color: #94a3b8;
+}
+
+/* Focus premium */
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* Label flutuante */
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    color: #64748b;
+    font-size: 14px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: 0.25s ease;
+    background: white;
+    padding: 0 5px;
+}
+
+/* Animação label */
+.input-group input:focus + label,
+.input-group input:valid + label,
+.input-group select:focus + label,
+.input-group select:valid + label {
+    top: -8px;
+    font-size: 12px;
+    color: #6366f1;
+}
+
+/* Botão */
+button {
+    margin-top: 30px;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #1565c0;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover botão */
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+}
+
+/* Responsivo */
+@media (max-width: 650px) {
+    #formCadastro {
+        width: 90%;
+        padding: 30px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: span 1;
+    }
+}
+
+/* Animação */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.senha-group {
+    position: relative;
+}
+
+.toggle-senha {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.input-group.error input,
+.input-group.error select {
+    border-color: #ef4444;
+    background: #fef2f2;
+}
+
+
+.eye-img {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+
+}
+
+.eye-img:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* DARK MODE */
+
+/* FUNDO GLOBAL */
+body.dark-mode {
+    background: #0d0d0d;
+    color: #e5e5e5;
+}
+
+/* FORMULÁRIO */
+body.dark-mode #formCadastro {
+    background: #1a1a1a;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+/* TÍTULOS */
+body.dark-mode #formCadastro h1 {
+    color: #ffffff;
+}
+
+body.dark-mode .subtitle {
+    color: #a3a3a3;
+}
+
+/* INPUTS */
+body.dark-mode .input-group input,
+body.dark-mode .input-group select {
+    background: #121212;
+    border: 1px solid #2a2a2a;
+    color: #e5e5e5;
+}
+
+/* LABEL */
+body.dark-mode .input-group label {
+    background: #1a1a1a;
+    color: #a3a3a3;
+}
+
+/* HOVER */
+body.dark-mode .input-group input:hover,
+body.dark-mode .input-group select:hover {
+    border-color: #3a3a3a;
+}
+
+/* FOCUS (cinza claro elegante) */
+body.dark-mode .input-group input:focus,
+body.dark-mode .input-group select:focus {
+    border-color: #666666;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+
+/* LABEL ATIVO */
+body.dark-mode .input-group input:focus + label,
+body.dark-mode .input-group input:valid + label,
+body.dark-mode .input-group select:focus + label,
+body.dark-mode .input-group select:valid + label {
+    color: #d4d4d4;
+}
+
+/* BOTÃO */
+body.dark-mode button {
+    background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+    color: #ffffff;
+}
+
+/* BOTÃO HOVER */
+body.dark-mode button:hover {
+    background: linear-gradient(135deg, #3a3a3a, #4a4a4a);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* ERRO */
+body.dark-mode .input-group.error input,
+body.dark-mode .input-group.error select {
+    border-color: #ff4d4d;
+    background: #2a0f0f;
+}
+
+body.dark-mode .error-message {
+    color: #ff6b6b;
+}
+
+/* SUCESSO */
+body.dark-mode .sucesso-msg {
+    background: #1f2a1f;
+    color: #7ee787;
+}
+
+/* ÍCONE OLHO */
+body.dark-mode .toggle-senha {
+    color: #cccccc;
+}
+

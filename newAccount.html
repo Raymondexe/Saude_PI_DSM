@@ -8,6 +8,7 @@
 
     <!-- CSS externo -->
     <link rel="stylesheet" href="Css/estiloLogin.css">
+    <link rel="stylesheet" href="Css/estiloNewAccount.css">
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -48,29 +49,143 @@
     <script src="scriptTraducao.js"></script>
     <script src="scriptShowLogin.js"></script>
 
-    <form action="php/usuario/cadastrar.php" method="POST" id="formCadastro">
-        <input type="text" name="nomeUsuario" placeholder="Nome completo" required>
-        <input type="date" name="dataNascimento" required>
-        <select name="sexo" required>
-            <option value="">Sexo</option>
-            <option value="M">Masculino</option>
-            <option value="F">Feminino</option>
-        </select>
-        <input type="text" name="enderecoUsuario" placeholder="Endereço" required>
-        <input type="text" name="telefoneUsuario" placeholder="Telefone" required>
-        <input type="email" name="emailUsuario" placeholder="Email" required>
 
-        <input type="text" name="usuario" placeholder="Usuário" required>
-        <input type="password" name="senha" placeholder="Senha" required>
-        <select name="tipoUsuario" required>
-            <option value="">Tipo</option>
-            <option value="1">Dependente</option>
-            <option value="2">Responsável</option>
-            <option value="3">Profissional</option>
-        </select>
+    <form action="php/usuario/cadastrar.php" method="POST" id="formCadastro">
+
+        <h1>Crie sua conta</h1>
+        <p class="subtitle">Preencha os dados abaixo para continuar</p>
+
+        <div class="grid">
+
+            <div class="input-group">
+                <input type="text" name="nomeUsuario" required>
+                <label>Nome completo</label>
+            </div>
+
+            <div class="input-group">
+                <input type="date" name="dataNascimento" required>
+                <label>Data de nascimento</label>
+            </div>
+
+            <div class="input-group">
+                <select name="sexo" required>
+                    <option value="" disabled selected></option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                </select>
+                <label>Sexo</label>
+            </div>
+
+            <div class="input-group full">
+                <input type="text" name="enderecoUsuario" required>
+                <label>Endereço</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="telefoneUsuario" id="telefone" required>
+                <label>Telefone</label>
+            </div>
+
+            <div class="input-group">
+                <input type="email" name="emailUsuario" required>
+                <label>Email</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="usuario" required>
+                <label>Usuário</label>
+            </div>
+
+            <div class="input-group senha-group">
+                <input type="password" id="senha" required>
+                <label>Senha</label>
+
+                <img src="Img/closed.png" id="eyeImg" class="eye-img" onclick="toggleSenhaImg()">
+            </div>
+
+            <div class="input-group full">
+                <select name="tipoUsuario" required>
+                    <option value="" disabled selected></option>
+                    <option value="1">Dependente</option>
+                    <option value="2">Responsável</option>
+                    <option value="3">Profissional</option>
+                </select>
+                <label>Tipo de usuário</label>
+            </div>
+
+        </div>
 
         <button type="submit">Cadastrar</button>
+
     </form>
+    <script>
+        function toggleSenha() {
+            const senha = document.getElementById("senha");
+            senha.type = senha.type === "password" ? "text" : "password";
+        }
+
+
+        // TELEFONE cfg
+        document.getElementById("telefone").addEventListener("input", function (e) {
+            let v = e.target.value.replace(/\D/g, "");
+
+            if (v.length > 11) v = v.slice(0, 11);
+
+            if (v.length > 10) {
+                v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+            } else if (v.length > 6) {
+                v = v.replace(/^(\d{2})(\d{4})(\d+)/, "($1) $2-$3");
+            } else if (v.length > 2) {
+                v = v.replace(/^(\d{2})(\d+)/, "($1) $2");
+            }
+
+            e.target.value = v;
+        });
+
+
+        document.getElementById("formCadastro").addEventListener("submit", function (e) {
+
+            let valido = true;
+
+            document.querySelectorAll(".input-group").forEach(group => {
+                group.classList.remove("error");
+                const msg = group.querySelector(".error-message");
+                if (msg) msg.remove();
+            });
+
+            document.querySelectorAll("#formCadastro input, #formCadastro select").forEach(input => {
+                if (!input.value) {
+                    valido = false;
+
+                    const group = input.parentElement;
+                    group.classList.add("error");
+
+                    const error = document.createElement("div");
+                    error.className = "error-message";
+                    error.innerText = "Campo obrigatório";
+
+                    group.appendChild(error);
+                }
+            });
+
+            if (!valido) e.preventDefault();
+        });
+
+
+        // Troca de Visibilidade (senha)
+        function toggleSenhaImg() {
+            const senha = document.getElementById("senha");
+            const img = document.getElementById("eyeImg");
+
+            if (senha.type === "password") {
+                senha.type = "text";
+                img.src = "Img/opened.png";
+            } else {
+                senha.type = "password";
+                img.src = "Img/closed.png";
+            }
+        }
+    </script>
 
     <!-- Rodapé -->
     <footer class="footer">
