@@ -97,7 +97,7 @@
             </div>
 
             <div class="input-group senha-group">
-                <input type="password" id="senha" required>
+                <input type="password" id="senha" name="senha" required>
                 <label>Senha</label>
 
                 <img src="Img/closed.png" id="eyeImg" class="eye-img" onclick="toggleSenhaImg()">
@@ -119,6 +119,35 @@
 
     </form>
     <script>
+
+        document.getElementById("formCadastro").addEventListener("submit", function (e) {
+
+            let valido = true;
+
+            document.querySelectorAll(".input-group").forEach(group => {
+                group.classList.remove("error");
+                const msg = group.querySelector(".error-message");
+                if (msg) msg.remove();
+            });
+
+            document.querySelectorAll("#formCadastro input, #formCadastro select").forEach(input => {
+                if (!input.value) {
+                    valido = false;
+
+                    const group = input.parentElement;
+                    group.classList.add("error");
+
+                    const error = document.createElement("div");
+                    error.className = "error-message";
+                    error.innerText = "Campo obrigatório";
+
+                    group.appendChild(error);
+                }
+            });
+
+            if (!valido) e.preventDefault();
+        });
+
         function toggleSenha() {
             const senha = document.getElementById("senha");
             senha.type = senha.type === "password" ? "text" : "password";
@@ -185,7 +214,12 @@
                 img.src = "Img/closed.png";
             }
         }
+
+
+
     </script>
+
+
 
     <!-- Rodapé -->
     <footer class="footer">
@@ -230,41 +264,7 @@
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.getElementById("loginForm");
-            const emailInput = document.getElementById("email");
-            const senhaInput = document.getElementById("senha");
-            const errorMsg = document.getElementById("error-message");
 
-            form.addEventListener("submit", function (event) {
-                event.preventDefault(); // Impede o recarregamento da página
-
-                const email = emailInput.value.trim();
-                const senha = senhaInput.value.trim();
-
-                // Limpa mensagem de erro anterior
-                errorMsg.textContent = "";
-
-                // Logins válidos
-                const usuarios = [
-                    { email: "ana@gmail.com", senha: "12345", destino: "responsavelPage.html" },
-                    { email: "joseAnt@gmail.com", senha: "abc123", destino: "homeDependente.html" },
-                    { email: "roger@gmail.com", senha: "med123", destino: "profissionalPage.html" }
-                ];
-
-                // Verifica se o usuário existe
-                const usuarioValido = usuarios.find(u => u.email === email && u.senha === senha);
-
-                if (usuarioValido) {
-                    // Redireciona para a página específica
-                    window.location.href = usuarioValido.destino;
-                } else {
-                    // Mostra erro
-                    errorMsg.textContent = "❌ E-mail ou senha incorretos. Tente novamente.";
-                    errorMsg.style.color = "red";
-                }
-            });
-        });
     </script>
 </body>
 

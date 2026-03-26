@@ -55,27 +55,34 @@
                 <h1>Bem-Estar 360</h1>
                 <p>Faça login para acessar seu painel de saúde</p>
 
-                <form id="loginForm">
+                <form id="loginForm" action="./php/usuario/login.php" method="POST">
                     <div class="input-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="seu@email.com" required>
+                        <label for="usuario">Email</label>
+                        <input type="email" id="usuario" name="usuario" placeholder="seu@email.com" required>
                     </div>
 
                     <div class="input-group">
                         <label for="senha">Senha</label>
-                        <input type="password" id="senha" placeholder="********" required>
+                        <input type="password" id="senha" name="senha" placeholder="********" required>
                     </div>
 
                     <button type="submit">Login</button>
 
+                    <p class="error-message" id="error-message"></p>
+
+                    <br>
+
                     <p class="forgot"><a href="./forgotSenha.html">Esqueci minha senha</a></p>
+
                     <p class="signup-text">
                         Não possui uma conta? <a href="./newAccount.html">Crie a sua agora!</a>
                     </p>
-                    <p class="error-message" id="error-message"></p>
-                    <p>Faça login de outras maneiras</p>
-                    <div class="OpcLogin">
 
+                    <p class="error-message" id="error-message"></p>
+
+                    <p>Faça login de outras maneiras</p>
+
+                    <div class="OpcLogin">
                         <div class="bordaLogin">
                             <a href="#">
                                 <img class="imglogin" src="./Img/google1.png">
@@ -87,17 +94,14 @@
                     </div>
                 </form>
 
-                <!-- Botão pequeno ao lado do formulário -->
-                <button type="button" id="btnTestAccounts" class="test-small-btn">?</button>
+                
 
-                <!-- Box com os logins -->
-                <div id="testAccountsBox" class="test-accounts-box">
-                    <strong>Logins de Teste</strong>
-                    <p>ana@gmail.com — 12345 (Responsável)</p>
-                    <p>joseAnt@gmail.com — abc123 (Dependente)</p>
-                    <p>roger@gmail.com — med123 (Profissional)</p>
-                </div>
+                
+            </div>
+        </div>
     </main>
+
+    
 
     <!-- Rodapé -->
     <footer class="footer">
@@ -148,34 +152,6 @@
             const senhaInput = document.getElementById("senha");
             const errorMsg = document.getElementById("error-message");
 
-            form.addEventListener("submit", function (event) {
-                event.preventDefault(); // Impede o recarregamento da página
-
-                const email = emailInput.value.trim();
-                const senha = senhaInput.value.trim();
-
-                // Limpa mensagem de erro anterior
-                errorMsg.textContent = "";
-
-                // Logins válidos
-                const usuarios = [
-                    { email: "ana@gmail.com", senha: "12345", destino: "responsavelPage.html" },
-                    { email: "joseAnt@gmail.com", senha: "abc123", destino: "homeDependente.html" },
-                    { email: "roger@gmail.com", senha: "med123", destino: "profissionalPage.html" }
-                ];
-
-                // Verifica se o usuário existe
-                const usuarioValido = usuarios.find(u => u.email === email && u.senha === senha);
-
-                if (usuarioValido) {
-                    // Redireciona para a página específica
-                    window.location.href = usuarioValido.destino;
-                } else {
-                    // Mostra erro
-                    errorMsg.textContent = "❌ E-mail ou senha incorretos. Tente novamente.";
-                    errorMsg.style.color = "red";
-                }
-            });
         });
     </script>
 </body>

@@ -1,0 +1,419 @@
+<?php
+    session_start();
+    $logado = isset($_SESSION['idLogin']);
+    $nome = $logado ? $_SESSION['nome'] : '';
+    $foto = $_SESSION['foto'] ?? 'Img/defaultUser.png';
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-Estar 360 - Home Page </title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navegacao = document.querySelector('.Navegacao');
+
+            menuToggle.addEventListener('click', () => {
+                navegacao.classList.toggle('ativo');
+            });
+
+            document.querySelectorAll('.Navegacao a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navegacao.classList.remove('ativo');
+                });
+            });
+        });
+    </script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="icon/icon_BemEstar360.ico">
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="Css/estilo.css">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="TopoSite">
+        <div class="Logo">
+            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+        </div>
+
+        <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+
+        <nav class="Navegacao">
+            <ul>
+                <li><a href="./index.html" data-lang="home">Home</a></li>
+                <li><a href="./monitoramento.html" data-lang="monitoring">Monitoramento</a></li>
+
+                <li><a href="./calendario.html" data-lang="">Agenda</a></li>
+                <li><a href="./servicos.html" data-lang="services">Serviços</a></li>
+                <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
+                <li><a href="./login.html" data-lang="login">Login</a></li>
+
+                <!-- Menu de Configurações -->
+                <li class="config-menu">
+                    <button id="config-btn" aria-haspopup="true" aria-expanded="false">⚙️</button>
+
+                    <div class="dropdown" role="menu">
+                        <button id="toggle-theme">🌙 Modo Escuro</button>
+                        <button id="change-lang">🌎 Trocar Idioma</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <script src="script.js"></script>
+    <script src="scriptTraducao.js"></script>
+
+    <section class="welcome-section">
+        <div class="welcome-wrapper animate-fade-in">
+            <div class="welcome-text centered">
+                <h1 data-lang="h1BemVindo">Bem-vindo ao <span>Bem-Estar 360</span></h1>
+                <p data-lang="pTexto1">Monitore sua saúde diariamente e acompanhe seu bem-estar de forma simples,
+                    intuitiva e confiável.</p>
+                <p data-lang="pTexto2">Nosso objetivo é ajudá-lo a compreender seu corpo, adotando hábitos saudáveis e
+                    prevenindo riscos.
+                </p>
+            </div>
+        </div>
+
+        <div class="welcome-background">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+        </div>
+    </section>
+
+    <br><br>
+
+    <div class="titleNotices">
+        <h4 data-lang="newsTitle">Últimas notícias sobre saúde</h4>
+    </div>
+
+    <section class="ContainerNoticias">
+        <div class="card-wrapper">
+            <ul class="card-list">
+                <li class="card-item">
+                    <a href="sus.html" class="card-link">
+                        <img src="./Img/sus.webp" alt="" class="card-image">
+                    </a>
+                    <p class="badge paragrafoS" data-lang="newsTagSUS">#Sus</p>
+                    <h2 class="card-title" data-lang="newsTitleSUS">SUS garante atendimento de qualidade a todos os
+                        brasileiros</h2>
+                    <p data-lang="newsTextSUS">
+                        O Sistema Único de Saúde (SUS) continua oferecendo atendimento gratuito, promovendo prevenção,
+                        tratamentos e acompanhamento em diversas áreas da saúde, reforçando seu papel essencial na vida
+                        da população.
+                    </p>
+                    <button class="card-button material-symbols-outlined" data-lang="newsBtn"
+                        onclick="window.location.href='sus.html'">arrow_forward</button>
+                </li>
+
+                <li class="card-item">
+                    <a href="diabetes.html" class="card-link">
+                        <img src="./Img/diabete.webp" alt="" class="card-image">
+                    </a>
+                    <p class="badge paragrafoD" data-lang="newsTagDiabetes">#Diabete</p>
+                    <h2 class="card-title" data-lang="newsTitleDiabetes">Diabetes exige acompanhamento e cuidados
+                        contínuos</h2>
+                    <p data-lang="newsTextDiabetes">
+                        O diabetes é uma doença crônica que exige atenção diária à alimentação, atividade física e
+                        controle médico. O diagnóstico precoce é essencial para evitar complicações graves.
+                    </p>
+                    <button class="card-button material-symbols-outlined" data-lang="newsBtn"
+                        onclick="window.location.href='diabetes.html'">arrow_forward</button>
+                </li>
+
+                <li class="card-item">
+                    <a href="saudesexual.html" class="card-link">
+                        <img src="./Img/saudeSexual.webp" alt="" class="card-image">
+                    </a>
+                    <p class="badge paragrafoSS" data-lang="newsTagSexualHealth">#Saúde Sexual</p>
+                    <h2 class="card-title" data-lang="newsTitleSexualHealth">Saúde sexual: importância da prevenção e
+                        bem-estar</h2>
+                    <p data-lang="newsTextSexualHealth">
+                        Especialistas alertam sobre a necessidade de cuidados com a saúde sexual, que envolve bem-estar
+                        físico, emocional e social, além da prevenção de doenças e promoção de relacionamentos
+                        saudáveis.
+                    </p>
+                    <button class="card-button material-symbols-outlined" data-lang="newsBtn"
+                        onclick="window.location.href='saudesexual.html'">arrow_forward</button>
+                </li>
+
+                <li class="card-item">
+                    <a href="saudeMental.html" class="card-link">
+                        <img src="./Img/saudeMental.jpg" alt="" class="card-image">
+                    </a>
+                    <p class="badge paragrafoSM" data-lang="newsTagMentalHealth">#Saúde Mental</p>
+                    <h2 class="card-title" data-lang="newsTitleMentalHealth">Saúde mental recebe atenção crescente no
+                        Brasil</h2>
+                    <p data-lang="newsTextMentalHealth">
+                        O cuidado com a saúde mental é cada vez mais valorizado, envolvendo estratégias de prevenção,
+                        tratamento de transtornos psicológicos e promoção do equilíbrio emocional para uma melhor
+                        qualidade de vida.
+                    </p>
+                    <button class="card-button material-symbols-outlined" data-lang="newsBtn"
+                        onclick="window.location.href='saudeMental.html'">arrow_forward</button>
+                </li>
+
+                <li class="card-item">
+                    <a href="glaucoma.html" class="card-link">
+                        <img src="./Img/glaucoma.jpg" alt="" class="card-image">
+                    </a>
+                    <p class="badge paragrafoG" data-lang="newsTagGlaucoma">#Glaucoma</p>
+                    <h2 class="card-title" data-lang="newsTitleGlaucoma">Glaucoma: doença silenciosa que ameaça a visão
+                    </h2>
+                    <p data-lang="newsTextGlaucoma">
+                        O glaucoma, caracterizado pelo aumento da pressão ocular, pode levar à perda da visão se não for
+                        diagnosticado precocemente. Profissionais recomendam consultas regulares para prevenção.
+                    </p>
+                    <button class="card-button material-symbols-outlined" data-lang="newsBtn"
+                        onclick="window.location.href='glaucoma.html'">arrow_forward</button>
+                </li>
+
+
+                <li class="card-item">
+                    <a href="./idosoBemEstar.html" class="card-link">
+                        <img src="./Img/idosos_correndo.jpg" alt="" class="card-image">
+                    </a>
+                    <p class="badge paragrafoI" data-lang="newsTagIdosos">#Idosos Bem Estar</p>
+                    <h2 class="card-title" data-lang="newsTitleGlaucoma"></h2>
+                    <p data-lang="newsTextIdoosos">
+                        Como monitorar glicemia, pressão, temperatura e batimentos cardíacos pode transformar qualidade
+                        de vida — e quais são os obstáculos que o novo aplicativo enfrenta nesse caminho.
+                    </p>
+                    <button class="card-button material-symbols-outlined" data-lang="newsBtn"
+                        onclick="window.location.href='idosoBemEstar.html'">arrow_forward</button>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="ContainerControle">
+        <div class="Controle hospital-card">
+            <h2 data-lang="textContainerControle">Registre seus dados de saúde</h2>
+            <p data-lang="textPcontainer">
+                Para manter seu acompanhamento atualizado, clique nos cards abaixo e registre suas medições
+                de pressão arterial, glicemia, batimentos cardíacos e temperatura. O registro diário ajuda
+                você e os profissionais de saúde a monitorarem seu bem-estar com mais precisão.
+            </p>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <section class="grid-cards">
+        <div class="card">
+            <a href="./pressao.html">
+                <img src="./Img/pressao.jpg" alt="Ícone de Pressão" loading="lazy">
+            </a>
+            <div class="card-content">
+                <h2 data-lang="cardPress">Pressão Arterial</h2>
+                <p data-lang="cardPressP">Registre e acompanhe seus valores de pressão arterial.</p>
+                <a href="./pressao.html" data-lang="cardPressA">Registre sua Pressão Arterial</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <a href="./glicemia.html">
+                <img src="./Img/glicemia.jpg" alt="Ícone de Glicemia" loading="lazy">
+            </a>
+            <div class="card-content">
+                <h2 data-lang="cardGlicemia">Glicemia</h2>
+                <p data-lang="cardGlicemiaP">Registre e acompanhe seus níveis de glicose no sangue.</p>
+                <a href="./glicemia.html" data-lang="cardGlicemiaA">Registrar Glicemia</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <a href="./batimentosCardiacos.html">
+                <img src="./Img/batimentos.jpg" alt="Ícone de Batimentos Cardíacos" loading="lazy">
+            </a>
+            <div class="card-content">
+                <h2 data-lang="cardBatimentos">Batimentos Cardíacos</h2>
+                <p data-lang="cardBatimentosP">Registre e acompanhe sua frequência cardíaca.</p>
+                <a href="./batimentosCardiacos.html" data-lang="cardBatimentosA">Registrar Batimentos</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <a href="./temperatura.html">
+                <img src="./Img/temperatura.jpg" alt="Ícone de Temperatura" loading="lazy">
+            </a>
+            <div class="card-content">
+                <h2 data-lang="cardTemperatura">Temperatura</h2>
+                <p data-lang="cardTemperaturaP">Registre e acompanhe sua temperatura corporal.</p>
+                <a href="./temperatura.html" data-lang="cardTemperaturaA">Registrar Temperatura</a>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="ubs-section">
+        <h2 class="ubs-section-title" data-lang="textUbsSection">Nossas UBS</h2>
+
+        <div class="ubs-slider">
+            <ul class="ubs-list">
+                <li class="ubs-card">
+                    <div class="ubs-image-wrapper">
+                        <img src="./Img/UBS_Itaquera.webp" alt="UBS Itaquera" class="ubs-image">
+                    </div>
+                    <div class="ubs-content">
+                        <h3 class="ubs-name">UBS Itaquera</h3>
+                        <p class="ubs-description" data-lang="ubsDesc1">
+                            Localizada na Rua Américo Salvador Novelli, 265, oferece atendimento clínico, vacinação e
+                            exames de rotina.
+                        </p>
+                        <button onclick="abrirNoMaps(-23.539298875972847, -46.455240619332)" class="ubs-button"
+                            data-lang="textVerRota">
+                            Ver rota
+                        </button>
+                    </div>
+                </li>
+
+                <li class="ubs-card">
+                    <div class="ubs-image-wrapper">
+                        <img src="./Img/UBS_VilaCarmosina.webp" alt="UBS Central" class="ubs-image">
+                    </div>
+                    <div class="ubs-content">
+                        <h3 class="ubs-name">UBS Vila Carmosina</h3>
+                        <p class="ubs-description" data-lang="ubsDesc2">
+                            Situada na Rua Ipopoca, 61, oferece atendimento clínico, vacinação e exames de rotina.
+                            no centro da cidade, oferece atendimento clínico, vacinação e exames de rotina.
+                        </p>
+                        <button onclick="abrirNoMaps(-23.549686649777833, -46.44868669891686)" class="ubs-button"
+                            data-lang="textVerRota">
+                            Ver rota
+                        </button>
+                    </div>
+                </li>
+
+                <li class="ubs-card">
+                    <div class="ubs-image-wrapper">
+                        <img src="./Img/UBS_NossaSenhoraAparecida.png" alt="UBS Central" class="ubs-image">
+                    </div>
+                    <div class="ubs-content">
+                        <h3 class="ubs-name">UBS Vila Nossa Senhora Aparecida</h3>
+                        <p class="ubs-description" data-lang="ubsDesc3">
+                            Localizada na Rua Paulino Serqueira, 1, oferece atendimento clínico, vacinação e exames de
+                            rotina.
+                        </p>
+                        <button onclick="abrirNoMaps(-23.53414480520631, -46.4427562317228)" class="ubs-button"
+                            data-lang="textVerRota">
+                            Ver rota
+                        </button>
+                    </div>
+                </li>
+
+                <li class="ubs-card">
+                    <div class="ubs-image-wrapper">
+                        <img src="./Img/josebonifacio.png" alt="UBS Central" class="ubs-image">
+                    </div>
+                    <div class="ubs-content">
+                        <h3 class="ubs-name">UBS José Bonifácio II</h3>
+                        <p class="ubs-description" data-lang="ubsDesc4">
+                            Situada na Rua Murmúrios da Tarde, oferece atendimento clínico, vacinação e exames de
+                            rotina.
+                        </p>
+                        <button onclick="abrirNoMaps(-23.553662524171656, -46.4446753047391)" class="ubs-button"
+                            data-lang="textVerRota">
+                            Ver rota
+                        </button>
+                    </div>
+                </li>
+
+                <li class="ubs-card">
+                    <div class="ubs-image-wrapper">
+                        <img src="./Img/UBS_JoseBoni3.webp" alt="UBS Central" class="ubs-image">
+                    </div>
+                    <div class="ubs-content">
+                        <h3 class="ubs-name">UBS/AMA José Bonifácio III</h3>
+                        <p class="ubs-description" data-lang="ubsDesc5">
+                            Localizada na Rua Sílvio Barbini, 40, oferece atendimento clínico, vacinação e exames de
+                            rotina.
+                        </p>
+                        <button onclick="abrirNoMaps(-23.540641766427793, -46.4393115759034)" class="ubs-button"
+                            data-lang="textVerRota">
+                            Ver rota
+                        </button>
+                    </div>
+                </li>
+
+                <li class="ubs-card">
+                    <div class="ubs-image-wrapper">
+                        <img src="./Img/UBS_CidadeLider.png" alt="UBS Vila Nova" class="ubs-image">
+                    </div>
+                    <div class="ubs-content">
+                        <h3 class="ubs-name">UBS Cidade Líder</h3>
+                        <p class="ubs-description" data-lang="ubsDesc6">
+                            Localizada na Av. Dr. Francisco Munhoz Filho, 379, oferece atendimento clínico, vacinação e
+                            exames de rotina.
+                        </p>
+                        <button onclick="abrirNoMaps(-23.554291369235724, -46.46517399124749)" class="ubs-button"
+                            data-lang="textVerRota">
+                            Ver rota
+                        </button>
+                    </div>
+                </li>
+            </ul>
+            <script src="scriptLocalizacao.js"></script>
+        </div>
+    </section>
+
+
+    <br><br>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footerContainer">
+            <!-- Logo e nome -->
+            <div class="footerBrand">
+                <img src="Img/2.png" alt="Bem Estar 360" class="footerLogo">
+
+            </div>
+
+            <div class="footerLinks">
+                <ul>
+                    <li><a href="./index.html" data-lang="footerHome">Home</a></li>
+                    <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
+                    <li><a href="./servicos.html" data-lang="footerServices">Serviços</a></li>
+                    <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
+                </ul>
+            </div>
+
+            <!-- Contato -->
+            <div class="footerContato">
+                <h4 data-lang="footerContactTitle">Contato</h4>
+                <p data-lang="footerEmail">Email: contato@bemestar360.com</p>
+                <p data-lang="footerPhone">Telefone: (11) 1234-5678</p>
+                <div class="footerSocials">
+                    <a href="#"><img src="./Img/face_icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="./Img/insta_icon.webp" alt="Instagram"></a>
+                    <a href="#"><img src="./Img/X_icon.svg.png" alt="Twitter"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footerBottom">
+            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
