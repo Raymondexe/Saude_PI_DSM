@@ -691,7 +691,6 @@ body.dark-mode .hospital-card p {
     font-weight: bold;
 }
 
-/* Mostrar dropdowns ao clicar */
 #config-btn:focus + .dropdown,
 #config-btn:active + .dropdown,
 #perfil-btn:focus + .dropdown-perfil,
@@ -699,9 +698,6 @@ body.dark-mode .hospital-card p {
     display: flex;
     flex-direction: column;
 }
-
-
-
 
 
 /* ==== START Cards ==== */

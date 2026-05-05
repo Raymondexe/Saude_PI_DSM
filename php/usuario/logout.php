@@ -1,6 +1,10 @@
 <?php
 session_start();
+
+// Limpa sessão
+$_SESSION = [];
 session_destroy();
 
-header("Location: ../../index.php");
+// Redireciona corretamente
+header("Location: /Saude_PI_DSM-main/index.php");
 exit();

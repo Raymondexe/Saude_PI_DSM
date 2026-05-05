@@ -1,8 +1,9 @@
 <?php
-    session_start();
-    $logado = isset($_SESSION['idLogin']);
-    $nome = $logado ? $_SESSION['nome'] : '';
-    $foto = $_SESSION['foto'] ?? 'Img/defaultUser.png';
+session_start();
+
+$logado = isset($_SESSION['idLogin']);
+$nome = $logado ? $_SESSION['nome'] : '';
+$foto = $logado ? ($_SESSION['foto'] ?? 'Img/defaultUser.png') : 'Img/defaultUser.png';
 ?>
 
 <!DOCTYPE html>
@@ -55,13 +56,24 @@
 
         <nav class="Navegacao">
             <ul>
-                <li><a href="./index.html" data-lang="home">Home</a></li>
-                <li><a href="./monitoramento.html" data-lang="monitoring">Monitoramento</a></li>
+                <li><a href="./index.php" data-lang="home">Home</a></li>
+                <li><a href="./monitoramento.php" data-lang="monitoring">Monitoramento</a></li>
 
-                <li><a href="./calendario.html" data-lang="">Agenda</a></li>
-                <li><a href="./servicos.html" data-lang="services">Serviços</a></li>
-                <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
-                <li><a href="./login.html" data-lang="login">Login</a></li>
+                <li><a href="./calendario.php">Agenda</a></li>
+                <li><a href="./servicos.php" data-lang="services">Serviços</a></li>
+                <li><a href="./quemSomos.php" data-lang="about">Quem somos</a></li>
+
+                <?php if ($logado): ?>
+                    <li class="perfil-menu">
+                        <a href="/Saude_PI_DSM-main/perfil.php" id="perfil-btn" class="perfil-link">
+                            <img src="<?= $foto ?>" alt="Foto de perfil" class="foto-perfil">
+                            <span class="nome-perfil"><?= $nome ?></span>
+                        </a>
+                    </li>
+
+                <?php else: ?>
+                    <li><a href="./login.html" data-lang="login">Login</a></li>
+                <?php endif; ?>
 
                 <!-- Menu de Configurações -->
                 <li class="config-menu">

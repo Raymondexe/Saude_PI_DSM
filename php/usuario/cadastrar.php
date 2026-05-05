@@ -15,13 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $telefone = $_POST['telefoneUsuario'] ?? null;
     $email = $_POST['emailUsuario'] ?? null;
 
-    // 👉 usa email como login (RECOMENDADO)
+    
     $usuario = $_POST['emailUsuario'] ?? null;
 
     $senha = isset($_POST['senha']) ? password_hash($_POST['senha'], PASSWORD_DEFAULT) : null;
     $tipo = $_POST['tipoUsuario'] ?? null;
 
-    // 🔥 validação básica
+
     if (!$usuario || !$senha || !$tipo) {
         die("Erro: dados de login incompletos");
     }
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn->begin_transaction();
 
     try {
-        // 🔹 INSERE USUÁRIO
+        
         $stmt = $conn->prepare("
             INSERT INTO tblUsuario 
             (nomeUsuario, dataNascimento, sexo, enderecoUsuario, telefoneUsuario, emailUsuario, dataCadastroUsuario)
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $idUsuario = $conn->insert_id;
 
-        // 🔹 INSERE LOGIN
+        
         $stmt2 = $conn->prepare("
             INSERT INTO tblLogin (Usuario_idUsuario, usuario, senha, tipo_usuario)
             VALUES (?, ?, ?, ?)

@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+$logado = isset($_SESSION['idLogin']);
+$nome = $logado ? $_SESSION['nome'] : '';
+$foto = $logado ? ($_SESSION['foto'] ?? 'Img/defaultUser.png') : 'Img/defaultUser.png';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -7,7 +15,8 @@
     <title>Bem-Estar 360 - Login</title>
 
     <!-- CSS externo -->
-    <link rel="stylesheet" href="Css/estiloLogin.css">
+    <link rel="stylesheet" href="Css/estilo.css">
+    <link rel="stylesheet" href="Css/estiloPerfilUser.css">
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -25,12 +34,23 @@
 
         <nav class="Navegacao">
             <ul>
-                <li><a href="./index.php" data-lang="home">Home</a></li>
+                <li><a href="./index.html" data-lang="home">Home</a></li>
                 <li><a href="./monitoramento.html" data-lang="monitoring">Monitoramento</a></li>
-                <li><a href="./calendario.html" data-lang="">Agenda</a></li>
                 <li><a href="./servicos.html" data-lang="services">Serviços</a></li>
                 <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
                 <li><a href="./login.html" data-lang="login">Login</a></li>
+
+                <?php if ($logado): ?>
+                    <li class="perfil-menu">
+                        <a href="/Saude_PI_DSM-main/perfil.php" id="perfil-btn" class="perfil-link">
+                            <img src="<?= $foto ?>" alt="Foto de perfil" class="foto-perfil">
+                            <span class="nome-perfil"><?= $nome ?></span>
+                        </a>
+                    </li>
+
+                <?php else: ?>
+                    <li><a href="./login.html" data-lang="login">Login</a></li>
+                <?php endif; ?>
 
                 <!-- Menu de Configurações -->
                 <li class="config-menu">
@@ -49,60 +69,92 @@
     <script src="scriptTraducao.js"></script>
     <script src="scriptShowLogin.js"></script>
 
-    <!-- Login -->
-    <main class="main-login">
-        <div class="login-container">
-            <div class="login-box">
-                <h1>Bem-Estar 360</h1>
-                <p>Faça login para acessar seu painel de saúde</p>
 
-                <form id="loginForm" action="./php/usuario/login.php" method="POST">
-                    <div class="input-group">
-                        <label for="usuario">Email</label>
-                        <input type="email" id="usuario" name="usuario" placeholder="seu@email.com" required>
-                    </div>
 
-                    <div class="input-group">
-                        <label for="senha">Senha</label>
-                        <input type="password" id="senha" name="senha" placeholder="********" required>
-                    </div>
 
-                    <button type="submit">Login</button>
+    <section class="Perfil">
 
-                    <p class="error-message" id="error-message"></p>
+        <h1>Meu Perfil</h1>
 
-                    <br>
+        <!-- FOTO -->
+        <div class="fotoPerfil">
+            <img src="<?= $foto ?>" id="previewFoto">
 
-                    <p class="forgot"><a href="./forgotSenha.html">Esqueci minha senha</a></p>
-
-                    <p class="signup-text">
-                        Não possui uma conta? <a href="./newAccount.html">Crie a sua agora!</a>
-                    </p>
-
-                    <p class="error-message" id="error-message"></p>
-
-                    <p>Faça login de outras maneiras</p>
-
-                    <div class="OpcLogin">
-                        <div class="bordaLogin">
-                            <a href="#">
-                                <img class="imglogin" src="./Img/google1.png">
-                            </a>
-                            <a href="#">
-                                <img class="imglogin" src="./Img/govbr1.png">
-                            </a>
-                        </div>
-                    </div>
-                </form>
-
-                
-
-                
-            </div>
+            <form action="php/usuario/uploadFoto.php" method="POST" enctype="multipart/form-data">
+                <input type="file" name="foto" accept="image/*" required>
+                <button type="submit">Atualizar Foto</button>
+            </form>
         </div>
-    </main>
 
-    
+        <!-- INFO -->
+        <form action="php/usuario/updatePerfil.php" method="POST" class="infoPerfil">
+
+            <div class="input-group">
+                <label>Nome</label>
+                <input type="text" name="nome" value="<?= $nome ?>" required>
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" name="email" value="<?= $usuario ?>" required>
+            </div>
+
+            <div class="input-group">
+                <label>Nova Senha</label>
+                <input type="password" name="novaSenha">
+            </div>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+
+        <!-- ZONA PERIGOSA -->
+        <div class="danger-zone">
+            <h2>Excluir Conta</h2>
+            <p>Essa ação é irreversível.</p>
+
+            <form action="php/usuario/deleteConta.php" method="POST">
+                <input type="text" name="confirmNome" placeholder="Digite seu nome para confirmar" required>
+                <input type="password" name="senha" placeholder="Digite sua senha" required>
+
+                <button type="submit" class="btn-danger">
+                    Deletar Conta Permanentemente
+                </button>
+            </form>
+        </div>
+
+    </section>
+
+
+
+    <br><br><br><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Rodapé -->
     <footer class="footer">
@@ -144,17 +196,6 @@
 
     <!-- Scripts -->
     <script src="script.js"></script>
-
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.getElementById("loginForm");
-            const emailInput = document.getElementById("email");
-            const senhaInput = document.getElementById("senha");
-            const errorMsg = document.getElementById("error-message");
-
-        });
-    </script>
 </body>
 
 </html>
