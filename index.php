@@ -1,9 +1,58 @@
 <?php
 session_start();
+include("php/config/conexao.php");
 
 $logado = isset($_SESSION['idLogin']);
-$nome = $logado ? $_SESSION['nome'] : '';
-$foto = $logado ? ($_SESSION['foto'] ?? 'Img/defaultUser.png') : 'Img/defaultUser.png';
+
+if (!$logado) {
+    header("Location: login.html");
+    exit;
+}
+
+$id = $_SESSION['idUsuario'];
+
+$stmt = $conn->prepare("
+    SELECT *
+    FROM tblUsuario
+    WHERE idUsuario = ?
+");
+
+$stmt->bind_param("i", $id);
+$stmt->execute();
+
+$result = $stmt->get_result();
+$usuario = $result->fetch_assoc();
+
+
+$nome = $usuario['nomeUsuario'] ?? '';
+$email = $usuario['emailUsuario'] ?? '';
+$telefone = $usuario['telefoneUsuario'] ?? '';
+$cpf = $usuario['cpfUsuario'] ?? '';
+$endereco = $usuario['enderecoUsuario'] ?? '';
+
+if (empty($usuario['codigoVinculo'])) {
+    $codigo = 'BSTR-' . strtoupper(substr(md5(uniqid()), 0, 6));
+
+    $stmtCodigo = $conn->prepare("
+        UPDATE tblUsuario 
+        SET codigoVinculo = ? 
+        WHERE idUsuario = ?
+    ");
+    $stmtCodigo->bind_param("si", $codigo, $id);
+    $stmtCodigo->execute();
+
+    $usuario['codigoVinculo'] = $codigo;
+}
+
+$codigoVinculo = $usuario['codigoVinculo'] ?? '';
+
+$fotoBanco = $usuario['foto'] ?? null;
+
+if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
+    $foto = "uploads/" . $fotoBanco;
+} else {
+    $foto = "Img/defaultUser.png";
+}
 ?>
 
 <!DOCTYPE html>

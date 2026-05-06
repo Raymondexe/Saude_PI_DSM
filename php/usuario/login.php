@@ -12,11 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Preparar SQL
     $stmt = $conn->prepare("
-        SELECT l.idLogin, l.usuario, l.senha, l.tipo_usuario, u.nomeUsuario
-        FROM tblLogin l
-        INNER JOIN tblUsuario u ON u.idUsuario = l.Usuario_idUsuario
-        WHERE l.usuario = ?
-    ");
+    SELECT 
+        l.idLogin,
+        l.usuario,
+        l.senha,
+        l.tipo_usuario,
+        u.idUsuario,
+        u.nomeUsuario,
+        u.foto
+    FROM tblLogin l
+    INNER JOIN tblUsuario u ON u.idUsuario = l.Usuario_idUsuario
+    WHERE l.usuario = ?
+");
 
     if (!$stmt) {
         die("Erro no prepare: " . $conn->error);
@@ -34,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($senha, $dados['senha'])) {
 
             // Criar sessão
+            $_SESSION['idUsuario'] = $dados['idUsuario'];
             $_SESSION['idLogin'] = $dados['idLogin'];
             $_SESSION['usuario'] = $dados['usuario'];
             $_SESSION['nome'] = $dados['nomeUsuario'];

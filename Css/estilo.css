@@ -644,7 +644,6 @@ body.dark-mode .hospital-card p {
     font-weight: bold;
 }
 
-/* Dropdown perfil */
 .foto-perfil {
     width: 40px;
     height: 40px;
@@ -664,32 +663,6 @@ body.dark-mode .hospital-card p {
     color: #000;
 }
 
-.dropdown-perfil {
-    display: none;
-    position: absolute;
-    top: 130%;
-    right: 0;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    min-width: 150px;
-    flex-direction: column;
-    z-index: 1000;
-}
-
-.dropdown-perfil a {
-    display: block;
-    text-decoration: none;
-    color: #2563eb;
-    padding: 10px 15px;
-    font-size: 14px;
-    transition: background 0.2s, font-weight 0.2s;
-}
-
-.dropdown-perfil a:hover {
-    background: #eef2ff;
-    font-weight: bold;
-}
 
 #config-btn:focus + .dropdown,
 #config-btn:active + .dropdown,
