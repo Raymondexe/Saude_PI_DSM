@@ -1,11 +1,6 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-<<<<<<< HEAD
-
-=======
-require_once '../utils/alert.php';
->>>>>>> c00d29eb8a4370918eab91ad61ff9b73999ac04c
 
 
 include("../config/conexao.php");
@@ -67,14 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $conn->commit();
 
-<<<<<<< HEAD
         echo "Cadastro realizado com sucesso!";
         // header("Location: ../../login.html");
-=======
-        //echo "Cadastro realizado com sucesso!";
-        // header("Location: ../../login.html");
-        meuAlerta("Cadastro realizado com sucesso!", "../../login.html", "Página de login");
->>>>>>> c00d29eb8a4370918eab91ad61ff9b73999ac04c
 
     } catch (Exception $e) {
         $conn->rollback();

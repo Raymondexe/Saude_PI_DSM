@@ -30,17 +30,6 @@ $telefone = $usuario['telefoneUsuario'] ?? '';
 $cpf = $usuario['cpfUsuario'] ?? '';
 $endereco = $usuario['enderecoUsuario'] ?? '';
 
-<<<<<<< HEAD
-=======
-$tipoSanguineo = $usuario['tipoSanguineo'] ?? '';
-
-$alergias = isset($usuario['alergias']) ? htmlspecialchars($usuario['alergias']) : '';
-$doencasCronicas = isset($usuario['doencasCronicas']) ? htmlspecialchars($usuario['doencasCronicas']) : '';
-
-$contatoEmergencia = htmlspecialchars($usuario['contatoEmergencia'] ?? '');
-$telefoneEmergencia = htmlspecialchars($usuario['telefoneEmergencia'] ?? '');
-
->>>>>>> c00d29eb8a4370918eab91ad61ff9b73999ac04c
 if (empty($usuario['codigoVinculo'])) {
     $codigo = 'BSTR-' . strtoupper(substr(md5(uniqid()), 0, 6));
 
@@ -64,21 +53,8 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 } else {
     $foto = "Img/defaultUser.png";
 }
-<<<<<<< HEAD
 ?>
 
-=======
-
-
-if (isset($_GET['sucesso'])): ?>
-    <script>
-        window.history.replaceState({}, document.title, window.location.pathname);
-    </script>
-<?php endif; ?>
-?>
-
-
->>>>>>> c00d29eb8a4370918eab91ad61ff9b73999ac04c
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -150,139 +126,6 @@ if (isset($_GET['sucesso'])): ?>
 
     <script>
 
-<<<<<<< HEAD
-=======
-        let tagParaExcluir = null;
-
-        function adicionarTag(tipo) {
-            const input = document.getElementById(
-                tipo === "alergia" ? "inputAlergia" : "inputDoenca"
-            );
-
-            const hidden = document.getElementById(
-                tipo === "alergia" ? "hiddenAlergias" : "hiddenDoencas"
-            );
-
-            const valor = input.value.trim();
-
-            if (!valor) return;
-
-            let lista = hidden.value
-                ? hidden.value.split(",").map(item => item.trim()).filter(Boolean)
-                : [];
-
-            if (lista.includes(valor)) {
-                alert("Item já existe.");
-                return;
-            }
-
-            lista.push(valor);
-            hidden.value = lista.join(",");
-
-            input.value = "";
-
-            renderizarTags(tipo);
-        }
-
-        function renderizarTags(tipo) {
-            const hidden = document.getElementById(
-                tipo === "alergia" ? "hiddenAlergias" : "hiddenDoencas"
-            );
-
-            const listaContainer = document.getElementById(
-                tipo === "alergia" ? "listaAlergias" : "listaDoencas"
-            );
-
-            listaContainer.innerHTML = "";
-
-            let lista = hidden.value
-                ? hidden.value.split(",").map(item => item.trim()).filter(Boolean)
-                : [];
-
-            lista.forEach(item => {
-                const tag = document.createElement("div");
-                tag.className = "tag-item";
-
-                tag.innerHTML = `
-    <span class="tag-text">${item}</span>
-    <button type="button" 
-            class="tag-remove-btn"
-            onclick="abrirModal('${tipo}', '${item}')">
-        ✕
-    </button>
-`;
-
-                listaContainer.appendChild(tag);
-            });
-        }
-
-        function abrirModal(tipo, valor) {
-            tagParaExcluir = { tipo, valor };
-            document.getElementById("modalExcluir").style.display = "flex";
-        }
-
-        function fecharModal() {
-            document.getElementById("modalExcluir").style.display = "none";
-            tagParaExcluir = null;
-        }
-
-        function confirmarExclusao() {
-            if (!tagParaExcluir) return;
-
-            fetch("php/usuario/removerTag.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: `tipo=${encodeURIComponent(tagParaExcluir.tipo)}&valor=${encodeURIComponent(tagParaExcluir.valor)}`
-            })
-                .then(response => response.text())
-                .then(data => {
-                    console.log("Resposta removerTag:", data);
-
-                    if (data.trim() === "ok") {
-
-                        const hidden = document.getElementById(
-                            tagParaExcluir.tipo === "alergia"
-                                ? "hiddenAlergias"
-                                : "hiddenDoencas"
-                        );
-
-                        let lista = hidden.value
-                            ? hidden.value.split(",").map(item => item.trim()).filter(Boolean)
-                            : [];
-
-                        lista = lista.filter(item => item !== tagParaExcluir.valor);
-
-                        hidden.value = lista.join(",");
-
-                        renderizarTags(tagParaExcluir.tipo);
-                        fecharModal();
-
-                    } else {
-                        alert(data); // mostra erro real vindo do PHP
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                    alert("Erro de conexão ao excluir.");
-                });
-        }
-
-        window.addEventListener("load", function () {
-            renderizarTags("alergia");
-            renderizarTags("doenca");
-        }); 1
-
-
-
-
-
-
-
-
-
->>>>>>> c00d29eb8a4370918eab91ad61ff9b73999ac04c
         // Abre accordio após clicar na Âncora 
         document.querySelectorAll('.menu a').forEach(link => {
             link.addEventListener('click', function () {
@@ -307,7 +150,6 @@ if (isset($_GET['sucesso'])): ?>
 
 
         // Validação código (Relacionamento)
-<<<<<<< HEAD
         const inputCodigo = document.getElementById("codigoDependente");
         const erro = document.getElementById("codigoErro");
 
@@ -328,75 +170,6 @@ if (isset($_GET['sucesso'])): ?>
                 erro.textContent = "Código válido";
                 erro.style.color = "green";
             }
-=======
-        window.addEventListener("DOMContentLoaded", function () {
-
-            const inputCodigo = document.getElementById("codigoDependente");
-            const erro = document.getElementById("codigoErro");
-
-            if (inputCodigo) {
-                inputCodigo.addEventListener("input", function () {
-                    this.value = this.value.toUpperCase();
-
-                    const regex = /^BSTR-[A-Z0-9]{6}$/;
-
-                    if (this.value === "") {
-                        erro.textContent = "";
-                        return;
-                    }
-
-                    if (!regex.test(this.value)) {
-                        erro.textContent = "Formato inválido. Use: BSTR-F84FCD";
-                        erro.style.color = "red";
-                    } else {
-                        erro.textContent = "Código válido";
-                        erro.style.color = "green";
-                    }
-                });
-            }
-
-            renderizarTags("alergia");
-            renderizarTags("doenca");
-        });
-
-
-
-        const campoTelefone = document.getElementById("telefone");
-        const campoCpf = document.getElementById("cpf");
-
-        /* TELEFONE */
-        campoTelefone.addEventListener("input", function (e) {
-            let v = e.target.value.replace(/\D/g, "");
-
-            if (v.length > 11) v = v.slice(0, 11);
-
-            if (v.length > 10) {
-                v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
-            } else if (v.length > 6) {
-                v = v.replace(/^(\d{2})(\d{4})(\d+)/, "($1) $2-$3");
-            } else if (v.length > 2) {
-                v = v.replace(/^(\d{2})(\d+)/, "($1) $2");
-            }
-
-            e.target.value = v;
-        });
-
-        /* CPF */
-        campoCpf.addEventListener("input", function (e) {
-            let v = e.target.value.replace(/\D/g, "");
-
-            if (v.length > 11) v = v.slice(0, 11);
-
-            if (v.length > 9) {
-                v = v.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
-            } else if (v.length > 6) {
-                v = v.replace(/^(\d{3})(\d{3})(\d+)/, "$1.$2.$3");
-            } else if (v.length > 3) {
-                v = v.replace(/^(\d{3})(\d+)/, "$1.$2");
-            }
-
-            e.target.value = v;
->>>>>>> c00d29eb8a4370918eab91ad61ff9b73999ac04c
         });
     </script>
 
@@ -485,18 +258,9 @@ if (isset($_GET['sucesso'])): ?>
                                     <input type="email" name="email" value="<?= $email ?>">
                                 </div>
 
-<<<<<<< HEAD
                                 <div class="field">
                                     <label>Telefone</label>
                                     <input type="text" name="telefone" value="<?= $telefone ?>">
-=======
-
-
-                                <!-- ARRUMAR MASCARA DO TELEFONE E CPF -->
-                                <div class="field">
-                                    <label>Telefone</label>
-                                    <input type="text" id="cpf" name="cpf" value="<?= $cpf ?>">
->>>>>>> c00d29eb8a4370918eab91ad61ff9b73999ac04c
                                 </div>
 
                                 <div class="field">
@@ -510,7 +274,6 @@ if (isset($_GET['sucesso'])): ?>
                             <summary>Dados Médicos</summary>
 
                             <div class="grid">
-<<<<<<< HEAD
                                 <div class="field">
                                     <label>Tipo sanguíneo</label>
                                     <select name="tipoSanguineo">
@@ -521,85 +284,10 @@ if (isset($_GET['sucesso'])): ?>
                                 <div class="field">
                                     <label>Alergias</label>
                                     <textarea name="alergias"></textarea>
-=======
-
-                                <!-- Tipo sanguíneo -->
-                                <div class="field">
-                                    <label>Tipo sanguíneo</label>
-                                    <select name="tipoSanguineo">
-                                        <option value="">Selecione</option>
-                                        <?php
-                                        $tipos = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
-                                        foreach ($tipos as $tipo) {
-                                            $selected = ($tipoSanguineo == $tipo) ? 'selected' : '';
-                                            echo "<option value='$tipo' $selected>$tipo</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-
-
-                                <!-- ALERGIAS -->
-                                <div class="field full-width">
-                                    <label>Alergias</label>
-
-                                    <div class="input-group-tag">
-                                        <input type="text" id="inputAlergia" placeholder="Digite alergia">
-                                        <button type="button" onclick="adicionarTag('alergia')">
-                                            Adicionar
-                                        </button>
-                                    </div>
-
-                                    <div id="listaAlergias" class="tags-list"></div>
-
-                                    <input type="hidden" name="alergias" id="hiddenAlergias"
-                                        value="<?= isset($alergias) ? $alergias : '' ?>">
-                                </div>
-
-                                <!-- DOENÇAS -->
-                                <div class="field full-width">
-                                    <label>Doenças Crônicas</label>
-
-                                    <div class="input-group-tag">
-                                        <input type="text" id="inputDoenca" placeholder="Digite doença">
-                                        <button type="button" onclick="adicionarTag('doenca')">
-                                            Adicionar
-                                        </button>
-                                    </div>
-
-                                    <div id="listaDoencas" class="tags-list"></div>
-
-                                    <input type="hidden" name="doencasCronicas" id="hiddenDoencas"
-                                        value="<?= isset($doencasCronicas) ? $doencasCronicas : '' ?>">
->>>>>>> c00d29eb8a4370918eab91ad61ff9b73999ac04c
                                 </div>
                             </div>
                         </details>
 
-<<<<<<< HEAD
-=======
-
-                        <div id="modalExcluir" class="modal-excluir">
-                            <div class="modal-content-excluir">
-                                <h3>Confirmar exclusão</h3>
-                                <p>Deseja realmente excluir esta informação?</p>
-
-                                <div class="modal-buttons">
-                                    <button type="button" onclick="confirmarExclusao()">Confirmar</button>
-                                    <button type="button" onclick="fecharModal()">Cancelar</button>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-
-
->>>>>>> c00d29eb8a4370918eab91ad61ff9b73999ac04c
                         <details id="emergencia" class="accordion-item">
                             <summary>Emergência e Responsável</summary>
 
@@ -692,11 +380,7 @@ if (isset($_GET['sucesso'])): ?>
         </main>
     </div>
 
-<<<<<<< HEAD
     <div class="card">
-=======
-    <!-- <div class="card">
->>>>>>> c00d29eb8a4370918eab91ad61ff9b73999ac04c
         <h3>Resumo de Saúde</h3>
 
         <div class="stats">
@@ -720,21 +404,8 @@ if (isset($_GET['sucesso'])): ?>
                 <p>Água hoje</p>
             </div>
         </div>
-<<<<<<< HEAD
     </div>
     </main>
-
-    </div>
-
-    </main>
-=======
-    </div> -->
-
->>>>>>> c00d29eb8a4370918eab91ad61ff9b73999ac04c
-
-
-
-
     <br><br><br><br><br><br><br>
 
 
