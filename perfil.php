@@ -30,6 +30,18 @@ $telefone = $usuario['telefoneUsuario'] ?? '';
 $cpf = $usuario['cpfUsuario'] ?? '';
 $endereco = $usuario['enderecoUsuario'] ?? '';
 
+$tipoSanguineo = $usuario['tipoSanguineo'] ?? '';
+
+$alergias = isset($usuario['alergias']) ? htmlspecialchars($usuario['alergias']) : '';
+$doencasCronicas = isset($usuario['doencasCronicas']) ? htmlspecialchars($usuario['doencasCronicas']) : '';
+
+$contatoEmergencia = htmlspecialchars($usuario['contatoEmergencia'] ?? '');
+$telefoneEmergencia = htmlspecialchars($usuario['telefoneEmergencia'] ?? '');
+
+
+
+
+
 if (empty($usuario['codigoVinculo'])) {
     $codigo = 'BSTR-' . strtoupper(substr(md5(uniqid()), 0, 6));
 
@@ -53,7 +65,30 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 } else {
     $foto = "Img/defaultUser.png";
 }
+
+
+if (isset($_GET['sucesso'])): ?>
+    <script>
+        window.history.replaceState({}, document.title, window.location.pathname);
+    </script>
+<?php endif;
+
+
+if (isset($_GET['erro'])): ?>
+    <script>
+        const erro = "<?= $_GET['erro'] ?>";
+
+        if (erro === "senhasDiferentes") {
+            alert("As senhas não coincidem.");
+        }
+
+        if (erro === "preenchaAmbasSenhas") {
+            alert("Preencha ambos os campos de senha.");
+        }
+    </script>
+<?php endif;
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -126,18 +161,168 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
     <script>
 
-        // Abre accordio após clicar na Âncora 
-        document.querySelectorAll('.menu a').forEach(link => {
-            link.addEventListener('click', function () {
-                const targetId = this.getAttribute('href');
-                const target = document.querySelector(targetId);
+        let tagParaExcluir = null;
 
-                if (target && target.tagName === 'DETAILS') {
-                    target.open = true;
-                }
+        function adicionarTag(tipo) {
+            const input = document.getElementById(
+                tipo === "alergia" ? "inputAlergia" : "inputDoenca"
+            );
+
+            const hidden = document.getElementById(
+                tipo === "alergia" ? "hiddenAlergias" : "hiddenDoencas"
+            );
+
+            const valor = input.value.trim();
+
+            if (!valor) return;
+
+            let lista = hidden.value
+                ? hidden.value.split(",").map(item => item.trim()).filter(Boolean)
+                : [];
+
+            if (lista.includes(valor)) {
+                alert("Item já existe.");
+                return;
+            }
+
+            lista.push(valor);
+            hidden.value = lista.join(",");
+
+            input.value = "";
+
+            renderizarTags(tipo);
+        }
+
+        function renderizarTags(tipo) {
+            const hidden = document.getElementById(
+                tipo === "alergia" ? "hiddenAlergias" : "hiddenDoencas"
+            );
+
+            const listaContainer = document.getElementById(
+                tipo === "alergia" ? "listaAlergias" : "listaDoencas"
+            );
+
+            listaContainer.innerHTML = "";
+
+            let lista = hidden.value
+                ? hidden.value.split(",").map(item => item.trim()).filter(Boolean)
+                : [];
+
+            lista.forEach(item => {
+                const tag = document.createElement("div");
+                tag.className = "tag-item";
+
+                tag.innerHTML = `
+    <span class="tag-text">${item}</span>
+    <button type="button" 
+            class="tag-remove-btn"
+            onclick="abrirModal('${tipo}', '${item}')">
+        ✕
+    </button>
+`;
+
+                listaContainer.appendChild(tag);
             });
+        }
+
+        function abrirModal(tipo, valor) {
+            tagParaExcluir = { tipo, valor };
+            document.getElementById("modalExcluir").style.display = "flex";
+        }
+
+        function fecharModal() {
+            document.getElementById("modalExcluir").style.display = "none";
+            tagParaExcluir = null;
+        }
+
+        function confirmarExclusao() {
+            if (!tagParaExcluir) return;
+
+            fetch("php/usuario/removerTag.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `tipo=${encodeURIComponent(tagParaExcluir.tipo)}&valor=${encodeURIComponent(tagParaExcluir.valor)}`
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log("Resposta removerTag:", data);
+
+                    if (data.trim() === "ok") {
+
+                        const hidden = document.getElementById(
+                            tagParaExcluir.tipo === "alergia"
+                                ? "hiddenAlergias"
+                                : "hiddenDoencas"
+                        );
+
+                        let lista = hidden.value
+                            ? hidden.value.split(",").map(item => item.trim()).filter(Boolean)
+                            : [];
+
+                        lista = lista.filter(item => item !== tagParaExcluir.valor);
+
+                        hidden.value = lista.join(",");
+
+                        renderizarTags(tagParaExcluir.tipo);
+                        fecharModal();
+
+                    } else {
+                        alert(data); // mostra erro real vindo do PHP
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert("Erro de conexão ao excluir.");
+                });
+        }
+
+        window.addEventListener("load", function () {
+            renderizarTags("alergia");
+            renderizarTags("doenca");
         });
 
+
+        window.addEventListener("DOMContentLoaded", function () {
+
+            document.querySelectorAll('.menu a').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+
+                    if (!target) return;
+
+                    // abre o accordion alvo
+                    if (target.tagName.toLowerCase() === 'details') {
+                        target.open = true;
+                    }
+
+                    // abre accordions pais
+                    let parent = target.parentElement;
+
+                    while (parent) {
+                        if (
+                            parent.tagName &&
+                            parent.tagName.toLowerCase() === 'details'
+                        ) {
+                            parent.open = true;
+                        }
+                        parent = parent.parentElement;
+                    }
+
+                    setTimeout(() => {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 150);
+                });
+            });
+
+        });
 
         // Code Copia código
         function copiarCodigo() {
@@ -150,27 +335,142 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
 
         // Validação código (Relacionamento)
-        const inputCodigo = document.getElementById("codigoDependente");
-        const erro = document.getElementById("codigoErro");
+        window.addEventListener("DOMContentLoaded", function () {
 
-        inputCodigo.addEventListener("input", function () {
-            this.value = this.value.toUpperCase();
+            const inputCodigo = document.getElementById("codigoDependente");
+            const erro = document.getElementById("codigoErro");
 
-            const regex = /^BSTR-[A-Z0-9]{6}$/;
+            if (inputCodigo) {
+                inputCodigo.addEventListener("input", function () {
+                    this.value = this.value.toUpperCase();
 
-            if (this.value === "") {
-                erro.textContent = "";
-                return;
+                    const regex = /^BSTR-[A-Z0-9]{6}$/;
+
+                    if (this.value === "") {
+                        erro.textContent = "";
+                        return;
+                    }
+
+                    if (!regex.test(this.value)) {
+                        erro.textContent = "Formato inválido. Use: BSTR-F84FCD";
+                        erro.style.color = "red";
+                    } else {
+                        erro.textContent = "Código válido";
+                        erro.style.color = "green";
+                    }
+                });
             }
 
-            if (!regex.test(this.value)) {
-                erro.textContent = "Formato inválido. Use: BSTR-F84FCD";
-                erro.style.color = "red";
-            } else {
-                erro.textContent = "Código válido";
-                erro.style.color = "green";
+            renderizarTags("alergia");
+            renderizarTags("doenca");
+        });
+
+
+
+        const campoTelefone = document.getElementById("telefone");
+        const campoCpf = document.getElementById("cpf");
+
+        /* TELEFONE */
+        document.getElementById("telefone").addEventListener("input", function (e) {
+            let v = e.target.value.replace(/\D/g, "");
+
+            if (v.length > 11) v = v.slice(0, 11);
+
+            if (v.length > 10) {
+                v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+            } else if (v.length > 6) {
+                v = v.replace(/^(\d{2})(\d{4})(\d+)/, "($1) $2-$3");
+            } else if (v.length > 2) {
+                v = v.replace(/^(\d{2})(\d+)/, "($1) $2");
+            }
+
+            e.target.value = v;
+        });
+
+
+
+        // Excluir conta
+        const textoCorreto = "EXCLUIR MINHA CONTA";
+
+        const inputDelete = document.getElementById("confirmacaoDelete");
+        const btnDelete = document.getElementById("btnConfirmDelete");
+
+        inputDelete.addEventListener("input", function () {
+            btnDelete.disabled = this.value !== textoCorreto;
+        });
+
+
+        inputDelete.addEventListener("paste", function (e) {
+            e.preventDefault();
+        });
+
+
+
+        // Verifica Senha
+        const formPerfil = document.querySelector('form[action="php/usuario/updatePerfil.php"]');
+        const novaSenha = document.getElementById("novaSenha");
+        const confirmarSenha = document.getElementById("confirmarSenha");
+        const erroSenha = document.getElementById("erroSenha");
+
+        formPerfil.addEventListener("submit", function (e) {
+            erroSenha.textContent = "";
+
+            const senha = novaSenha.value.trim();
+            const confirmacao = confirmarSenha.value.trim();
+
+            // se começou preencher senha, precisa confirmar
+            if (senha !== "" || confirmacao !== "") {
+
+                if (senha === "" || confirmacao === "") {
+                    e.preventDefault();
+                    erroSenha.textContent = "Preencha os dois campos para alterar a senha.";
+                    return;
+                }
+
+                if (senha !== confirmacao) {
+                    e.preventDefault();
+                    erroSenha.textContent = "As senhas não coincidem.";
+                    return;
+                }
             }
         });
+
+
+        const modalDelete = document.getElementById("modalDeleteConta");
+        const inputDelete = document.getElementById("confirmacaoDelete");
+        const btnDelete = document.getElementById("btnConfirmDelete");
+
+        function abrirModalDelete() {
+            modalDelete.style.display = "flex";
+        }
+
+        function fecharModalDelete() {
+            modalDelete.style.display = "none";
+            inputDelete.value = "";
+            btnDelete.disabled = true;
+        }
+
+        inputDelete.addEventListener("input", function () {
+            btnDelete.disabled =
+                inputDelete.value.trim() !== "EXCLUIR MINHA CONTA";
+        });
+
+        function excluirConta() {
+            fetch("php/usuario/excluirConta.php", {
+                method: "POST"
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+
+                    if (data.trim() === "ok") {
+                        alert("Conta excluída com sucesso.");
+                        window.location.href = "login.html";
+                    } else {
+                        alert(data);
+                    }
+                });
+        }
     </script>
 
     <div class="perfil-layout">
@@ -258,14 +558,19 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                                     <input type="email" name="email" value="<?= $email ?>">
                                 </div>
 
+
+
+                                <!-- ARRUMAR MASCARA DO TELEFONE E CPF -->
+
                                 <div class="field">
                                     <label>Telefone</label>
-                                    <input type="text" name="telefone" value="<?= $telefone ?>">
+                                    <input type="text" id="telefone" name="telefone" value="<?= $telefone ?>"
+                                        maxlength="15">
                                 </div>
 
                                 <div class="field">
                                     <label>CPF</label>
-                                    <input type="text" name="cpf" value="<?= $cpf ?>">
+                                    <input type="text" id="cpf" name="cpf" value="<?= $cpf ?>" maxlength="14">
                                 </div>
                             </div>
                         </details>
@@ -273,20 +578,94 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                         <details id="dados-medicos" class="accordion-item">
                             <summary>Dados Médicos</summary>
 
+                            <div class="info-box">
+                                <div class="info-icon">i</div>
+
+                                <div class="info-text">
+                                    <strong>Como adicionar informações médicas</strong>
+                                    <p>
+                                        Digite uma alergia ou doença, clique em <b>Adicionar</b> para incluir
+                                        na lista e, ao finalizar todas as alterações, clique em
+                                        <b>Salvar Alterações</b>. É possível excluir qualquer alteração antes e depois
+                                        de clicar em Salvar alterações.
+                                    </p>
+                                </div>
+                            </div>
+
                             <div class="grid">
+
+                                <!-- Tipo sanguíneo -->
                                 <div class="field">
                                     <label>Tipo sanguíneo</label>
                                     <select name="tipoSanguineo">
-                                        <option>O+</option>
+                                        <option value="">Selecione</option>
+                                        <?php
+                                        $tipos = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+                                        foreach ($tipos as $tipo) {
+                                            $selected = ($tipoSanguineo == $tipo) ? 'selected' : '';
+                                            echo "<option value='$tipo' $selected>$tipo</option>";
+                                        }
+                                        ?>
                                     </select>
                                 </div>
 
-                                <div class="field">
+
+                                <!-- ALERGIAS -->
+                                <div class="field full-width">
                                     <label>Alergias</label>
-                                    <textarea name="alergias"></textarea>
+
+                                    <div class="input-group-tag">
+                                        <input type="text" id="inputAlergia" placeholder="Digite alergia">
+                                        <button type="button" onclick="adicionarTag('alergia')">
+                                            Adicionar
+                                        </button>
+                                    </div>
+
+                                    <div id="listaAlergias" class="tags-list"></div>
+
+                                    <input type="hidden" name="alergias" id="hiddenAlergias"
+                                        value="<?= isset($alergias) ? $alergias : '' ?>">
+                                </div>
+
+                                <!-- DOENÇAS -->
+                                <div class="field full-width">
+                                    <label>Doenças Crônicas</label>
+
+                                    <div class="input-group-tag">
+                                        <input type="text" id="inputDoenca" placeholder="Digite doença">
+                                        <button type="button" onclick="adicionarTag('doenca')">
+                                            Adicionar
+                                        </button>
+                                    </div>
+
+                                    <div id="listaDoencas" class="tags-list"></div>
+
+                                    <input type="hidden" name="doencasCronicas" id="hiddenDoencas"
+                                        value="<?= isset($doencasCronicas) ? $doencasCronicas : '' ?>">
                                 </div>
                             </div>
                         </details>
+
+
+                        <div id="modalExcluir" class="modal-excluir">
+                            <div class="modal-content-excluir">
+                                <h3>Confirmar exclusão</h3>
+                                <p>Deseja realmente excluir esta informação?</p>
+
+                                <div class="modal-buttons">
+                                    <button type="button" onclick="confirmarExclusao()">Confirmar</button>
+                                    <button type="button" onclick="fecharModal()">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
 
                         <details id="emergencia" class="accordion-item">
                             <summary>Emergência e Responsável</summary>
@@ -310,22 +689,129 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                             </div>
                         </details>
 
-                        <details id="seguranca" class="accordion-item">
-                            <summary>Segurança e Conta</summary>
 
-                            <div class="grid">
-                                <div class="field">
-                                    <label>Nova senha</label>
-                                    <input type="password" name="novaSenha">
-                                </div>
-                            </div>
-                        </details>
 
-                        <button class="save-btn" type="submit">
-                            Salvar Alterações
-                        </button>
-                    </form>
+
+                        <div class="security-sections">
+
+                            <!-- CONTA -->
+                            <form id="formPerfil" action="php/usuario/updatePerfil.php" method="POST">
+
+                                <details id="seguranca" class="accordion-item">
+                                    <summary>Segurança e Conta</summary>
+
+                                    <div class="security-wrapper">
+
+                                        <!-- CONTA -->
+                                        <details class="sub-accordion" open>
+                                            <summary>Conta</summary>
+
+                                            <div class="sub-content">
+
+                                                <div class="info-box">
+                                                    <div class="info-icon">i</div>
+
+                                                    <div class="info-text">
+                                                        <strong>Alteração de senha</strong>
+                                                        <p>
+                                                            Para redefinir sua senha, preencha os campos abaixo
+                                                            e confirme a nova senha antes de salvar.
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="password-container">
+                                                    <div class="field password-field">
+                                                        <label>Nova senha</label>
+                                                        <input type="password" id="novaSenha" name="novaSenha">
+                                                    </div>
+
+                                                    <div class="field password-field">
+                                                        <label>Confirmar nova senha</label>
+                                                        <input type="password" id="confirmarSenha"
+                                                            name="confirmarSenha">
+                                                    </div>
+                                                </div>
+
+                                                <p id="erroSenha" class="erro-senha"></p>
+
+                                                <button type="submit" class="change-password-btn">
+                                                    Salvar alteração de senha
+                                                </button>
+
+                                                <small class="password-hint">
+                                                    A senha só será alterada caso os dois campos estejam preenchidos
+                                                    corretamente.
+                                                </small>
+
+                                            </div>
+                                        </details>
+
+                                        <!-- SEGURANÇA -->
+                                        <details class="sub-accordion danger-accordion">
+                                            <summary>Segurança</summary>
+
+                                            <div class="sub-content">
+
+                                                <div class="alert-box">
+                                                    <div class="alert-icon">!</div>
+
+                                                    <div class="alert-text">
+                                                        <strong>Zona de risco</strong>
+                                                        <p>
+                                                            Esta área contém ações críticas e irreversíveis.
+                                                            Dados removidos não poderão ser recuperados.
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <button type="button" class="danger-btn" onclick="abrirModalDelete()">
+                                                    Excluir Conta
+                                                </button>
+
+                                            </div>
+                                        </details>
+                                    </div>
+                                </details>
+
+                                <button class="save-btn" type="submit">
+                                    Salvar Alterações
+                                </button>
+
+                            </form>
+
+
+
+                        </div>
+
+
+            </details>
+
+            <!-- MODAL FORA DO ACCORDION -->
+            <div id="modalDeleteConta" class="modal-excluir">
+                <div class="modal-content-excluir">
+
+                    <h3>Excluir conta</h3>
+
+                    <p>
+                        Esta ação é irreversível. Para confirmar, digite:
+                    </p>
+
+                    <strong id="textoConfirmacao">EXCLUIR MINHA CONTA</strong>
+
+                    <input type="text" id="confirmacaoDelete" placeholder="Digite exatamente o texto acima"
+                        autocomplete="off" spellcheck="false">
+
+                    <button id="btnConfirmDelete" disabled onclick="excluirConta()">
+                        Excluir Conta Permanentemente
+                    </button>
+
+                    <button type="button" onclick="fecharModalDelete()">
+                        Cancelar
+                    </button>
+
                 </div>
+            </div>
             </details>
 
 
@@ -380,7 +866,7 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
         </main>
     </div>
 
-    <div class="card">
+    <!-- <div class="card">
         <h3>Resumo de Saúde</h3>
 
         <div class="stats">
@@ -404,8 +890,12 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                 <p>Água hoje</p>
             </div>
         </div>
-    </div>
-    </main>
+    </div> -->
+
+
+
+
+
     <br><br><br><br><br><br><br>
 
 
@@ -428,17 +918,6 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
 
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-=======
->>>>>>> c00d29eb8a4370918eab91ad61ff9b73999ac04c
     <!-- Rodapé -->
     <footer class="footer">
         <div class="footerContainer">
@@ -479,6 +958,111 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
     <!-- Scripts -->
     <script src="script.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /* ===== ALTERAÇÃO DE SENHA ===== */
+            const formPerfil = document.querySelector('form[action="php/usuario/updatePerfil.php"]');
+            const novaSenha = document.getElementById("novaSenha");
+            const confirmarSenha = document.getElementById("confirmarSenha");
+            const erroSenha = document.getElementById("erroSenha");
+
+            formPerfil.addEventListener("submit", function (e) {
+                erroSenha.textContent = "";
+
+                const senha = novaSenha.value.trim();
+                const confirmacao = confirmarSenha.value.trim();
+
+                if (senha !== "" || confirmacao !== "") {
+
+                    if (senha === "" || confirmacao === "") {
+                        e.preventDefault();
+                        erroSenha.textContent = "Preencha ambos os campos.";
+                        return;
+                    }
+
+                    if (senha !== confirmacao) {
+                        e.preventDefault();
+                        erroSenha.textContent = "As senhas não coincidem.";
+                        return;
+                    }
+                }
+            });
+
+
+            /* ===== MODAL DELETE ===== */
+            const modalDelete = document.getElementById("modalDeleteConta");
+            const inputDelete = document.getElementById("confirmacaoDelete");
+            const btnDelete = document.getElementById("btnConfirmDelete");
+
+            const textoConfirmacao = "EXCLUIR MINHA CONTA";
+
+            window.abrirModalDelete = function () {
+                modalDelete.style.display = "flex";
+                inputDelete.value = "";
+                btnDelete.disabled = true;
+            }
+
+            window.fecharModalDelete = function () {
+                modalDelete.style.display = "none";
+                inputDelete.value = "";
+                btnDelete.disabled = true;
+            }
+
+            inputDelete.addEventListener("paste", function (e) {
+                e.preventDefault();
+            });
+
+            inputDelete.addEventListener("input", function () {
+                btnDelete.disabled = inputDelete.value.trim() !== textoConfirmacao;
+            });
+
+            window.excluirConta = function () {
+                fetch("php/usuario/excluirConta.php", {
+                    method: "POST"
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        if (data.trim() === "ok") {
+                            alert("Conta excluída com sucesso.");
+                            window.location.href = "login.html";
+                        } else {
+                            alert(data);
+                        }
+                    })
+                    .catch(() => {
+                        alert("Erro ao excluir conta.");
+                    });
+            }
+
+        });
+
+    </script>
+
+
+    <div id="modalDeleteConta" class="modal-excluir">
+        <div class="modal-content-excluir">
+
+            <h3>Excluir conta</h3>
+
+            <p>Esta ação é irreversível. Para confirmar, digite:</p>
+
+            <strong id="textoConfirmacao">EXCLUIR MINHA CONTA</strong>
+
+            <input type="text" id="confirmacaoDelete" placeholder="Digite exatamente o texto acima" autocomplete="off"
+                spellcheck="false" autocorrect="off" autocapitalize="off">
+
+            <button id="btnConfirmDelete" disabled onclick="excluirConta()">
+                Excluir Conta Permanentemente
+            </button>
+
+            <button type="button" onclick="fecharModalDelete()">
+                Cancelar
+            </button>
+
+        </div>
+    </div>
 </body>
 
 </html>
