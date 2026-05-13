@@ -87,7 +87,53 @@ if (isset($_GET['erro'])): ?>
         }
     </script>
 <?php endif;
+
+
+
+
+$stmtConvites = $conn->prepare("
+    SELECT 
+        c.idConvite,
+        c.validadeConvite,
+        c.statusConvite,
+        f.nomeFamilia,
+        u.nomeUsuario
+    FROM tblConvite c
+    INNER JOIN tblUsuario u 
+        ON u.idUsuario = c.Responsavel_idResponsavel
+    LEFT JOIN tblFamiliaUsuario fu
+        ON fu.Usuario_idUsuario = c.Usuario_idUsuario
+    LEFT JOIN tblFamilia f
+        ON f.idFamilia = fu.Familia_idFamilia
+    WHERE c.Usuario_idUsuario = ?
+    AND c.statusConvite = 'pendente'
+");
+
+$stmtConvites->bind_param("i", $id);
+$stmtConvites->execute();
+
+$resultConvites = $stmtConvites->get_result();
+$totalConvites = $resultConvites->num_rows;
+
+$stmtFamilias = $conn->prepare("
+    SELECT DISTINCT
+        f.idFamilia,
+        f.nomeFamilia
+    FROM tblFamilia f
+    INNER JOIN tblFamiliaUsuario fu
+        ON fu.Familia_idFamilia = f.idFamilia
+    WHERE fu.Usuario_idUsuario = ?
+");
+
+$stmtFamilias->bind_param("i", $id);
+$stmtFamilias->execute();
+
+$resultFamilias = $stmtFamilias->get_result();
+$temFamilias = $resultFamilias->num_rows > 0;
+$totalFamilias = $resultFamilias->num_rows;
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -131,11 +177,11 @@ if (isset($_GET['erro'])): ?>
                             <span class="nome-perfil"><?= $nome ?></span>
                         </a>
 
-                        <button id="btnNotificacao" class="notificacao-btn">
-                            <img id="iconeNotificacao" src="Img/Corres_Fechada.png" alt="Notificações" class="Notificacao">
-                        </button>
-                    </li>
 
+                    </li>
+                    <button id="btnNotificacao" class="notificacao-btn">
+                        <img id="iconeNotificacao" src="Img/Corres_Fechada.png" alt="Notificações" class="Notificacao">
+                    </button>
                 <?php else: ?>
                     <li><a href="./login.html" data-lang="login">Login</a></li>
                 <?php endif; ?>
@@ -389,22 +435,6 @@ if (isset($_GET['erro'])): ?>
 
 
 
-        // Excluir conta
-        const textoCorreto = "EXCLUIR MINHA CONTA";
-
-        const inputDelete = document.getElementById("confirmacaoDelete");
-        const btnDelete = document.getElementById("btnConfirmDelete");
-
-        inputDelete.addEventListener("input", function () {
-            btnDelete.disabled = this.value !== textoCorreto;
-        });
-
-
-        inputDelete.addEventListener("paste", function (e) {
-            e.preventDefault();
-        });
-
-
 
         // Verifica Senha
         const formPerfil = document.querySelector('form[action="php/usuario/updatePerfil.php"]');
@@ -436,40 +466,15 @@ if (isset($_GET['erro'])): ?>
         });
 
 
-        const modalDelete = document.getElementById("modalDeleteConta");
-        const inputDelete = document.getElementById("confirmacaoDelete");
-        const btnDelete = document.getElementById("btnConfirmDelete");
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
 
-        function abrirModalDelete() {
-            modalDelete.style.display = "flex";
-        }
+            toast.textContent = msg;
+            toast.style.display = "block";
 
-        function fecharModalDelete() {
-            modalDelete.style.display = "none";
-            inputDelete.value = "";
-            btnDelete.disabled = true;
-        }
-
-        inputDelete.addEventListener("input", function () {
-            btnDelete.disabled =
-                inputDelete.value.trim() !== "EXCLUIR MINHA CONTA";
-        });
-
-        function excluirConta() {
-            fetch("php/usuario/excluirConta.php", {
-                method: "POST"
-            })
-                .then(response => response.text())
-                .then(data => {
-                    console.log(data);
-
-                    if (data.trim() === "ok") {
-                        alert("Conta excluída com sucesso.");
-                        window.location.href = "login.html";
-                    } else {
-                        alert(data);
-                    }
-                });
+            setTimeout(() => {
+                toast.style.display = "none";
+            }, 2500);
         }
     </script>
 
@@ -695,90 +700,89 @@ if (isset($_GET['erro'])): ?>
                         <div class="security-sections">
 
                             <!-- CONTA -->
-                            <form id="formPerfil" action="php/usuario/updatePerfil.php" method="POST">
 
-                                <details id="seguranca" class="accordion-item">
-                                    <summary>Segurança e Conta</summary>
 
-                                    <div class="security-wrapper">
+                            <details id="seguranca" class="accordion-item">
+                                <summary>Segurança e Conta</summary>
 
-                                        <!-- CONTA -->
-                                        <details class="sub-accordion" open>
-                                            <summary>Conta</summary>
+                                <div class="security-wrapper">
 
-                                            <div class="sub-content">
+                                    <!-- CONTA -->
+                                    <details class="sub-accordion" open>
+                                        <summary>Conta</summary>
 
-                                                <div class="info-box">
-                                                    <div class="info-icon">i</div>
+                                        <div class="sub-content">
 
-                                                    <div class="info-text">
-                                                        <strong>Alteração de senha</strong>
-                                                        <p>
-                                                            Para redefinir sua senha, preencha os campos abaixo
-                                                            e confirme a nova senha antes de salvar.
-                                                        </p>
-                                                    </div>
+                                            <div class="info-box">
+                                                <div class="info-icon">i</div>
+
+                                                <div class="info-text">
+                                                    <strong>Alteração de senha</strong>
+                                                    <p>
+                                                        Para redefinir sua senha, preencha os campos abaixo
+                                                        e confirme a nova senha antes de salvar.
+                                                    </p>
                                                 </div>
-
-                                                <div class="password-container">
-                                                    <div class="field password-field">
-                                                        <label>Nova senha</label>
-                                                        <input type="password" id="novaSenha" name="novaSenha">
-                                                    </div>
-
-                                                    <div class="field password-field">
-                                                        <label>Confirmar nova senha</label>
-                                                        <input type="password" id="confirmarSenha"
-                                                            name="confirmarSenha">
-                                                    </div>
-                                                </div>
-
-                                                <p id="erroSenha" class="erro-senha"></p>
-
-                                                <button type="submit" class="change-password-btn">
-                                                    Salvar alteração de senha
-                                                </button>
-
-                                                <small class="password-hint">
-                                                    A senha só será alterada caso os dois campos estejam preenchidos
-                                                    corretamente.
-                                                </small>
-
                                             </div>
-                                        </details>
 
-                                        <!-- SEGURANÇA -->
-                                        <details class="sub-accordion danger-accordion">
-                                            <summary>Segurança</summary>
-
-                                            <div class="sub-content">
-
-                                                <div class="alert-box">
-                                                    <div class="alert-icon">!</div>
-
-                                                    <div class="alert-text">
-                                                        <strong>Zona de risco</strong>
-                                                        <p>
-                                                            Esta área contém ações críticas e irreversíveis.
-                                                            Dados removidos não poderão ser recuperados.
-                                                        </p>
-                                                    </div>
+                                            <div class="password-container">
+                                                <div class="field password-field">
+                                                    <label>Nova senha</label>
+                                                    <input type="password" id="novaSenha" name="novaSenha">
                                                 </div>
 
-                                                <button type="button" class="danger-btn" onclick="abrirModalDelete()">
-                                                    Excluir Conta
-                                                </button>
-
+                                                <div class="field password-field">
+                                                    <label>Confirmar nova senha</label>
+                                                    <input type="password" id="confirmarSenha" name="confirmarSenha">
+                                                </div>
                                             </div>
-                                        </details>
-                                    </div>
-                                </details>
 
-                                <button class="save-btn" type="submit">
-                                    Salvar Alterações
-                                </button>
+                                            <p id="erroSenha" class="erro-senha"></p>
 
-                            </form>
+                                            <button type="submit" class="change-password-btn">
+                                                Salvar alteração de senha
+                                            </button>
+
+                                            <small class="password-hint">
+                                                A senha só será alterada caso os dois campos estejam preenchidos
+                                                corretamente.
+                                            </small>
+
+                                        </div>
+                                    </details>
+
+                                    <!-- SEGURANÇA -->
+                                    <details class="sub-accordion danger-accordion">
+                                        <summary>Segurança</summary>
+
+                                        <div class="sub-content">
+
+                                            <div class="alert-box">
+                                                <div class="alert-icon">!</div>
+
+                                                <div class="alert-text">
+                                                    <strong>Zona de risco</strong>
+                                                    <p>
+                                                        Esta área contém ações críticas e irreversíveis.
+                                                        Dados removidos não poderão ser recuperados.
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <button type="button" class="danger-btn" onclick="abrirModalDelete()">
+                                                Excluir Conta
+                                            </button>
+
+                                        </div>
+                                    </details>
+                                </div>
+                            </details>
+
+                            <button class="save-btn" type="submit">
+                                Salvar Alterações
+                            </button>
+
+
 
 
 
@@ -787,31 +791,7 @@ if (isset($_GET['erro'])): ?>
 
             </details>
 
-            <!-- MODAL FORA DO ACCORDION -->
-            <div id="modalDeleteConta" class="modal-excluir">
-                <div class="modal-content-excluir">
 
-                    <h3>Excluir conta</h3>
-
-                    <p>
-                        Esta ação é irreversível. Para confirmar, digite:
-                    </p>
-
-                    <strong id="textoConfirmacao">EXCLUIR MINHA CONTA</strong>
-
-                    <input type="text" id="confirmacaoDelete" placeholder="Digite exatamente o texto acima"
-                        autocomplete="off" spellcheck="false">
-
-                    <button id="btnConfirmDelete" disabled onclick="excluirConta()">
-                        Excluir Conta Permanentemente
-                    </button>
-
-                    <button type="button" onclick="fecharModalDelete()">
-                        Cancelar
-                    </button>
-
-                </div>
-            </div>
             </details>
 
 
@@ -819,51 +799,265 @@ if (isset($_GET['erro'])): ?>
             <details id="relacionamento" class="main-accordion">
                 <summary>Relacionamento</summary>
 
-                <div class="card">
-                    <form action="php/relacionamento/enviarConvite.php" method="POST">
-                        <details class="accordion-item" open>
-                            <summary>Adicionar Dependente</summary>
 
-                            <div class="grid">
-                                <div class="field">
-                                    <label>Código do dependente</label>
-                                    <input type="text" name="codigoDependente" id="codigoDependente"
-                                        placeholder="BSTR-F84FCD" maxlength="11" pattern="^BSTR-[A-Z0-9]{6}$" required>
-                                    <small id="codigoErro"></small>
+                <?php if (!$temFamilias): ?>
+
+                    <div id="estadoInicial" class="empty-family-box">
+                        <h3>Crie seu relacionamento familiar</h3>
+                        <p>Monte sua família e convide membros.</p>
+
+                        <button type="button" onclick="abrirModalNovaFamilia()">
+                            + Criar família
+                        </button>
+                    </div>
+
+                <?php else: ?>
+
+                    <div class="card">
+
+                        <details id="familias" class="accordion-item" open>
+                            <summary>Minhas Famílias</summary>
+
+                            <?php while ($familia = $resultFamilias->fetch_assoc()): ?>
+
+                                <?php
+                                $idFamilia = $familia['idFamilia'];
+
+                                $stmtMembros = $conn->prepare("
+                SELECT
+                    u.nomeUsuario,
+                    u.foto,
+                    fu.papel,
+                    fu.statusMembro
+                FROM tblFamiliaUsuario fu
+                INNER JOIN tblUsuario u
+                    ON u.idUsuario = fu.Usuario_idUsuario
+                WHERE fu.Familia_idFamilia = ?
+            ");
+
+                                $stmtMembros->bind_param("i", $idFamilia);
+                                $stmtMembros->execute();
+                                $membros = $stmtMembros->get_result();
+                                ?>
+
+                                <div class="familia-card">
+
+                                    <details class="familia-accordion">
+                                        <summary class="familia-header">
+
+                                            <h3><?= htmlspecialchars($familia['nomeFamilia']) ?></h3>
+
+                                            <div class="familia-actions" onclick="event.stopPropagation()">
+                                                <button type="button" onclick="abrirModalConfigFamilia(<?= $idFamilia ?>,
+                                                    '<?= htmlspecialchars($familia['nomeFamilia'], ENT_QUOTES) ?>'
+                                                         )">
+                                                    ⚙️
+                                                </button>
+                                            </div>
+
+                                        </summary>
+
+                                        <div class="familia-content">
+
+                                            <!-- RESPONSÁVEIS -->
+                                            <div class="membros-section">
+                                                <h4>Responsáveis</h4>
+
+                                                <div class="membros-grid">
+                                                    <?php
+                                                    mysqli_data_seek($membros, 0);
+                                                    while ($membro = $membros->fetch_assoc()):
+                                                        if ($membro['papel'] !== 'responsavel')
+                                                            continue;
+
+                                                        $fotoMembro = !empty($membro['foto']) && file_exists("uploads/" . $membro['foto'])
+                                                            ? "uploads/" . $membro['foto']
+                                                            : "Img/defaultUser.png";
+                                                        ?>
+
+
+                                                        <div
+                                                            class="membro-card <?= $membro['statusMembro'] === 'pendente' ? 'pending' : '' ?>">
+                                                            <img src="<?= $fotoMembro ?>">
+                                                            <span><?= htmlspecialchars($membro['nomeUsuario']) ?></span>
+                                                            <small><?= ucfirst($membro['papel']) ?></small>
+                                                        </div>
+
+                                                        <div class="add-dependente"
+                                                            onclick="abrirModalAdicionarResponsavel(<?= $idFamilia ?>)">
+                                                            + Adicionar responsável
+                                                        </div>
+                                                    <?php endwhile; ?>
+                                                </div>
+                                            </div>
+
+                                            <!-- DEPENDENTES -->
+                                            <div class="membros-section">
+                                                <h4>Dependentes</h4>
+
+                                                <div class="membros-grid">
+                                                    <?php
+                                                    mysqli_data_seek($membros, 0);
+                                                    while ($membro = $membros->fetch_assoc()):
+                                                        if ($membro['papel'] !== 'dependente')
+                                                            continue;
+
+                                                        $fotoMembro = !empty($membro['foto']) && file_exists("uploads/" . $membro['foto'])
+                                                            ? "uploads/" . $membro['foto']
+                                                            : "Img/defaultUser.png";
+                                                        ?>
+                                                        <div
+                                                            class="membro-card <?= $membro['statusMembro'] === 'pendente' ? 'pending' : '' ?>">
+                                                            <img src="<?= $fotoMembro ?>">
+                                                            <span><?= htmlspecialchars($membro['nomeUsuario']) ?></span>
+                                                            <small><?= ucfirst($membro['papel']) ?></small>
+                                                        </div>
+                                                    <?php endwhile; ?>
+
+                                                    <div class="add-dependente"
+                                                        onclick="abrirModalAdicionarDependente(<?= $idFamilia ?>)">
+                                                        + Adicionar dependente
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </details>
                                 </div>
 
-                            </div>
-                            <button class="save-btn" type="button">
-                                Enviar convite
-                            </button>
+                            <?php endwhile; ?>
+
+                            <?php if ($totalFamilias < 2): ?>
+                                <div class="novo-relacionamento-card" onclick="abrirModalNovaFamilia()">
+                                    +
+                                </div>
+                            <?php endif; ?>
+
                         </details>
-                    </form>
+                    </div>
 
-                    <details class="accordion-item">
-                        <summary>Histórico de Convites</summary>
+                <?php endif; ?>
 
-                        <div class="history-list">
-                            <div class="history-item pending">
-                                <strong>Julieta</strong>
-                                <span>Pendente</span>
-                            </div>
 
-                            <div class="history-item accepted">
-                                <strong>Maria</strong>
-                                <span>Aceito</span>
-                            </div>
+                <div id="modalNovaFamilia" class="modal-excluir">
+                    <div class="modal-content-excluir">
 
-                            <div class="history-item refused">
-                                <strong>Carlos</strong>
-                                <span>Recusado</span>
+                        <h3>Criar nova família</h3>
+
+                        <p>
+                            Escolha um nome para identificar esse relacionamento familiar.
+                        </p>
+
+                        <input type="text" id="nomeNovaFamilia" placeholder="Ex: Família Oliveira" maxlength="50">
+
+                        <button type="button" onclick="criarFamilia()">
+                            Criar família
+                        </button>
+
+                        <button type="button" onclick="fecharModalNovaFamilia()">
+                            Cancelar
+                        </button>
+
+                    </div>
+                </div>
+
+                <div id="modalNovoRelacionamento" class="modal-excluir">
+                    <div class="modal-content-excluir">
+
+                        <h3>Novo relacionamento</h3>
+
+                        <input type="text" id="nomeFamilia" placeholder="Nome da família">
+
+                        <input type="text" id="codigoDependenteModal" placeholder="BSTR-XXXXXX">
+
+                        <button onclick="enviarConviteRelacionamento()">
+                            Enviar convite
+                        </button>
+
+                        <button type="button" onclick="fecharModalNovoRelacionamento()">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+
+                <div id="modalConfigFamilia" class="modal-excluir">
+                    <div class="modal-config-familia">
+
+                        <div class="modal-config-header">
+                            <h3>Configurações da Família</h3>
+                            <button type="button" onclick="fecharModalConfigFamilia()">✕</button>
+                        </div>
+
+                        <input type="hidden" id="idFamiliaConfig">
+
+                        <div class="config-section">
+                            <label>Nome da família</label>
+
+                            <div class="edit-nome-box">
+                                <input type="text" id="novoNomeFamilia" maxlength="50">
+                                <button type="button" onclick="salvarNovoNomeFamilia()">
+                                    Salvar
+                                </button>
                             </div>
                         </div>
-                    </details>
 
+                        <div class="config-actions">
+                            <button type="button" onclick="gerenciarMembros()">
+                                👥 Gerenciar membros
+                            </button>
+
+                            <button class="btnPerigo" onclick="abrirModalExcluir()">
+                                🗑 Excluir família
+                            </button>
+
+
+                            <!-- ARRUMAR MODAL DE CONFIRMARÇÃO DE EXCLUSÃO DE FAMILIA -->
+
+                            <div id="modalConfirmarExclusao" class="modal-excluir">
+                                <div class="modal-content-excluir">
+                                    <h3>Excluir família</h3>
+                                    <p>Tem certeza que deseja excluir esta família?</p>
+
+                                    <div class="modal-buttons">
+                                        <button onclick="excluirFamilia()">Sim, excluir</button>
+                                        <button onclick="fecharModalExcluir()">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- <div id="toast" class="toast"></div>-->
+            </details>
+
+            <details class="accordion-item">
+                <summary>Histórico de Convites</summary>
+
+                <div class="history-list">
+                    <div class="history-item pending">
+                        <strong>Julieta</strong>
+                        <span>Pendente</span>
+                    </div>
+
+                    <div class="history-item accepted">
+                        <strong>Maria</strong>
+                        <span>Aceito</span>
+                    </div>
+
+                    <div class="history-item refused">
+                        <strong>Carlos</strong>
+                        <span>Recusado</span>
+                    </div>
                 </div>
             </details>
 
-        </main>
+    </div>
+    </details>
+
+    </main>
     </div>
 
     <!-- <div class="card">
@@ -1038,6 +1232,188 @@ if (isset($_GET['erro'])): ?>
 
         });
 
+
+
+
+        // MODAL NOTIFICAÇÃO
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const modalNotificacoes = document.getElementById("modalNotificacoes");
+            const btnNotificacao = document.getElementById("btnNotificacao");
+
+            if (!modalNotificacoes || !btnNotificacao) {
+                console.log("Elemento não encontrado");
+                return;
+            }
+
+            btnNotificacao.addEventListener("click", function () {
+                modalNotificacoes.style.display = "flex";
+            });
+
+            window.fecharNotificacoes = function () {
+                modalNotificacoes.style.display = "none";
+            };
+
+            window.addEventListener("click", function (e) {
+                if (e.target === modalNotificacoes) {
+                    modalNotificacoes.style.display = "none";
+                }
+            });
+        });
+
+
+
+        function abrirModalNovoRelacionamento() {
+            document.getElementById("modalNovoRelacionamento").style.display = "flex";
+        }
+
+        function fecharModalNovoRelacionamento() {
+            document.getElementById("modalNovoRelacionamento").style.display = "none";
+        }
+
+        function enviarConviteRelacionamento() {
+
+            showToast("Enviando convite...");
+
+            const nomeFamilia =
+                document.getElementById("nomeFamilia").value;
+
+            const codigoDependente =
+                document.getElementById("codigoDependenteModal").value;
+
+            fetch("php/relacionamento/enviarConvite.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body:
+                    "nomeFamilia=" + encodeURIComponent(nomeFamilia) +
+                    "&codigoDependente=" + encodeURIComponent(codigoDependente)
+            })
+                .then(response => response.text())
+                .then(data => {
+                    if (data.trim() === "ok") {
+                        showToast("Convite enviado!");
+
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1200);
+                    } else {
+                        showToast(data);
+                    }
+                });
+        }
+
+
+        function abrirModalNovaFamilia() {
+            document.getElementById("modalNovaFamilia").style.display = "flex";
+            document.getElementById("nomeNovaFamilia").value = "";
+        }
+
+        function fecharModalNovaFamilia() {
+            document.getElementById("modalNovaFamilia").style.display = "none";
+        }
+
+        function criarFamilia() {
+            const nomeFamilia = document.getElementById("nomeNovaFamilia").value.trim();
+
+            if (!nomeFamilia) {
+                alert("Digite o nome da família.");
+                return;
+            }
+
+            fetch("/Saude_PI_DSM-main/php/usuario/relacionamento/criarFamilia.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "nomeFamilia=" + encodeURIComponent(nomeFamilia)
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+
+                    if (data.trim() === "ok") {
+                        fecharModalNovaFamilia();
+                        location.reload();
+                    } else {
+                        alert(data);
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert("Erro ao criar família.");
+                });
+        }
+
+
+        function abrirModalConfigFamilia(idFamilia, nomeFamilia) {
+            document.getElementById("modalConfigFamilia").style.display = "flex";
+            document.getElementById("idFamiliaConfig").value = idFamilia;
+            document.getElementById("novoNomeFamilia").value = nomeFamilia;
+        }
+
+        function fecharModalConfigFamilia() {
+            document.getElementById("modalConfigFamilia").style.display = "none";
+        }
+
+        function salvarNovoNomeFamilia() {
+            const idFamilia = document.getElementById("idFamiliaConfig").value;
+            const novoNome = document.getElementById("novoNomeFamilia").value.trim();
+
+            if (!novoNome) {
+                alert("Digite um nome válido.");
+                return;
+            }
+
+            fetch("/Saude_PI_DSM-main/php/usuario/relacionamento/editarFamilia.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body:
+                    "idFamilia=" + encodeURIComponent(idFamilia) +
+                    "&novoNome=" + encodeURIComponent(novoNome)
+            })
+                .then(res => res.text())
+                .then(data => {
+                    if (data.trim() === "ok") {
+                        location.reload();
+                    } else {
+                        alert(data);
+                    }
+                });
+        }
+
+        function excluirFamilia() {
+            const idFamilia = document.getElementById("idFamiliaConfig").value;
+
+            fetch("/Saude_PI_DSM-main/php/usuario/relacionamento/excluirFamilia.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "idFamilia=" + encodeURIComponent(idFamilia)
+            })
+                .then(res => res.text())
+                .then(data => {
+                    if (data.trim() === "ok") {
+                        location.reload();
+                    } else {
+                        mostrarToast(data || "Erro ao excluir família");
+                    }
+                });
+        }
+
+
+        function abrirModalExcluir() {
+            document.getElementById("modalConfirmarExclusao").style.display = "flex";
+        }
+
+        function fecharModalExcluir() {
+            document.getElementById("modalConfirmarExclusao").style.display = "none";
+        }
+
     </script>
 
 
@@ -1060,6 +1436,102 @@ if (isset($_GET['erro'])): ?>
             <button type="button" onclick="fecharModalDelete()">
                 Cancelar
             </button>
+
+        </div>
+    </div>
+
+
+    <div id="modalNotificacoes" class="modal-notificacoes">
+
+        <div class="modal-box-notificacoes">
+
+            <div class="modal-header">
+                <h2>Notificações</h2>
+                <button onclick="fecharNotificacoes()">✕</button>
+            </div>
+
+            <!-- CONVITES -->
+            <details class="notificacao-accordion" open>
+                <summary>
+                    Convites
+                    <span class="badge contador-itens">
+                        <?= $totalConvites ?>
+                    </span>
+                </summary>
+
+                <div class="notificacao-lista">
+
+                    <?php if ($totalConvites > 0): ?>
+                        <?php while ($convite = $resultConvites->fetch_assoc()): ?>
+
+                            <div class="convite-card">
+
+                                <div class="convite-info">
+                                    <strong>
+                                        <?= htmlspecialchars($convite['nomeUsuario']) ?>
+                                    </strong>
+                                    <p>Família
+                                        <?= htmlspecialchars($convite['nomeUsuario']) ?>
+                                    </p>
+                                    <small>
+                                        Convite válido até:
+                                        <?= date('d/m/Y', strtotime($convite['validadeConvite'])) ?>
+                                    </small>
+                                </div>
+
+                                <div class="convite-acoes">
+
+                                    <form action="php/relacionamento/aceitarConvite.php" method="POST">
+                                        <input type="hidden" name="idConvite" value="<?= $convite['idConvite'] ?>">
+                                        <button type="submit" class="btn-aceitar">
+                                            Aceitar
+                                        </button>
+                                    </form>
+
+                                    <form action="php/relacionamento/recusarConvite.php" method="POST">
+                                        <input type="hidden" name="idConvite" value="<?= $convite['idConvite'] ?>">
+                                        <button type="submit" class="btn-recusar">
+                                            Recusar
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        <?php endwhile; ?>
+
+                    <?php else: ?>
+                        <div class="empty-box">
+                            Nenhum convite pendente.
+                        </div>
+                    <?php endif; ?>
+
+                </div>
+            </details>
+
+            <!-- SAÚDE -->
+            <details class="notificacao-accordion">
+                <summary>
+                    Saúde
+                    <span class="badge">0</span>
+                </summary>
+
+                <div class="empty-box">
+                    Nenhuma notificação de saúde.
+                </div>
+            </details>
+
+            <!-- OUTROS -->
+            <details class="notificacao-accordion">
+                <summary>
+                    Outros
+                    <span class="badge">0</span>
+                </summary>
+
+                <div class="empty-box">
+                    Nenhuma outra notificação.
+                </div>
+            </details>
 
         </div>
     </div>

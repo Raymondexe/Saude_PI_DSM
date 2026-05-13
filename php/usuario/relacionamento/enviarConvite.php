@@ -6,50 +6,20 @@ if (!isset($_SESSION['idUsuario'])) {
     die("Usuário não autenticado.");
 }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    die("Acesso inválido.");
-}
+$idResponsavel = $_SESSION['idUsuario'];
 
-$idUsuario = $_SESSION['idUsuario'];
+$nomeFamilia = trim($_POST['nomeFamilia'] ?? '');
 $codigo = strtoupper(trim($_POST['codigoDependente'] ?? ''));
 
-/* =========================
-   1. VALIDAR FORMATO
-========================= */
+if (empty($nomeFamilia) || empty($codigo)) {
+    die("Preencha todos os campos.");
+}
+
 if (!preg_match('/^BSTR-[A-Z0-9]{6}$/', $codigo)) {
     die("Código inválido.");
 }
 
-/* =========================
-   2. PEGAR CÓDIGO DO USUÁRIO LOGADO
-========================= */
-$stmt = $conn->prepare("
-    SELECT codigoVinculo
-    FROM tblUsuario
-    WHERE idUsuario = ?
-");
-$stmt->bind_param("i", $idUsuario);
-$stmt->execute();
-
-$result = $stmt->get_result();
-$usuarioLogado = $result->fetch_assoc();
-
-if (!$usuarioLogado) {
-    die("Usuário não encontrado.");
-}
-
-$meuCodigo = $usuarioLogado['codigoVinculo'];
-
-/* =========================
-   3. IMPEDIR AUTO CONVITE
-========================= */
-if ($codigo === $meuCodigo) {
-    die("Você não pode enviar convite para si mesmo.");
-}
-
-/* =========================
-   4. VERIFICAR EXISTÊNCIA DO DESTINATÁRIO
-========================= */
+/* localizar dependente */
 $stmt = $conn->prepare("
     SELECT idUsuario
     FROM tblUsuario
@@ -59,54 +29,65 @@ $stmt->bind_param("s", $codigo);
 $stmt->execute();
 
 $result = $stmt->get_result();
-$destinatario = $result->fetch_assoc();
+$dependente = $result->fetch_assoc();
 
-if (!$destinatario) {
-    die("Código não encontrado.");
+if (!$dependente) {
+    die("Usuário não encontrado.");
 }
 
-$idDestino = $destinatario['idUsuario'];
+$idDependente = $dependente['idUsuario'];
 
-/* =========================
-   5. IMPEDIR DUPLICIDADE DE RELAÇÃO
-========================= */
+if ($idDependente == $idResponsavel) {
+    die("Você não pode convidar a si mesmo.");
+}
+
+/* limite 2 famílias */
 $stmt = $conn->prepare("
-    SELECT *
-    FROM tblVerificaResponsavel
+    SELECT COUNT(*) total
+    FROM tblFamiliaUsuario
     WHERE Usuario_idUsuario = ?
+    AND papel = 'responsavel'
 ");
-$stmt->bind_param("i", $idDestino);
+$stmt->bind_param("i", $idResponsavel);
 $stmt->execute();
 
-$result = $stmt->get_result();
+$total = $stmt->get_result()->fetch_assoc()['total'];
 
-if ($result->num_rows > 0) {
-    die("Esse usuário já possui vínculo.");
+if ($total >= 2) {
+    die("Você atingiu o limite de 2 famílias.");
 }
 
-/* =========================
-   6. IMPEDIR CONVITE PENDENTE DUPLICADO
-========================= */
+/* cria família */
 $stmt = $conn->prepare("
-    SELECT *
-    FROM tblConvite
-    WHERE Usuario_idUsuario = ?
-    AND statusConvite = 'pendente'
+    INSERT INTO tblFamilia (nomeFamilia)
+    VALUES (?)
 ");
-$stmt->bind_param("i", $idDestino);
+$stmt->bind_param("s", $nomeFamilia);
 $stmt->execute();
 
-$result = $stmt->get_result();
+$idFamilia = $conn->insert_id;
 
-if ($result->num_rows > 0) {
-    die("Já existe convite pendente para esse usuário.");
-}
+/* responsável */
+$stmt = $conn->prepare("
+    INSERT INTO tblFamiliaUsuario
+    (Familia_idFamilia, Usuario_idUsuario, papel, statusMembro)
+    VALUES (?, ?, 'responsavel', 'ativo')
+");
+$stmt->bind_param("ii", $idFamilia, $idResponsavel);
+$stmt->execute();
 
-/* =========================
-   7. GERAR CONVITE
-========================= */
+/* dependente pendente */
+$stmt = $conn->prepare("
+    INSERT INTO tblFamiliaUsuario
+    (Familia_idFamilia, Usuario_idUsuario, papel, statusMembro)
+    VALUES (?, ?, 'dependente', 'pendente')
+");
+$stmt->bind_param("ii", $idFamilia, $idDependente);
+$stmt->execute();
+
+/* convite */
 $codigoConvite = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 8);
-$tipoConvite = "dependente_para_responsavel";
+$tipoConvite = "familia";
 $validade = date("Y-m-d H:i:s", strtotime("+7 days"));
 
 $stmt = $conn->prepare("
@@ -119,21 +100,18 @@ $stmt = $conn->prepare("
         validadeConvite,
         statusConvite
     )
-    VALUES (?, NULL, ?, ?, ?, 'pendente')
+    VALUES (?, ?, ?, ?, ?, 'pendente')
 ");
 
 $stmt->bind_param(
-    "isss",
-    $idDestino,
+    "iisss",
+    $idDependente,
+    $idResponsavel,
     $codigoConvite,
     $tipoConvite,
     $validade
 );
 
-if ($stmt->execute()) {
-    header("Location: ../../perfil.php?sucesso=convite_enviado");
-    exit;
-} else {
-    die("Erro ao enviar convite.");
-}
-?>
+$stmt->execute();
+
+echo "ok";
