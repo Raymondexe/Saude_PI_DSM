@@ -1,25 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const toggleTheme = document.getElementById("toggle-theme");
+  const toggleTheme = document.getElementById("toggle-theme");
 
-    function setTheme(theme) {
-      if (theme === "dark") {
-        document.body.classList.add("dark-mode");
-        toggleTheme.textContent = "☀️ Modo Claro";
-      } else {
-        document.body.classList.remove("dark-mode");
-        toggleTheme.textContent = "🌙 Modo Escuro";
-      }
-      localStorage.setItem("theme", theme);
+  function setTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+      toggleTheme.textContent = "☀️ Modo Claro";
+    } else {
+      document.body.classList.remove("dark-mode");
+      toggleTheme.textContent = "🌙 Modo Escuro";
     }
+    localStorage.setItem("theme", theme);
+  }
 
-    // Carregar tema salvo
-    setTheme(localStorage.getItem("theme") || "light");
+  // Carregar tema salvo
+  setTheme(localStorage.getItem("theme") || "light");
 
-    // Alternar tema
-    toggleTheme.addEventListener("click", () => {
-      const isDark = document.body.classList.contains("dark-mode");
-      setTheme(isDark ? "light" : "dark");
-    });
+  // Alternar tema
+  toggleTheme.addEventListener("click", () => {
+    const isDark = document.body.classList.contains("dark-mode");
+    setTheme(isDark ? "light" : "dark");
+  });
 });
 /* ==== DROPDOWN MENU ==== */
 
@@ -65,9 +65,16 @@ if (accessibilityToggle) {
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".config-menu")) {
     dropdown.style.display = "none";
-    subDropdown.style.display = "none";
+
+    if (subDropdown) {
+      subDropdown.style.display = "none";
+    }
+
     configBtn.setAttribute("aria-expanded", "false");
-    accessibilityToggle.setAttribute("aria-expanded", "false");
+
+    if (accessibilityToggle) {
+      accessibilityToggle.setAttribute("aria-expanded", "false");
+    }
   }
 });
 

@@ -96,24 +96,19 @@ $stmtConvites = $conn->prepare("
         c.idConvite,
         c.validadeConvite,
         c.statusConvite,
-        f.nomeFamilia,
-        u.nomeUsuario
+        r.nomeResponsavel AS nomeUsuario
     FROM tblConvite c
-    INNER JOIN tblUsuario u 
-        ON u.idUsuario = c.Responsavel_idResponsavel
-    LEFT JOIN tblFamiliaUsuario fu
-        ON fu.Usuario_idUsuario = c.Usuario_idUsuario
-    LEFT JOIN tblFamilia f
-        ON f.idFamilia = fu.Familia_idFamilia
+    INNER JOIN tblResponsavel r
+        ON r.idResponsavel = c.Responsavel_idResponsavel
     WHERE c.Usuario_idUsuario = ?
     AND c.statusConvite = 'pendente'
 ");
 
 $stmtConvites->bind_param("i", $id);
 $stmtConvites->execute();
-
 $resultConvites = $stmtConvites->get_result();
 $totalConvites = $resultConvites->num_rows;
+$resultConvites->data_seek(0);
 
 $stmtFamilias = $conn->prepare("
     SELECT DISTINCT
@@ -131,6 +126,7 @@ $stmtFamilias->execute();
 $resultFamilias = $stmtFamilias->get_result();
 $temFamilias = $resultFamilias->num_rows > 0;
 $totalFamilias = $resultFamilias->num_rows;
+
 ?>
 
 
@@ -833,6 +829,12 @@ $totalFamilias = $resultFamilias->num_rows;
                 INNER JOIN tblUsuario u
                     ON u.idUsuario = fu.Usuario_idUsuario
                 WHERE fu.Familia_idFamilia = ?
+ORDER BY 
+    CASE 
+        WHEN fu.statusMembro = 'ativo' THEN 0
+        ELSE 1
+    END,
+    fu.papel
             ");
 
                                 $stmtMembros->bind_param("i", $idFamilia);
@@ -845,7 +847,9 @@ $totalFamilias = $resultFamilias->num_rows;
                                     <details class="familia-accordion">
                                         <summary class="familia-header">
 
-                                            <h3><?= htmlspecialchars($familia['nomeFamilia']) ?></h3>
+                                            <h3>
+                                                <p><?= htmlspecialchars($familia['nomeFamilia']) ?></p>
+                                            </h3>
 
                                             <div class="familia-actions" onclick="event.stopPropagation()">
                                                 <button type="button" onclick="abrirModalConfigFamilia(<?= $idFamilia ?>,
@@ -883,6 +887,8 @@ $totalFamilias = $resultFamilias->num_rows;
                                                             <small><?= ucfirst($membro['papel']) ?></small>
                                                         </div>
 
+
+
                                                         <div class="add-dependente"
                                                             onclick="abrirModalAdicionarResponsavel(<?= $idFamilia ?>)">
                                                             + Adicionar responsável
@@ -912,6 +918,18 @@ $totalFamilias = $resultFamilias->num_rows;
                                                             <span><?= htmlspecialchars($membro['nomeUsuario']) ?></span>
                                                             <small><?= ucfirst($membro['papel']) ?></small>
                                                         </div>
+
+                                                        <!-- <div class="membro">
+                                                            <img src="<?= $membro['foto'] ?>" class="foto">
+
+                                                            <?php if ($membro['statusMembro'] === 'ativo'): ?>
+                                                                <span class="status verde"></span>
+                                                            <?php endif; ?>
+
+                                                            <p>
+                                                                <?= $membro['nomeUsuario'] ?>
+                                                            </p>
+                                                        </div> -->
                                                     <?php endwhile; ?>
 
                                                     <div class="add-dependente"
@@ -1237,28 +1255,27 @@ $totalFamilias = $resultFamilias->num_rows;
 
         // MODAL NOTIFICAÇÃO
         document.addEventListener("DOMContentLoaded", function () {
-
             const modalNotificacoes = document.getElementById("modalNotificacoes");
             const btnNotificacao = document.getElementById("btnNotificacao");
 
-            if (!modalNotificacoes || !btnNotificacao) {
-                console.log("Elemento não encontrado");
-                return;
-            }
+            console.log(btnNotificacao);
+            console.log(modalNotificacoes);
 
-            btnNotificacao.addEventListener("click", function () {
-                modalNotificacoes.style.display = "flex";
-            });
+            if (btnNotificacao && modalNotificacoes) {
+                btnNotificacao.addEventListener("click", function () {
+                    modalNotificacoes.style.display = "flex";
+                });
 
-            window.fecharNotificacoes = function () {
-                modalNotificacoes.style.display = "none";
-            };
-
-            window.addEventListener("click", function (e) {
-                if (e.target === modalNotificacoes) {
+                window.fecharNotificacoes = function () {
                     modalNotificacoes.style.display = "none";
-                }
-            });
+                };
+
+                window.addEventListener("click", function (e) {
+                    if (e.target === modalNotificacoes) {
+                        modalNotificacoes.style.display = "none";
+                    }
+                });
+            }
         });
 
 
@@ -1414,6 +1431,44 @@ $totalFamilias = $resultFamilias->num_rows;
             document.getElementById("modalConfirmarExclusao").style.display = "none";
         }
 
+
+        function abrirModalAdicionarDependente(idFamilia) {
+            document.getElementById("idFamiliaDependente").value = idFamilia;
+            document.getElementById("modalAdicionarDependente").style.display = "flex";
+        }
+
+        function fecharModalDependente() {
+            document.getElementById("modalAdicionarDependente").style.display = "none";
+            document.getElementById("codigoDependente").value = "";
+        }
+
+        function adicionarDependente() {
+            const idFamilia = document.getElementById("idFamiliaDependente").value;
+            const codigo = document.getElementById("codigoDependente").value.trim();
+
+            if (!codigo) {
+                alert("Digite um código");
+                return;
+            }
+
+            fetch("/Saude_PI_DSM-main/php/usuario/relacionamento/adicionarDependente.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body:
+                    "idFamilia=" + encodeURIComponent(idFamilia) +
+                    "&codigo=" + encodeURIComponent(codigo)
+            })
+                .then(res => res.text())
+                .then(data => {
+                    if (data.trim() === "ok") {
+                        location.reload();
+                    } else {
+                        alert(data);
+                    }
+                });
+        }
     </script>
 
 
@@ -1437,6 +1492,23 @@ $totalFamilias = $resultFamilias->num_rows;
                 Cancelar
             </button>
 
+        </div>
+    </div>
+
+
+    <div id="modalAdicionarDependente" class="modal-excluir">
+        <div class="modal-content-excluir">
+            <h3>Adicionar dependente</h3>
+            <p>Insira o código único do dependente</p>
+
+            <input type="hidden" id="idFamiliaDependente">
+
+            <input type="text" id="codigoDependente" placeholder="Ex: ABC12345" maxlength="20">
+
+            <div class="modal-buttons">
+                <button onclick="adicionarDependente()">Adicionar</button>
+                <button onclick="fecharModalDependente()">Cancelar</button>
+            </div>
         </div>
     </div>
 
@@ -1470,29 +1542,31 @@ $totalFamilias = $resultFamilias->num_rows;
                                     <strong>
                                         <?= htmlspecialchars($convite['nomeUsuario']) ?>
                                     </strong>
-                                    <p>Família
-                                        <?= htmlspecialchars($convite['nomeUsuario']) ?>
+
+                                    <!-- <p>
+                                        convidou você para entrar em
+                                        <?= htmlspecialchars($convite['nomeFamilia']) ?>
+                                    </p> -->
+
+                                    <p>
+                                        convidou você para um relacionamento familiar
                                     </p>
+
                                     <small>
-                                        Convite válido até:
-                                        <?= date('d/m/Y', strtotime($convite['validadeConvite'])) ?>
+                                        válido até <?= date('d/m/Y', strtotime($convite['validadeConvite'])) ?>
                                     </small>
                                 </div>
 
                                 <div class="convite-acoes">
 
-                                    <form action="php/relacionamento/aceitarConvite.php" method="POST">
+                                    <form action="php/usuario/relacionamento/aceitarConvite.php" method="POST">
                                         <input type="hidden" name="idConvite" value="<?= $convite['idConvite'] ?>">
-                                        <button type="submit" class="btn-aceitar">
-                                            Aceitar
-                                        </button>
+                                        <button type="submit" class="btn-aceitar">Aceitar</button>
                                     </form>
 
-                                    <form action="php/relacionamento/recusarConvite.php" method="POST">
+                                    <form action="php/usuario/relacionamento/recusarConvite.php" method="POST">
                                         <input type="hidden" name="idConvite" value="<?= $convite['idConvite'] ?>">
-                                        <button type="submit" class="btn-recusar">
-                                            Recusar
-                                        </button>
+                                        <button type="submit" class="btn-recusar">Recusar</button>
                                     </form>
 
                                 </div>

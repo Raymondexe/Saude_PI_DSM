@@ -1,107 +1,107 @@
 <?php
 session_start();
-include("../config/conexao.php");
+include("../../config/conexao.php");
 
 if (!isset($_SESSION['idUsuario'])) {
     die("Usuário não autenticado.");
 }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    die("Acesso inválido.");
-}
-
 $idUsuario = $_SESSION['idUsuario'];
-$idConvite = intval($_POST['idConvite'] ?? 0);
+$idConvite = $_POST['idConvite'] ?? null;
 
-if ($idConvite <= 0) {
+if (!$idConvite) {
     die("Convite inválido.");
 }
 
 /* =========================
-   1. BUSCAR CONVITE
+   BUSCA CONVITE
 ========================= */
-$stmt = $conn->prepare("
-    SELECT *
+$sqlConvite = $conn->prepare("
+    SELECT 
+        idConvite,
+        Responsavel_idResponsavel,
+        Usuario_idUsuario,
+        statusConvite
     FROM tblConvite
     WHERE idConvite = ?
     AND Usuario_idUsuario = ?
-    AND statusConvite = 'PENDENTE'
+    LIMIT 1
 ");
-$stmt->bind_param("ii", $idConvite, $idUsuario);
-$stmt->execute();
 
-$result = $stmt->get_result();
-$convite = $result->fetch_assoc();
+$sqlConvite->bind_param("ii", $idConvite, $idUsuario);
+$sqlConvite->execute();
+
+$resultConvite = $sqlConvite->get_result();
+$convite = $resultConvite->fetch_assoc();
 
 if (!$convite) {
-    die("Convite não encontrado ou já processado.");
+    die("Convite não encontrado.");
 }
 
-/* =========================
-   2. VALIDAR EXPIRAÇÃO
-========================= */
-$dataAtual = date("Y-m-d H:i:s");
-
-if ($convite['validadeConvite'] < $dataAtual) {
-    die("Este convite expirou.");
+if ($convite['statusConvite'] !== 'pendente') {
+    die("Convite já processado.");
 }
 
-/* =========================
-   3. IMPEDIR DUPLICIDADE
-========================= */
-$stmt = $conn->prepare("
-    SELECT *
-    FROM tblVerificaResponsavel
-    WHERE Usuario_idUsuario = ?
-");
-$stmt->bind_param("i", $idUsuario);
-$stmt->execute();
-
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    die("Você já possui vínculo.");
-}
+$idResponsavel = $convite['Responsavel_idResponsavel'];
 
 /* =========================
-   4. CRIAR VÍNCULO
+   ACEITA CONVITE
 ========================= */
-$stmt = $conn->prepare("
-    INSERT INTO tblVerificaResponsavel
-    (
-        Usuario_idUsuario,
-        Responsavel_idResponsavel
-    )
-    VALUES (?, ?)
-");
-
-$stmt->bind_param(
-    "ii",
-    $idUsuario,
-    $convite['Responsavel_idResponsavel']
-);
-
-if (!$stmt->execute()) {
-    die("Erro ao criar vínculo.");
-}
-
-/* =========================
-   5. ATUALIZAR STATUS
-========================= */
-$stmt = $conn->prepare("
+$sqlAceitar = $conn->prepare("
     UPDATE tblConvite
-    SET statusConvite = 'ACEITO'
+    SET statusConvite = 'aceito'
     WHERE idConvite = ?
 ");
-$stmt->bind_param("i", $idConvite);
 
-if (!$stmt->execute()) {
-    die("Erro ao atualizar convite.");
+$sqlAceitar->bind_param("i", $idConvite);
+
+if (!$sqlAceitar->execute()) {
+    die("Erro ao aceitar convite.");
 }
 
+
 /* =========================
-   6. REDIRECIONAR
+   DESCOBRE FAMÍLIA DO RESPONSÁVEL
 ========================= */
-header("Location: ../../perfil.php?sucesso=convite_aceito");
+$sqlFamilia = $conn->prepare("
+    SELECT fu.Familia_idFamilia
+    FROM tblFamiliaUsuario fu
+    INNER JOIN tblResponsavel r
+        ON r.Login_Usuario_idUsuario = fu.Usuario_idUsuario
+    WHERE r.idResponsavel = ?
+    AND fu.papel = 'responsavel'
+    LIMIT 1
+");
+
+$sqlFamilia->bind_param("i", $idResponsavel);
+$sqlFamilia->execute();
+
+$resultFamilia = $sqlFamilia->get_result();
+$familia = $resultFamilia->fetch_assoc();
+
+if (!$familia) {
+    die("Família não encontrada.");
+}
+
+$idFamilia = $familia['Familia_idFamilia'];
+
+
+/* =========================
+   ATIVA MEMBRO
+========================= */
+$sqlAtivar = $conn->prepare("
+    UPDATE tblFamiliaUsuario
+    SET statusMembro = 'ativo'
+    WHERE Usuario_idUsuario = ?
+    AND Familia_idFamilia = ?
+");
+
+$sqlAtivar->bind_param("ii", $idUsuario, $idFamilia);
+
+if (!$sqlAtivar->execute()) {
+    die("Erro ao ativar membro.");
+}
+
+header("Location: ../../../perfil.php");
 exit;
 ?>

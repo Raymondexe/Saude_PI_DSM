@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../config/conexao.php");
+include("../../config/conexao.php");
 
 if (!isset($_SESSION['idUsuario'])) {
     die("Usuário não autenticado.");
