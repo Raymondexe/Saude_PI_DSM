@@ -1,0 +1,943 @@
+
+
+/* =========================================================
+   TITULOS
+========================================================= */
+
+.conteudo h2,
+.grafico-container h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+/* =========================================================
+   STATUS BOXES
+========================================================= */
+
+.status-geral {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin: 25px 0 40px;
+}
+
+.status-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding: 18px;
+
+    border-radius: 22px;
+
+    color: white;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+
+    transition: .3s ease;
+}
+
+.status-box:hover {
+    transform: translateY(-6px);
+}
+
+.status-box span {
+    font-size: 2rem;
+}
+
+.status-box h3 {
+    margin-bottom: 4px;
+}
+
+.status-box.sucesso {
+    background: linear-gradient(135deg, #00b894, #00d2a0);
+}
+
+.status-box.alerta {
+    background: linear-gradient(135deg, #ff9800, #ffb703);
+}
+
+.status-box.info {
+    background: linear-gradient(135deg, #3a86ff, #00b4d8);
+}
+
+/* =========================================================
+   MONITORAMENTO
+========================================================= */
+
+.monitoramento-container {
+    background: rgba(255,255,255,.75);
+
+    backdrop-filter: blur(12px);
+
+    border-radius: 26px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.08);
+
+    transition: .3s ease;
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 24px;
+    margin: 30px 0;
+}
+
+.card {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 28px;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,0.72);
+
+    backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(255,255,255,.5);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.08),
+        inset 0 1px 1px rgba(255,255,255,.4);
+
+    transition: .35s ease;
+}
+
+.card::before {
+    content: '';
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    background: rgba(15,110,220,.08);
+
+    border-radius: 50%;
+
+    top: -70px;
+    right: -70px;
+
+    transition: .4s ease;
+}
+
+.card:hover::before {
+    transform: scale(1.3);
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+
+    box-shadow:
+        0 20px 40px rgba(15,110,220,.16);
+}
+
+.card h3 {
+    margin-bottom: 12px;
+    font-size: 1.15rem;
+    color: #0f6edc;
+    position: relative;
+    z-index: 2;
+}
+
+.card p {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #222;
+    position: relative;
+    z-index: 2;
+}
+
+/* CORES INDIVIDUAIS */
+
+#card-batimentos {
+    border-left: 6px solid #ff4d6d;
+}
+
+#card-glicemia {
+    border-left: 6px solid #ffb703;
+}
+
+#card-temperatura {
+    border-left: 6px solid #00b894;
+}
+
+#card-pressao {
+    border-left: 6px solid #3a86ff;
+}
+
+/* =========================================================
+   CALENDÁRIO
+========================================================= */
+
+.calendar-container {
+    width: 100%;
+    max-width: 550px;
+
+    background: rgba(255,255,255,.75);
+
+    backdrop-filter: blur(14px);
+
+    border-radius: 28px;
+
+    padding: 26px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.08);
+
+    text-align: center;
+
+    margin: 40px auto;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 18px;
+
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.calendar-header button {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: rgba(15,110,220,.08);
+
+    color: #0f6edc;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+.calendar-header button:hover {
+    background: #0f6edc;
+    color: white;
+    transform: scale(1.1);
+}
+
+.calendar-weekdays,
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.calendar-weekdays div {
+    font-weight: 700;
+    color: #666;
+}
+
+.calendar-days div {
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    position: relative;
+
+    transition: .25s ease;
+}
+
+.calendar-days div:hover {
+    background: linear-gradient(135deg,#0f6edc,#3a86ff);
+    color: white;
+
+    transform: scale(1.08);
+}
+
+.calendar-days .today {
+    background: linear-gradient(135deg,#00b894,#00d2a0);
+    color: white;
+}
+
+.calendar-days .has-record::after {
+    content: '';
+
+    width: 7px;
+    height: 7px;
+
+    background: #0f6edc;
+
+    border-radius: 50%;
+
+    position: absolute;
+
+    bottom: 6px;
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+.day-records {
+    margin-top: 22px;
+
+    background: rgba(15,110,220,.08);
+
+    border-left: 5px solid #0f6edc;
+
+    border-radius: 18px;
+
+    padding: 18px;
+
+    min-height: 80px;
+
+    color: #333;
+
+    font-size: .96rem;
+
+    text-align: left;
+
+    line-height: 1.8;
+}
+
+/* =========================================================
+   GRÁFICO
+========================================================= */
+
+.grafico-container {
+    background: rgba(255,255,255,.75);
+
+    backdrop-filter: blur(12px);
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.08);
+
+    padding: 32px;
+
+    margin: 50px auto;
+
+    max-width: 950px;
+
+    text-align: center;
+
+    transition: .3s ease;
+}
+
+.controle-grafico {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 26px;
+
+    flex-wrap: wrap;
+}
+
+.controle-grafico label {
+    font-weight: 700;
+    color: #333;
+}
+
+.controle-grafico select {
+    background: white;
+
+    border: none;
+
+    padding: 12px 18px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 14px rgba(0,0,0,.08);
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+.controle-grafico select:hover {
+    transform: translateY(-2px);
+}
+
+#graficoMonitoramento {
+    width: 100%;
+    max-width: 820px;
+    height: 420px;
+
+    margin: 0 auto;
+
+    animation: fadeIn .5s ease;
+}
+
+/* =========================================================
+   ANIMAÇÕES
+========================================================= */
+
+.card,
+.calendar-container,
+.grafico-container,
+.status-box {
+    animation: subir .5s ease;
+}
+
+@keyframes subir {
+
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes countUp {
+
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#batimentos.animate {
+    animation: countUp 0.5s ease forwards;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+    background: linear-gradient(135deg,#1565c0,#0f6edc);
+
+    color: #fff;
+
+    padding: 3rem 2rem 1rem;
+
+    margin-top: 60px;
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    gap: 2rem;
+}
+
+.footerLogo {
+    width: 150px;
+}
+
+.footerLinks ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footerLinks ul li {
+    margin-bottom: .6rem;
+}
+
+.footerLinks ul li a {
+    color: white;
+    text-decoration: none;
+    transition: .25s ease;
+}
+
+.footerLinks ul li a:hover {
+    opacity: .7;
+}
+
+.footerSocials img {
+    width: 24px;
+    transition: .25s ease;
+}
+
+.footerSocials img:hover {
+    transform: scale(1.15);
+}
+
+.footerBottom {
+    text-align: center;
+
+    margin-top: 2rem;
+
+    border-top: 1px solid rgba(255,255,255,.2);
+
+    padding-top: 1rem;
+
+    font-size: .85rem;
+}
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode {
+    background:
+        radial-gradient(circle at top left, rgba(15,110,220,0.12), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(0,200,150,0.12), transparent 25%),
+        #0f1115;
+
+    color: #eee;
+}
+
+body.dark-mode .TopoSite {
+    background: #14161b;
+}
+
+body.dark-mode .Navegacao li a,
+body.dark-mode .menu-toggle,
+body.dark-mode .config-menu button {
+    color: #fff;
+}
+
+body.dark-mode .card,
+body.dark-mode .grafico-container,
+body.dark-mode .calendar-container,
+body.dark-mode .monitoramento-container {
+    background: rgba(30,30,30,.75);
+
+    backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(255,255,255,.05);
+
+    color: #eee;
+}
+
+body.dark-mode .card h3,
+body.dark-mode .grafico-container h2 {
+    color: #fff;
+}
+
+body.dark-mode .card p,
+body.dark-mode .controle-grafico label,
+body.dark-mode .calendar-weekdays div,
+body.dark-mode .calendar-days div {
+    color: #ddd;
+}
+
+body.dark-mode .calendar-days div:hover {
+    background: #2a2a2a;
+}
+
+body.dark-mode .day-records {
+    background: rgba(255,255,255,.04);
+
+    border-left: 5px solid #2185f8;
+
+    color: #ddd;
+}
+
+body.dark-mode .controle-grafico select {
+    background: #2a2a2a;
+    color: white;
+}
+
+body.dark-mode .calendar-header button {
+    background: rgba(255,255,255,.06);
+    color: #2185f8;
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .status-geral {
+        grid-template-columns: 1fr;
+    }
+
+    .calendar-container {
+        padding: 18px;
+    }
+
+    .grafico-container {
+        padding: 20px;
+    }
+
+    .card p {
+        font-size: 1.6rem;
+    }
+
+    .conteudo h2,
+    .grafico-container h2 {
+        font-size: 1.6rem;
+    }
+
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 1.2rem;
+        top: 1rem;
+    }
+
+    .Navegacao {
+        position: absolute;
+        top: 60px;
+        right: 0;
+
+        width: 220px;
+
+        background: white;
+
+        border-radius: 0 0 16px 16px;
+
+        display: none;
+
+        flex-direction: column;
+
+        padding: 1rem;
+
+        box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    }
+
+    .Navegacao.ativo {
+        display: flex;
+        animation: fadeIn .3s ease;
+    }
+
+    .Navegacao ul {
+        flex-direction: column;
+        gap: .8rem;
+    }
+
+    body.dark-mode .Navegacao {
+        background: #1e1e1e;
+    }
+}
+
+
+/* ===== HEADER DO MONITORAMENTO ===== */
+
+.monitoramento-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.monitoramento-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #0f6edc, #4aa3ff);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(15, 110, 220, 0.25);
+    letter-spacing: 0.3px;
+}
+
+.monitoramento-subtitulo {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: #5a6475;
+}
+
+.monitoramento-alerta {
+    margin: 22px auto 0;
+    max-width: 760px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: linear-gradient(135deg, #eef5ff, #f6fbff);
+    border: 1px solid rgba(15, 110, 220, 0.15);
+    border-left: 5px solid #0f6edc;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 4px 10px rgba(15, 110, 220, 0.08);
+}
+
+.monitoramento-alerta span {
+    font-size: 1.4rem;
+}
+
+.monitoramento-alerta p {
+    margin: 0;
+    text-align: left;
+    color: #445066;
+    line-height: 1.5;
+    font-size: 0.96rem;
+}
+
+/* ===== MODO ESCURO ===== */
+
+body.dark-mode .monitoramento-subtitulo {
+    color: #b9c2d0;
+}
+
+body.dark-mode .monitoramento-alerta {
+    background: linear-gradient(135deg, #1f2937, #17202b);
+    border: 1px solid #2c3b4d;
+    border-left: 5px solid #4aa3ff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .monitoramento-alerta p {
+    color: #d3d9e3;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+@media (max-width: 768px) {
+
+    .monitoramento-subtitulo {
+        font-size: 0.95rem;
+        padding: 0 8px;
+    }
+
+    .monitoramento-alerta {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .monitoramento-alerta span {
+        font-size: 1.2rem;
+    }
+}
+
+
+.acoes-monitoramento{
+    display:flex;
+    justify-content:center;
+    margin-top:25px;
+}
+
+.btn-pdf{
+    background: linear-gradient(135deg,#1565c0,#0d47a1);
+    color:#fff;
+    padding:14px 26px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+    box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+
+.btn-pdf:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 22px rgba(0,0,0,.22);
+}
+
+
+.notificacao-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 12px;
+}
+
+.Notificacao {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transition: 0.3s ease;
+}
+
+.Notificacao:hover {
+    transform: scale(1.08);
+}
+
+
+.notificacao-accordion {
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+
+.notificacao-accordion summary {
+    padding: 18px 22px;
+    background: #f8fafc;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notificacao-accordion summary::-webkit-details-marker {
+    display: none;
+}
+
+.badge {
+    min-width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    background: #2563eb;
+    color: white;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    padding: 0 10px;
+}
+
+.notificacao-lista {
+    padding: 18px;
+    background: white;
+}
+
+.convite-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    margin-bottom: 14px;
+    transition: 0.25s;
+}
+
+.convite-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+.convite-info strong {
+    display: block;
+    font-size: 15px;
+    color: #111827;
+}
+
+.convite-info p {
+    margin: 6px 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.convite-info small {
+    color: #9ca3af;
+}
+
+.convite-acoes {
+    display: flex;
+    gap: 10px;
+}
+
+.convite-acoes form {
+    margin: 0;
+}
+
+.btn-aceitar,
+.btn-recusar {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-aceitar {
+    background: #16a34a;
+    color: white;
+}
+
+.btn-aceitar:hover {
+    background: #15803d;
+}
+
+.btn-recusar {
+    background: #dc2626;
+    color: white;
+}
+
+.btn-recusar:hover {
+    background: #b91c1c;
+}
+
+.empty-box {
+    padding: 20px;
+    text-align: center;
+    color: #6b7280;
+}
+
+.modal-notificacoes {
+    display: none;
+}
+
+
+.notificacao-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 12px;
+}
+
+.Notificacao {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transition: 0.3s ease;
+}
+
+.Notificacao:hover {
+    transform: scale(1.08);
+}

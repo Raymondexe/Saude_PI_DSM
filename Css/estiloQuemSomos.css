@@ -1,0 +1,1075 @@
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+
+/* ==== Dark Mode ==== */
+body.dark-mode .TopoSite {
+    background: #1b1b1b;
+}
+
+body.dark-mode .menu-toggle {
+    color: #fff;
+    /* Deixa o texto/branco */
+}
+
+/* Cards padrão */
+.grid-cards .card h2 {
+    color: #000;
+}
+
+.grid-cards .card p,
+.grid-cards .card a {
+    color: #333;
+}
+
+/* Modo escuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #eee;
+}
+
+body.dark-mode .grid-cards .card {
+    background-color: #1e1e1e;
+    border: 2px solid #333;
+}
+
+body.dark-mode .grid-cards .card h2 {
+    color: #fff;
+}
+
+body.dark-mode .grid-cards .card p,
+body.dark-mode .grid-cards .card a {
+    color: #ccc;
+}
+
+body,
+.grid-cards .card {
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .TopoSite {
+    background: #1e1e1e;
+    box-shadow: none;
+}
+
+body.dark-mode .Navegacao li a {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu button {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu .dropdown {
+    background: #1e1e1e;
+}
+
+body.dark-mode .config-menu .dropdown button {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu .dropdown button:hover {
+    background: #2a2a2a;
+    color: #2185f8;
+}
+
+body.dark-mode .ContainerNoticias {
+    background-color: #121212;
+    color: #eee;
+}
+
+body.dark-mode .ContainerNoticias .card-item {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+}
+
+body.dark-mode .ContainerNoticias .card-item h2.card-title {
+    color: #fff;
+}
+
+body.dark-mode .ContainerNoticias .card-item p,
+body.dark-mode .ContainerNoticias .card-item .badge {
+    color: #ccc;
+}
+
+body.dark-mode .ContainerNoticias .card-button {
+    color: #eee;
+}
+
+/* Transição suave */
+body.dark-mode .ContainerNoticias,
+body.dark-mode .ContainerNoticias .card-item {
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .paragrafoS {
+    background-color: rgba(135, 233, 159, 0.6);
+}
+
+/* ===== Seção de boas-vindas DARK MODE ===== */
+body.dark-mode .welcome-section {
+    background: #121212;
+    /* fundo escuro suave */
+    color: #eee;
+}
+
+/* Wrapper flexível */
+body.dark-mode .welcome-wrapper {
+    z-index: 2;
+    position: relative;
+}
+
+/* Texto principal */
+body.dark-mode .welcome-text h1 {
+    color: #fff;
+}
+
+body.dark-mode .welcome-text h1 span {
+    color: #4b79a1;
+    /* mantém destaque elegante */
+}
+
+body.dark-mode .welcome-text p {
+    color: #ccc;
+}
+
+/* Ilustração animada */
+body.dark-mode .welcome-illustration img {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Ondas suaves de fundo */
+body.dark-mode .wave {
+    background: rgba(75, 121, 161, 0.1);
+    /* aumenta contraste no dark mode */
+}
+
+body.dark-mode .wave1 {
+    top: -50%;
+    left: -50%;
+}
+
+body.dark-mode .wave2 {
+    top: -60%;
+    left: -40%;
+    animation-duration: 20s;
+}
+
+body.dark-mode .wave3 {
+    top: -70%;
+    left: -30%;
+    animation-duration: 25s;
+}
+
+/* ==== Dark Mode (PADRONIZADO) ==== */
+
+body.dark-mode {
+    background: #121212;
+    color: #f5f5f5;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Header */
+body.dark-mode .TopoSite {
+    background: #1b1b1b;
+    box-shadow: none;
+
+}
+
+body.dark-mode .Navegacao li a {
+    color: #f5f5f5;
+}
+
+body.dark-mode .menu-toggle {
+    color: #fff;
+}
+
+body.dark-mode .config-menu button {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu .dropdown {
+    background: #1e1e1e;
+}
+
+body.dark-mode .config-menu .dropdown button {
+    color: #f5f5f5;
+}
+
+body.dark-mode .config-menu .dropdown button:hover {
+    background: #2a2a2a;
+    color: #2185f8;
+}
+
+/* Cards Gerais */
+body.dark-mode .grid-cards .card {
+    background: #1e1e1e;
+    border: 2px solid #333;
+}
+
+body.dark-mode .grid-cards .card h2 {
+    color: #fff;
+}
+
+body.dark-mode .grid-cards .card p,
+body.dark-mode .grid-cards .card a {
+    color: #ccc;
+}
+
+/* Notícias */
+body.dark-mode .ContainerNoticias {
+    background-color: #121212;
+    color: #f5f5f5;
+}
+
+body.dark-mode .ContainerNoticias .card-item {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+}
+
+body.dark-mode .ContainerNoticias .card-item h2.card-title {
+    color: #fff;
+}
+
+body.dark-mode .ContainerNoticias .card-item p,
+body.dark-mode .ContainerNoticias .card-item .badge {
+    color: #ccc;
+}
+
+body.dark-mode .ContainerNoticias .card-button {
+    color: #eee;
+}
+
+/* Seção de boas-vindas */
+body.dark-mode .welcome-section {
+    background: #121212;
+    color: #f5f5f5;
+}
+
+body.dark-mode .welcome-text h1 {
+    color: #fff;
+}
+
+body.dark-mode .welcome-text h1 span {
+    color: #4b79a1;
+}
+
+body.dark-mode .welcome-text p {
+    color: #ccc;
+}
+
+body.dark-mode .welcome-illustration img {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .wave {
+    background: rgba(75, 121, 161, 0.1);
+}
+
+/* Quem Somos */
+body.dark-mode .card {
+    background: #1e1e1e;
+    border: 1px solid #333;
+}
+
+body.dark-mode .role,
+body.dark-mode .bio,
+body.dark-mode .tag,
+body.dark-mode .links a {
+    color: #ccc;
+}
+
+body.dark-mode .tag {
+    background: #2a2a2a;
+}
+
+body.dark-mode .links a {
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+/* Footer */
+body.dark-mode .footer {
+
+    color: #f5f5f5;
+}
+
+body.dark-mode .footerLinks ul li a {
+    color: #ddd;
+}
+
+body.dark-mode .footerLinks ul li a:hover {
+    color: #888;
+}
+
+body.dark-mode .footerSocials img:hover {
+    filter: brightness(0.7);
+}
+
+/* =========================
+   QUEM SOMOS - NOVO DESIGN
+========================= */
+
+.section {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 40px 3%;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.header h2 {
+    font-size: clamp(2rem, 3vw, 3rem);
+    color: #1565c0;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.header p {
+    max-width: 700px;
+    line-height: 1.7;
+    color: #555;
+    font-size: 1rem;
+}
+
+.header small {
+    background: rgba(21, 101, 192, 0.1);
+    color: #1565c0;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* GRID HORIZONTAL */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(230px, 1fr));
+    gap: 18px;
+    align-items: stretch;
+}
+
+/* CARD */
+.card {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 22px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    border: 1px solid rgba(0, 0, 0, 0.05);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.05);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border .25s ease;
+
+    position: relative;
+    overflow: hidden;
+
+    min-height: 100%;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background: linear-gradient(90deg,
+            #1565c0,
+            #42a5f5);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.12);
+
+    border-color: rgba(21, 101, 192, 0.2);
+}
+
+/* AVATAR */
+.avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 14px;
+
+    border: 4px solid rgba(21, 101, 192, 0.15);
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* NOME */
+.name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+/* CARGO */
+.role {
+    color: #1565c0;
+    font-size: .9rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* BIO */
+.bio {
+    font-size: .9rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 16px;
+    min-height: 45px;
+}
+
+/* TAGS */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.tag {
+    background: #eef5ff;
+    color: #1565c0;
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 700;
+    transition: .2s ease;
+}
+
+.tag:hover {
+    background: #1565c0;
+    color: #fff;
+}
+
+/* LINKS */
+.links {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.links a {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f7fb;
+    transition: transform .2s ease, background .2s ease;
+}
+
+.links a:hover {
+    transform: scale(1.08);
+    background: #4b8ad1;
+    color: #fff;
+}
+
+.links a svg {
+    width: 20px;
+    height: 20px;
+}
+
+.links a img {
+    width: 20px;
+    height: 20px;
+}
+
+/* =========================
+   BLOCO EXTRA INSTITUCIONAL
+========================= */
+
+/* =========================
+   BLOCO INSTITUCIONAL
+========================= */
+
+.info-projeto {
+    width: min(95vw, 1100px);
+    margin: 4vh auto 0 auto;
+    padding: clamp(20px, 2vw, 34px);
+    border-radius: 22px;
+    background: linear-gradient(135deg,#1565c0,#1e88e5);
+    color: #fff;
+    box-shadow:0 1.5vh 3vh rgba(21, 101, 192, 0.20);
+    overflow: hidden;
+}
+
+.info-projeto h3 {
+    font-size: clamp(1.5rem, 2vw, 2.2rem);
+    margin-bottom: 1.5vh;
+    line-height: 1.2;
+}
+
+.info-projeto p {
+    font-size: clamp(.92rem, 1vw, 1rem);
+    line-height: 1.8;
+    opacity: .96;
+    max-width: 100%;
+}
+
+/* GRID */
+
+.info-grid {
+    margin-top: 3vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5vw;
+}
+
+/* CARDS */
+
+.info-card {
+    background: rgba(255, 255, 255, 0.12);
+    border:1px solid rgba(255, 255, 255, 0.18);
+    padding: clamp(16px, 1.5vw, 22px);
+    border-radius: 18px;
+    backdrop-filter: blur(6px);
+    min-height: 18vh;
+    transition:transform .25s ease, background .25s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+    background:rgba(255, 255, 255, 0.18);
+}
+
+.info-card h4 {
+    font-size: clamp(1rem, 1.2vw, 1.15rem);
+    margin-bottom: 1vh;
+}
+
+.info-card p {
+    font-size: clamp(.85rem, .95vw, .96rem);
+    line-height: 1.7;
+}
+
+/* DIREITOS */
+
+.direitos {
+    width: min(90vw, 1000px);
+    margin: 3vh auto 0 auto;
+    text-align: center;
+    color: #777;
+    font-size: clamp(.8rem, .9vw, .92rem);
+    line-height: 1.8;
+    padding-bottom: 2vh;
+}
+
+/* DARK MODE */
+
+body.dark-mode .direitos {
+    color: #bbb;
+}
+
+body.dark-mode .info-card {
+
+    background:
+        rgba(0, 0, 0, 0.18);
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .info-projeto {
+
+        width: 94vw;
+
+        padding: 20px;
+    }
+
+    .info-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .info-card {
+
+        min-height: auto;
+    }
+}
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark-mode .card {
+    background: #1e1e1e;
+    border-color: #333;
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .name {
+    color: #fff;
+}
+
+body.dark-mode .bio {
+    color: #ccc;
+}
+
+body.dark-mode .tag {
+    background: #2b2b2b;
+    color: #90caf9;
+}
+
+body.dark-mode .tag:hover {
+    background: #1565c0;
+    color: #fff;
+}
+
+body.dark-mode .links a {
+    background: #2a2a2a;
+}
+
+body.dark-mode .header p,
+body.dark-mode .direitos {
+    color: #bbb;
+}
+
+body.dark-mode .info-card {
+    background: rgba(0, 0, 0, 0.18);
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 1600px) {
+    .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1100px) {
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+
+    .section {
+        padding: 30px 5%;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        flex-direction: column;
+    }
+
+    .info-projeto {
+        padding: 28px;
+    }
+
+}
+
+
+@media (max-width: 1000px) {
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header h2 {
+        font-size: 24px;
+    }
+
+    .header p {
+        font-size: 14px;
+    }
+}
+
+
+/* ==== Config Menu ==== */
+.config-menu,
+.perfil-menu {
+    position: relative;
+}
+
+.config-menu button,
+.perfil-menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s;
+}
+
+.config-menu button:hover,
+.perfil-menu button:hover {
+    color: #2563eb;
+}
+
+/* Dropdown configuração */
+.config-menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 130%;
+    right: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.config-menu .dropdown button {
+    padding: 10px 15px;
+    text-align: left;
+    width: 100%;
+    font-size: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.config-menu .dropdown button:hover {
+    background: #eef2ff;
+    font-weight: bold;
+}
+
+/* Dropdown perfil */
+.foto-perfil {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #2563eb;
+    transition: transform 0.2s;
+}
+
+.foto-perfil:hover {
+    transform: scale(1.1);
+}
+
+.nome-perfil {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+}
+
+.dropdown-perfil {
+    display: none;
+    position: absolute;
+    top: 130%;
+    right: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.dropdown-perfil a {
+    display: block;
+    text-decoration: none;
+    color: #2563eb;
+    padding: 10px 15px;
+    font-size: 14px;
+    transition: background 0.2s, font-weight 0.2s;
+}
+
+.dropdown-perfil a:hover {
+    background: #eef2ff;
+    font-weight: bold;
+}
+
+/* Mostrar dropdowns ao clicar */
+#config-btn:focus+.dropdown,
+#config-btn:active+.dropdown,
+#perfil-btn:focus+.dropdown-perfil,
+#perfil-btn:active+.dropdown-perfil {
+    display: flex;
+    flex-direction: column;
+}
+
+
+body.dark-mode .dropdown-perfil {
+    background: #1e1e1e;
+    border: 1px solid #4b79a1;
+    color: #ffffff;
+}
+
+body.dark-mode .dropdown-perfil a {
+    color: #ccc;
+}
+
+body.dark-mode .dropdown-perfil a:hover {
+    background-color: #4b79a1;
+    color: #ffffff;
+}
+
+body.dark-mode .nome-perfil {
+    color: #ffffff;
+}
+
+/* ==== START Footer ==== */
+
+.footer {
+    background-color: #1565c0;
+    color: #fff;
+    padding: 3rem 2rem 1rem 2rem;
+    font-family: var(--fonte);
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    gap: 2rem;
+}
+
+.footerLogo {
+    width: 150px;
+    margin-bottom: 0.5rem;
+}
+
+.footerBrand span {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.footerContact h4 {
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+}
+
+.footerLinks ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footerLinks ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footerLinks ul li a {
+    color: #fffdfd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footerLinks ul li a:hover {
+    color: #4e4848;
+}
+
+.footerContato p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.footerSocials a {
+    display: inline-block;
+    margin-right: 0.5rem;
+
+}
+
+.footerSocials img {
+    width: 24px;
+    transition: transform 0.3s;
+}
+
+.footerSocials img:hover {
+    transform: scale(1.2);
+}
+
+.footerBottom {
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 1rem;
+    font-size: 0.85rem;
+}
+
+/* ==== END Footer ==== */
+
+
+/* ==== Responsividade ==== */
+
+
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 1.2rem;
+        top: 1rem;
+    }
+
+    .Navegacao {
+        position: absolute;
+        top: 60px;
+        /* fica logo abaixo do header */
+        right: 0;
+        background: white;
+        box-shadow: var(--sombra);
+        border-radius: 0 0 12px 12px;
+        width: 200px;
+        display: none;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .Navegacao.ativo {
+        display: flex;
+        animation: menuSlide 0.3s ease forwards;
+    }
+
+    .Navegacao ul {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .Navegacao a {
+        font-size: 1rem;
+        text-align: left;
+        padding: 8px 0;
+        display: block;
+    }
+
+    @keyframes menuSlide {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    body.dark-mode .config-menu .dropdown {
+        width: 100%;
+    }
+
+    body.dark-mode .Navegacao {
+        flex-direction: column;
+        background-color: #1e1e1e;
+    }
+
+    body.dark-mode .grid-cards {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    body.dark-mode .grid-cards .card {
+        width: 100%;
+    }
+
+    body.dark-mode .ContainerNoticias {
+        padding: 1rem;
+    }
+}
+.dark-mode .info-projeto {
+    width: min(95vw, 1100px);
+    margin: 4vh auto 0 auto;
+    padding: clamp(20px, 2vw, 34px);
+    border-radius: 22px;
+
+    background: linear-gradient(135deg, #1565c0, #1e293b);
+
+    color: #f8fafc;
+
+    box-shadow: 0 1.5vh 3vh rgba(0, 0, 0, 0.35);
+
+    overflow: hidden;
+}
+
+body.dark-mode {
+    background:
+        radial-gradient(circle at top left, rgba(87, 126, 170, 0.12), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(15,110,220,0.12), transparent 25%),
+        #0f1115;
+    color: #eee;
+}
+
+.dark-mode .header h2 {
+    font-size: clamp(2rem, 3vw, 3rem);
+    color: #1565c0;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.dark-mode .card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background: linear-gradient(90deg,
+            #1565c0,
+            #1e293b);
+}

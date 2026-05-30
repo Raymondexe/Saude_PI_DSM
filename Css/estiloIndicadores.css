@@ -1,0 +1,986 @@
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(180deg,#4a6cf7,#7c92ff);
+    border-radius:999px;
+}
+
+/* =========================================================
+   REGISTRO
+========================================================= */
+
+.registroIndicador {
+    padding: 40px 20px 20px;
+}
+
+.registroIndicador::before{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    background:rgba(74,108,247,0.12);
+    border-radius:50%;
+    filter:blur(100px);
+    top:-120px;
+    left:-120px;
+}
+
+.registroIndicador .container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 28px;
+    padding: clamp(20px, 4vw, 50px);
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+}
+
+/* =========================================================
+   LEFT SIDE
+========================================================= */
+
+.leftSide {
+    flex: 1 1 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    min-width: 280px;
+}
+
+.leftSide h1 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    font-weight: 800;
+    color: #111;
+    max-width: 550px;
+}
+
+.descricaoIndicador {
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    line-height: 1.8;
+    color: #5c5c5c;
+    max-width: 600px;
+}
+
+.leftImg {
+    width: 100%;
+}
+
+.leftImg img {
+    width: 100%;
+    max-width: 620px;
+    height: auto;
+    display: block;
+    border-radius: 24px;
+    object-fit: cover;
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.12);
+    transition: 0.35s ease;
+}
+
+.leftImg img:hover{
+    transform:
+        translateY(-5px)
+        scale(1.01);
+}
+
+/* =========================================================
+   RIGHT FORM
+========================================================= */
+
+.rightForms {
+    flex: 1 1 500px;
+    min-width: 280px;
+}
+
+#pressaoForm{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.inputs-row{
+    display:flex;
+    gap:18px;
+}
+
+.input-group{
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.input-group label{
+    font-size:14px;
+    font-weight:700;
+
+    margin-bottom:8px;
+
+    color:#374151;
+}
+
+.input-group input,
+.input-group textarea{
+    padding:16px;
+
+    border-radius:16px;
+
+    border:1px solid #dfe7ff;
+
+    background:rgba(255,255,255,0.85);
+
+    color:#1f2937;
+
+    font-size:15px;
+
+    transition:0.25s ease;
+}
+
+.input-group textarea{
+    resize:vertical;
+    min-height:120px;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder{
+    color:#9ca3af;
+}
+
+.input-group input:focus,
+.input-group textarea:focus{
+    outline:none;
+
+    border-color:#4a6cf7;
+
+    background:white;
+
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 0 0 5px rgba(74,108,247,0.12),
+        0 10px 20px rgba(74,108,247,0.08);
+}
+
+/* =========================================================
+   BOTÃO
+========================================================= */
+
+#salvarPressao{
+    border:none;
+    padding:17px;
+    border-radius:18px;
+    background:
+        linear-gradient(135deg,#4a6cf7,#6f8cff);
+    color:white;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    transition:0.25s ease;
+    box-shadow:
+        0 10px 25px rgba(74,108,247,0.28);
+}
+
+#salvarPressao:hover{
+    transform:
+        translateY(-3px)
+        scale(1.01);
+
+    box-shadow:
+        0 18px 30px rgba(74,108,247,0.35);
+}
+
+#salvarPressao:active{
+    transform:scale(0.98);
+}
+
+/* =========================================================
+   HELP SECTION
+========================================================= */
+
+.help {
+    padding: 30px 20px 60px;
+}
+
+.help-container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.help h2{
+    text-align:center;
+
+    font-size:38px;
+    font-weight:800;
+
+    margin-bottom:15px;
+
+    color:#111827;
+}
+
+.help-container > p{
+    text-align:center;
+
+    color:#6b7280;
+
+    font-size:17px;
+
+    margin-bottom:50px;
+}
+
+.help-cards{
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(280px,1fr));
+
+    gap:25px;
+}
+
+/* =========================================================
+   HELP CARD
+========================================================= */
+
+.help-card{
+    position:relative;
+    padding:30px;
+    border-radius:24px;
+    overflow:hidden;
+    transition:0.35s ease;
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.5);
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.08);
+}
+
+.help-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:0.08;
+    transition:0.3s;
+}
+
+.help-card:hover{
+    transform:
+        translateY(-8px)
+        scale(1.01);
+    box-shadow:
+        0 18px 40px rgba(0,0,0,0.12);
+}
+
+.help-card:hover::before{
+    opacity:0.16;
+}
+
+.help-card h3{
+    font-size:24px;
+    font-weight:800;
+
+    margin-bottom:15px;
+}
+
+.help-card p{
+    font-size:15px;
+    line-height:1.7;
+
+    color:#4b5563;
+}
+
+/* =========================================================
+   CARD COLORS
+========================================================= */
+
+.help-card.green{
+    border-top:5px solid #22c55e;
+}
+
+.help-card.green::before{
+    background:
+        linear-gradient(135deg,#22c55e,transparent);
+}
+
+.help-card.orange{
+    border-top:5px solid #f59e0b;
+}
+
+.help-card.orange::before{
+    background:
+        linear-gradient(135deg,#f59e0b,transparent);
+}
+
+.help-card.red{
+    border-top:5px solid #ef4444;
+}
+
+.help-card.red::before{
+    background:
+        linear-gradient(135deg,#ef4444,transparent);
+}
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode{
+    background:
+        radial-gradient(circle at top left,rgba(255,255,255,0.03) 0%,transparent 25%),
+        radial-gradient(circle at bottom right,rgba(255,255,255,0.02) 0%,transparent 25%),
+        #0a0a0a;
+
+    color:#f5f5f5;
+}
+
+body.dark-mode .registroIndicador .container,
+body.dark-mode .help-card{
+    background:rgba(18,18,18,0.9);
+
+    border:1px solid #222;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,0.55);
+}
+
+body.dark-mode .leftSide h1,
+body.dark-mode .help h2,
+body.dark-mode .help-card h3{
+    color:white;
+}
+
+body.dark-mode .descricaoIndicador,
+body.dark-mode .help-card p,
+body.dark-mode .help-container > p{
+    color:#b8b8b8;
+}
+
+body.dark-mode .input-group label{
+    color:#d1d5db;
+}
+
+body.dark-mode .input-group input,
+body.dark-mode .input-group textarea{
+    background:#111111;
+
+    border:1px solid #2a2a2a;
+
+    color:white;
+}
+
+body.dark-mode .input-group input::placeholder,
+body.dark-mode .input-group textarea::placeholder{
+    color:#777;
+}
+
+body.dark-mode .input-group input:focus,
+body.dark-mode .input-group textarea:focus{
+    background:#151515;
+
+    border-color:#555;
+
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,0.04),
+        0 10px 20px rgba(0,0,0,0.5);
+}
+
+body.dark-mode #salvarPressao{
+    background:
+        linear-gradient(135deg,#1f1f1f,#2d2d2d);
+
+    border:1px solid #3a3a3a;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.45);
+}
+
+body.dark-mode #salvarPressao:hover{
+    background:
+        linear-gradient(135deg,#2a2a2a,#3a3a3a);
+
+    box-shadow:
+        0 18px 35px rgba(0,0,0,0.55);
+}
+
+body.dark-mode .TopoSite{
+    background:rgba(10,10,10,0.95);
+
+    border-bottom:1px solid #1f1f1f;
+}
+
+body.dark-mode .Navegacao li a,
+body.dark-mode .dropdown button,
+body.dark-mode .dropdown-perfil a{
+    color:#f5f5f5;
+}
+
+body.dark-mode .dropdown,
+body.dark-mode .dropdown-perfil{
+    background:#121212;
+
+    border:1px solid #262626;
+}
+
+body.dark-mode .dropdown button:hover,
+body.dark-mode .dropdown-perfil a:hover{
+    background:#1e1e1e;
+}
+
+body.dark-mode .footer{
+    background:#050505;
+
+    border-top:1px solid #1a1a1a;
+}
+
+body.dark-mode .footerBottom{
+    border-top:1px solid #1f1f1f;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb{
+    background:
+        linear-gradient(180deg,#2b2b2b,#3b3b3b);
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1024px) {
+
+    .registroIndicador .container {
+
+        gap: 30px;
+    }
+
+    .leftSide,
+    .rightForms {
+
+        flex: 1 1 100%;
+    }
+
+    .leftSide {
+
+        text-align: center;
+        align-items: center;
+    }
+
+    .leftImg {
+
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .registroIndicador {
+
+        padding: 25px 15px;
+    }
+
+    .registroIndicador .container {
+
+        padding: 25px;
+        border-radius: 22px;
+    }
+
+    .inputs-row {
+
+        flex-direction: column;
+    }
+
+    .help {
+
+        padding-top: 10px;
+    }
+
+    .help h2 {
+
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .registroIndicador .container {
+
+        padding: 18px;
+    }
+
+    .leftSide h1 {
+
+        font-size: 1.8rem;
+    }
+
+    .descricaoIndicador {
+
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .input-group input,
+    .input-group textarea {
+
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    #salvarPressao {
+
+        padding: 15px;
+    }
+}
+
+/* CSS GLICEMIA */
+
+/* =========================================================
+   SELECT GLICEMIA
+========================================================= */
+
+
+#salvarGlicemia{
+    border:none;
+    padding:17px;
+    border-radius:18px;
+    background:
+        linear-gradient(135deg,#4a6cf7,#6f8cff);
+    color:white;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    transition:0.25s ease;
+    box-shadow:
+        0 10px 25px rgba(74,108,247,0.28);
+}
+
+#salvarGlicemia:hover{
+    transform:
+        translateY(-3px)
+        scale(1.01);
+
+    box-shadow:
+        0 18px 30px rgba(74,108,247,0.35);
+}
+
+#salvarGlicemia:active{
+    transform:scale(0.98);
+}
+
+.input-group select{
+    padding:16px;
+
+    border-radius:16px;
+
+    border:1px solid #dfe7ff;
+
+    background:rgba(255,255,255,0.85);
+
+    color:#1f2937;
+
+    font-size:15px;
+
+    transition:0.25s ease;
+
+    cursor:pointer;
+}
+
+.input-group select:focus{
+    outline:none;
+
+    border-color:#4a6cf7;
+
+    background:white;
+
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 0 0 5px rgba(74,108,247,0.12),
+        0 10px 20px rgba(74,108,247,0.08);
+}
+
+.input-group option{
+    color:#111827;
+    background:white;
+}
+
+/* =========================================================
+   DARK MODE SELECT
+========================================================= */
+
+body.dark-mode .input-group select{
+    background:#111111;
+
+    border:1px solid #2a2a2a;
+
+    color:white;
+}
+
+body.dark-mode .input-group select:focus{
+    background:#151515;
+
+    border-color:#555;
+
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,0.04),
+        0 10px 20px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .input-group option{
+    background:#111111;
+    color:white;
+}
+
+
+
+
+/* =========================================================
+   BATIMENTOS CARDIACOS
+========================================================= */
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.input-group select{
+    padding:16px;
+
+    border-radius:16px;
+
+    border:1px solid #dfe7ff;
+
+    background:rgba(255,255,255,0.85);
+
+    color:#1f2937;
+
+    font-size:15px;
+
+    transition:0.25s ease;
+
+    appearance:none;
+    cursor:pointer;
+}
+
+.input-group select:focus{
+    outline:none;
+
+    border-color:#4a6cf7;
+
+    background:white;
+
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 0 0 5px rgba(74,108,247,0.12),
+        0 10px 20px rgba(74,108,247,0.08);
+}
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+#salvarBatimentos{
+    border:none;
+    padding:17px;
+    border-radius:18px;
+    background:
+        linear-gradient(135deg,#4a6cf7,#6f8cff);
+    color:white;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    transition:0.25s ease;
+    box-shadow:
+        0 10px 25px rgba(74,108,247,0.28);
+}
+
+#salvarTemperatura{
+    border:none;
+    padding:17px;
+    border-radius:18px;
+    background:
+        linear-gradient(135deg,#4a6cf7,#6f8cff);
+    color:white;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    transition:0.25s ease;
+    box-shadow:
+        0 10px 25px rgba(74,108,247,0.28);
+}
+
+.timer-group{
+    background:rgba(255,255,255,0.6);
+
+    border:1px solid rgba(255,255,255,0.5);
+
+    border-radius:22px;
+
+    padding:22px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.05);
+}
+
+.timer-group p{
+    margin-top:5px;
+    margin-bottom:18px;
+
+    font-size:14px;
+    line-height:1.6;
+
+    color:#6b7280;
+}
+
+.timer-group a{
+    color:#4a6cf7;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.timer-group a:hover{
+    text-decoration:underline;
+}
+
+.timer-controls{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:14px;
+}
+
+.timer-controls button{
+    border:none;
+
+    padding:14px 18px;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(135deg,#4a6cf7,#6f8cff);
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:0.25s ease;
+
+    box-shadow:
+        0 10px 20px rgba(74,108,247,0.22);
+}
+
+.timer-controls button:hover{
+    transform:
+        translateY(-2px)
+        scale(1.02);
+
+    box-shadow:
+        0 14px 25px rgba(74,108,247,0.3);
+}
+
+.timer-controls button:active{
+    transform:scale(0.98);
+}
+
+#timerDisplay{
+    min-width:90px;
+
+    text-align:center;
+
+    padding:12px 18px;
+
+    border-radius:14px;
+
+    background:#f3f4f6;
+
+    font-size:24px;
+    font-weight:800;
+
+    color:#111827;
+
+    box-shadow:
+        inset 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* =========================================================
+   VIDEO SECTION
+========================================================= */
+
+.teaching{
+    padding:20px 20px 80px;
+}
+
+.video-container{
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(320px,1fr));
+
+    gap:30px;
+}
+
+.video-card{
+    background:rgba(255,255,255,0.75);
+
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,0.5);
+
+    border-radius:24px;
+
+    padding:20px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.08);
+
+    transition:0.3s ease;
+}
+
+.video-card:hover{
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,0.12);
+}
+
+.video-card p{
+    font-size:20px;
+    font-weight:800;
+
+    margin-bottom:18px;
+
+    color:#111827;
+}
+
+.video-card iframe{
+    width:100%;
+    height:320px;
+
+    border:none;
+
+    border-radius:18px;
+}
+
+/* =========================================================
+   DARK MODE EXTRA
+========================================================= */
+
+body.dark-mode .input-group select{
+    background:#111111;
+
+    border:1px solid #2a2a2a;
+
+    color:white;
+}
+
+body.dark-mode .input-group select:focus{
+    background:#151515;
+
+    border-color:#555;
+
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,0.04),
+        0 10px 20px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .timer-group,
+body.dark-mode .video-card{
+    background:rgba(18,18,18,0.9);
+
+    border:1px solid #222;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,0.55);
+}
+
+body.dark-mode .timer-group p,
+body.dark-mode .video-card p{
+    color:#f5f5f5;
+}
+
+body.dark-mode #timerDisplay{
+    background:#0f0f0f;
+
+    color:white;
+
+    box-shadow:
+        inset 0 2px 5px rgba(255,255,255,0.03);
+}
+
+body.dark-mode .timer-controls button{
+    background:
+        linear-gradient(135deg,#1f1f1f,#2d2d2d);
+
+    border:1px solid #3a3a3a;
+}
+
+/* =========================================================
+   RESPONSIVO EXTRA
+========================================================= */
+
+@media (max-width:768px){
+
+    .timer-controls{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .timer-controls button{
+        width:100%;
+    }
+
+    #timerDisplay{
+        width:100%;
+    }
+
+    .video-card iframe{
+        height:220px;
+    }
+}
+
+.notificacao-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 12px;
+}
+
+.Notificacao {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transition: 0.3s ease;
+}
+
+.Notificacao:hover {
+    transform: scale(1.08);
+}
