@@ -12,15 +12,14 @@
     <!-- CSS externo -->
     <link rel="stylesheet" href="./Css/estiloServico.css">
 
-
-
 </head>
 
 <body>
+
     <!-- Header -->
     <header class="TopoSite">
         <div class="Logo">
-            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+            <img class="ImgLogo" id="logoSite" src="./Img/logoBemEstar-clara.png" alt="Logo BemEstar360">
         </div>
 
         <button class="menu-toggle" aria-label="Abrir menu">☰</button>
@@ -28,11 +27,11 @@
         <nav class="Navegacao">
             <ul>
                 <li><a href="./index.php" data-lang="home">Home</a></li>
-                <li><a href="./monitoramento.html" data-lang="monitoring">Monitoramento</a></li>
-                <li><a href="./calendario.html" data-lang="">Agenda</a></li>
-                <li><a href="./servicos.html" data-lang="services">Serviços</a></li>
-                <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
-                <li><a href="./login.html" data-lang="login">Login</a></li>
+                <li><a href="./monitoramento.php" data-lang="monitoring">Monitoramento</a></li>
+                <li><a href="./calendario.php" data-lang="calendar">Agenda</a></li>
+                <li><a href="./servicos.php" data-lang="services">Serviços</a></li>
+                <li><a href="./quemSomos.php" data-lang="about">Quem somos</a></li>
+                <li><a href="./login.php" data-lang="login">Login</a></li>
 
                 <!-- Menu de Configurações -->
                 <li class="config-menu">
@@ -89,17 +88,13 @@
                     </ul>
                 </div>
 
+                <!-- UPA -->
                 <button class="accordion-btn">UPA – Unidade de Pronto Atendimento</button>
-                <div class="accordion-content">
-                    <ul>
-                        <li>⏱️ Atendimento emergencial 24h</li>
-                        <li>🚑 Estabilização de pacientes</li>
-                        <li>🩹 Pequenas cirurgias e suturas</li>
-                        <li>🧾 Exames rápidos e internação curta</li>
-                        <li><button onclick="abrirMapa('UPA')">📍 Ver no Mapa</button></li>
-                    </ul>
+                <div class="accordion-content upa-content">
+                    <div id="container-upas" class="container-upas"></div>
                 </div>
 
+                <!-- SUS -->
                 <button class="accordion-btn">SUS Digital</button>
                 <div class="accordion-content">
                     <ul>
@@ -114,7 +109,6 @@
             <script src="./scriptAccordions.js"></script>
         </section>
 
-
         <br><br>
 
         <section class="feedback-servicos">
@@ -128,20 +122,19 @@
             <div id="alert-container"></div>
         </section>
 
-
         <!-- Rodapé -->
         <footer class="footer">
             <div class="footerContainer">
                 <!-- Logo e nome -->
                 <div class="footerBrand">
-                    <img src="Img/2.png" alt="Bem Estar 360" class="footerLogo">
-
+                    <img src="Img/Footer.png" alt="Bem Estar 360" class="footerLogo">
                 </div>
 
                 <div class="footerLinks">
                     <ul>
                         <li><a href="./index.html" data-lang="footerHome">Home</a></li>
                         <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
+                        <li><a href="./calendario.html" data-lang="footerMonitoring">Agenda</a></li>
                         <li><a href="./servicos.html" data-lang="footerServices">Serviços</a></li>
                         <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
                     </ul>
@@ -163,7 +156,8 @@
             <!-- Copyright -->
             <div class="footerBottom">
                 <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos
-                    reservados.</p>
+                    reservados.
+                </p>
             </div>
         </footer>
 

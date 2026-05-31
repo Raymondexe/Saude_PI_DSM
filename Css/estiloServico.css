@@ -10,15 +10,17 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1.5rem;
+    padding: 0.8rem 2rem;
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .ImgLogo {
-    width: 110px;
+    width: 185px;
     height: auto;
+    transition: 0.3s ease;
 }
 
 .Navegacao ul {
@@ -53,7 +55,6 @@ body {
     display: none;
     z-index: 20;
 }
-
 
 .config-menu {
     position: relative;
@@ -411,12 +412,12 @@ body.dark-mode .btn-feedback[data-feedback="parcial"] {
 
 /* ====== ACCORDION ====== */
 .accordion {
-  max-width: 700px;
+  max-width: 1200px;
   margin: 2rem auto;
 }
 
 /* ====== BOTÕES DO ACCORDION ====== */
-.accordion-btn {
+.accordion > .accordion-btn {
   width: 100%;
   background: #0f6edc; /* azul principal */
   color: #fff;
@@ -434,41 +435,171 @@ body.dark-mode .btn-feedback[data-feedback="parcial"] {
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.accordion-btn:hover {
+.accordion > .accordion-btn:hover {
   background: #0c57b3;
   transform: scale(1.02);
 }
 
-.accordion-btn:after {
+.accordion > .accordion-btn:after {
   content: "⬇️"; /* seta para indicar que abre */
   transition: transform 0.3s ease;
 }
 
-.accordion-btn.active:after {
+.accordion > .accordion-btn.active:after {
   transform: rotate(-180deg);
 }
 
-/* ====== CONTEÚDO DO ACCORDION ====== */
-.accordion-content {
+/* ACCORDION PRINCIPAL */
+.accordion-content{
   display: none;
-  background: #f9f9f9;
-  padding: 1rem 1.5rem;
-  border-left: 3px solid #0f6edc;
+  padding: 0;
+  background: #f5f9ff;
+  border-radius: 0 0 12px 12px;
   margin-bottom: 1rem;
-  border-radius: 0 0 8px 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-.accordion-content ul {
-  list-style: none;
-  padding-left: 0;
+.accordion-content.open{
+  display: block;
 }
 
-.accordion-content li {
-  margin-bottom: 0.5rem;
+/* ACCORDION INTERNO DAS UPA */
+.upa-content{
+  display: none;
+  padding: 1rem;
+  background: #f5f9ff;
+  border-radius: 0 0 12px 12px;
+}
+
+.upa-content.open{
+  display: block;
+}
+
+/* CARD DA UPA */
+.container-upas{
+  columns: 3 250px;
+  column-gap: 1.5rem;
+  padding: 0;
+}
+
+.card-upa{
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.card-upa:hover{
+  transform: translateY(-3px);
+}
+
+/* BOTÃO INTERNO */
+.upa-btn{
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  display: block;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+  cursor: pointer;
+}
+
+.upa-btn:hover{
+  transform: scale(1.01);
+}
+.upa-btn::after{
+  content: none;
+}
+
+/* TOPO */
+.card-topo{
+  position: relative;
+  width: 100%;
+  height: 320px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+/* camada escura */
+.overlay{
+  position: absolute;
+  inset: 0;
+
+  background:
+  linear-gradient(
+    to top,
+    rgba(0,0,0,.85),
+    rgba(0,0,0,.2)
+  );
+}
+
+/* informações */
+.info{
+  position: relative;
+  z-index: 2;
+
+  padding: 1.5rem;
+
+  color: white;
+}
+
+.info h2{
+  font-size: 2rem;
+  margin-bottom: .5rem;
+
+  line-height: 1.1;
+}
+
+.info p{
+  font-size: 1.1rem;
+  margin-bottom: .8rem;
+
+  color: rgba(255,255,255,.9);
+}
+
+.info span{
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem; /* espaço entre emoji e texto */
+  gap: .4rem;
+
+  padding: .5rem .9rem;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.18);
+
+  backdrop-filter: blur(6px);
+
+  font-weight: bold;
+}
+
+/* MAPA */
+
+.mapa iframe{
+  width: 100%;
+  height: 250px;
+  border: none;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+/* ANIMAÇÃO */
+
+@keyframes aparecer{
+
+  from{
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+
 }
 
 /* ====== BOTÃO "VER NO MAPA" ====== */
@@ -771,24 +902,4 @@ body.dark-mode .alert-feedback.parcial { background-color: #ffc107; color: #2125
     body.dark-mode .ContainerNoticias {
         padding: 1rem;
     }
-}
-
-
-.notificacao-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin-left: 12px;
-}
-
-.Notificacao {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    transition: 0.3s ease;
-}
-
-.Notificacao:hover {
-    transform: scale(1.08);
 }

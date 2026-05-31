@@ -22,10 +22,14 @@
         });
     </script>
 
+    <!-- API (Usabilidade) -->
+    <script src="https://seeb-widget.pages.dev/widget.js" defer></script>
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="icon/icon_BemEstar360.ico">
 
     <!-- CSS externo -->
+    <link rel="stylesheet" href="Css/estilo.css">
     <link rel="stylesheet" href="./CSS/estiloQuemSomos.css">
 
     <link rel="stylesheet"
@@ -42,7 +46,7 @@
     <!-- Header -->
     <header class="TopoSite">
         <div class="Logo">
-            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+            <img class="ImgLogo" src="Img/logoBemEstar.png" alt="Logo Bem Estar 360">
         </div>
 
         <button class="menu-toggle" aria-label="Abrir menu">☰</button>
@@ -50,11 +54,10 @@
         <nav class="Navegacao">
             <ul>
                 <li><a href="./index.php" data-lang="home">Home</a></li>
-                <li><a href="./monitoramento.html" data-lang="monitoring">Monitoramento</a></li>
-                <li><a href="./calendario.html" data-lang="">Agenda</a></li>
-                <li><a href="./servicos.html" data-lang="services">Serviços</a></li>
-                <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
-                <li><a href="./login.html" data-lang="login">Login</a></li>
+                <li><a href="./monitoramento.php" data-lang="monitoring">Monitoramento</a></li>
+                <li><a href="./calendario.php" data-lang="">Agenda</a></li>
+                <li><a href="./servicos.php" data-lang="services">Serviços</a></li>
+                <li><a href="./quemSomos.php" data-lang="about">Quem somos</a></li>
 
                 <!-- Menu de Configurações -->
                 <li class="config-menu">
@@ -78,8 +81,10 @@
         <header class="header">
             <div>
                 <h2 id="quem-somos" data-lang="whoWeAre">Quem Somos</h2>
-                <p data-lang="teamDescription">Uma breve apresentação da nossa equipe — quatro pessoas, uma missão:
-                    construir produtos que importam.</p>
+                <p data-lang="teamDescription">
+                    Conheça a equipe responsável pelo Bem-Estar 360 — profissionais dedicados
+                    ao desenvolvimento de soluções digitais focadas em saúde, acessibilidade e inovação.
+                </p>
             </div>
             <div>
                 <small style="color:var(--muted)" data-lang="availableForProjects">Disponível para projetos: Web •
@@ -128,8 +133,9 @@
                 <div class="role" data-lang="role2">Desenvolvedor Full-Stack</div>
                 <p class="bio" data-lang="specialty2">Especialista em Banco de Dados: </p>
                 <div class="tags" aria-hidden="true">
-                    <span class="tag">Dev Mobile</span>
-                    <span class="tag">SQL</span>
+                    <span class="tag">PHP</span>
+                    <span class="tag">MySQL/SQL</span>
+                    <span class="tag">JavaScript</span>
                 </div>
                 <div class="links">
                     <a href="https://www.linkedin.com/in/pedrohraimundo/" title="LinkedIn Pedro"
@@ -193,8 +199,8 @@
                     <span class="tag">Flutter</span>
                 </div>
                 <div class="links">
-                    <a href="https://www.linkedin.com/in/j%C3%BAlia-queiroz-de-santana-16902b366/" title="LinkedIn Julia"
-                        aria-label="LinkedIn Adriano">
+                    <a href="https://www.linkedin.com/in/j%C3%BAlia-queiroz-de-santana-16902b366/"
+                        title="LinkedIn Julia" aria-label="LinkedIn Julia">
                         <!-- LinkedIn svg -->
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="24" height="24" rx="4" fill="none" />
@@ -210,22 +216,133 @@
                 </div>
             </article>
 
+            <!-- Integrante 5 -->
+            <article class="card" role="listitem" aria-labelledby="nome-5">
+                <div class="avatar">
+                    <img src="./Img/karen.jpg" alt="Foto de Karen" />
+                </div>
+                <div class="name" id="nome-5">Karen Larissa Lima dos Santos</div>
+                <div class="role" data-lang="role5">Back-End Developer</div>
+                <p class="bio" data-lang="specialty5">Desenvolvedora Back-end</p>
+                <div class="tags" aria-hidden="true">
+                    <span class="tag">Java</span>
+                    <span class="tag">MySQL/SQL</span>
+                    <span class="tag">PHP</span>
+                </div>
+                <div class="links">
+                    <a href="https://www.linkedin.com/in/karen-larissa-lima-dos-santos/" aria-label="LinkedIn Karen">
+                        <!-- LinkedIn svg -->
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="24" height="24" rx="4" fill="none" />
+                            <path
+                                d="M6.94 8.94h2.5V18.5h-2.5zM8.19 6.5a1.26 1.26 0 110 2.52 1.26 1.26 0 010-2.52zM11.56 8.94h2.4v1.28h.03c.33-.63 1.15-1.29 2.36-1.29 2.52 0 2.99 1.66 2.99 3.81V18.5h-2.5v-4.3c0-1.03-.02-2.36-1.44-2.36-1.44 0-1.66 1.12-1.66 2.28v4.38h-2.5z"
+                                fill="currentColor" />
+                        </svg>
+                    </a>
+                    <a href="https://github.com/karenlarissa01" title="GitHub Julia" aria-label="GitHub Karen">
+                        <img src="./Img/github.png" alt="GitHub">
+                    </a>
+                </div>
+            </article>
+
+            <!-- Integrante 6 -->
+            <article class="card" role="listitem" aria-labelledby="nome-6">
+                <div class="avatar">
+                    <img src="./Img/gabriel.jpg" alt="Foto de Gabriel" />
+                </div>
+                <div class="name" id="nome-6">Gabriel Gomide de Souza Babo </div>
+                <div class="role" data-lang="role6">Desenvolvedor Full-Stack </div>
+                <p class="bio" data-lang="specialty6"></p>
+                <div class="tags" aria-hidden="true">
+                    <span class="tag">HTML/CSS</span>
+                    <span class="tag">Java</span>
+                    <span class="tag">C#</span>
+                </div>
+                <div class="links">
+                    <a href="https://www.linkedin.com/in/gabriel-gomide-387b21250/" aria-label="LinkedIn Gabriel">
+                        <!-- LinkedIn svg -->
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="24" height="24" rx="4" fill="none" />
+                            <path
+                                d="M6.94 8.94h2.5V18.5h-2.5zM8.19 6.5a1.26 1.26 0 110 2.52 1.26 1.26 0 010-2.52zM11.56 8.94h2.4v1.28h.03c.33-.63 1.15-1.29 2.36-1.29 2.52 0 2.99 1.66 2.99 3.81V18.5h-2.5v-4.3c0-1.03-.02-2.36-1.44-2.36-1.44 0-1.66 1.12-1.66 2.28v4.38h-2.5z"
+                                fill="currentColor" />
+                        </svg>
+                    </a>
+                    <a href="https://github.com/Gomide-Gabriel" title="GitHub Gabriel" aria-label="GitHub Gabriel">
+                        <img src="./Img/github.png" alt="GitHub">
+                    </a>
+                </div>
+                </div>
+            </article>
         </section>
     </main>
+
+
+    <section class="info-projeto">
+        <h3>🚀 Sobre o Bem-Estar 360</h3>
+        <p>
+            O Bem-Estar 360 nasceu como um projeto acadêmico com o objetivo de unir
+            tecnologia, acessibilidade e monitoramento inteligente de saúde em uma única
+            plataforma moderna e intuitiva.
+        </p>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>💡 Nossa Missão</h4>
+                <p>
+                    Desenvolver soluções digitais que auxiliem pessoas e profissionais
+                    da saúde no acompanhamento diário de indicadores importantes.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h4>📊 Tecnologia & Dados</h4>
+                <p>
+                    Integramos monitoramento em tempo real, gráficos inteligentes,
+                    histórico médico e futuramente análises clínicas automatizadas.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h4>🛡️ Segurança</h4>
+                <p>
+                    Priorizamos privacidade, organização e proteção de dados sensíveis
+                    relacionados à saúde dos usuários.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h4>🌍 Futuro do Projeto</h4>
+                <p>
+                    Atualmente o Bem-Estar 360 encontra-se em fase de projeto acadêmico,
+                    mas possui potencial para evoluir futuramente para um produto real
+                    voltado ao mercado de saúde digital.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <br>
+
+    <div class="direitos">
+        © 2025 Bem-Estar 360 — Todos os direitos reservados.<br>
+    </div>
+
+    <br>
 
     <!-- Rodapé -->
     <footer class="footer">
         <div class="footerContainer">
             <!-- Logo e nome -->
             <div class="footerBrand">
-                <img src="Img/2.png" alt="Bem Estar 360" class="footerLogo">
-
+                <img src="Img/Footer.png" alt="Bem Estar 360" class="footerLogo">
             </div>
 
             <div class="footerLinks">
                 <ul>
                     <li><a href="./index.html" data-lang="footerHome">Home</a></li>
                     <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
+                    <li><a href="./calendario.html" data-lang="footerMonitoring">Agenda</a></li>
                     <li><a href="./servicos.html" data-lang="footerServices">Serviços</a></li>
                     <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
                 </ul>
