@@ -209,8 +209,9 @@ $medicamentos = $stmtMedicamentos->get_result();
     <!-- Header -->
     <header class="TopoSite">
         <div class="Logo">
-            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+            <img class="ImgLogo" src="Img/logoBemEstar.png" alt="Logo Bem Estar 360">
         </div>
+
 
         <button class="menu-toggle" aria-label="Abrir menu">☰</button>
 
@@ -1428,16 +1429,16 @@ ORDER BY
         <div class="footerContainer">
             <!-- Logo e nome -->
             <div class="footerBrand">
-                <img src="Img/2.png" alt="Bem Estar 360" class="footerLogo">
-
+                <img src="Img/Footer.png" alt="Bem Estar 360" class="footerLogo">
             </div>
 
             <div class="footerLinks">
                 <ul>
-                    <li><a href="./index.html" data-lang="footerHome">Home</a></li>
-                    <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
-                    <li><a href="./servicos.html" data-lang="footerServices">Serviços</a></li>
-                    <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
+                    <li><a href="./index.php" data-lang="footerHome">Home</a></li>
+                    <li><a href="./monitoramento.php" data-lang="footerMonitoring">Monitoramento</a></li>
+                    <li><a href="./calendario.php" data-lang="">Agenda</a></li>
+                    <li><a href="./servicos.php" data-lang="footerServices">Serviços</a></li>
+                    <li><a href="./quemSomos.php" data-lang="about">Quem somos</a></li>
                 </ul>
             </div>
 

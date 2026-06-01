@@ -124,7 +124,7 @@ if ($idFamilia) {
     <!-- Header -->
     <header class="TopoSite">
         <div class="Logo">
-            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+            <img class="ImgLogo" src="Img/logoBemEstar.png" alt="Logo Bem Estar 360">
         </div>
 
         <button class="menu-toggle" aria-label="Abrir menu">☰</button>
@@ -346,54 +346,42 @@ if ($idFamilia) {
 
     <br><br>
 
-    <!-- FOOTER -->
-
+    <!-- Rodapé -->
     <footer class="footer">
-
         <div class="footerContainer">
-
+            <!-- Logo e nome -->
             <div class="footerBrand">
-                <img src="Img/2.png" alt="Bem Estar 360" class="footerLogo">
+                <img src="Img/Footer.png" alt="Bem Estar 360" class="footerLogo">
             </div>
 
             <div class="footerLinks">
-
                 <ul>
-
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="./monitoramento.html">Monitoramento</a></li>
-                    <li><a href="./servicos.html">Serviços</a></li>
-                    <li><a href="./quemSomos.html">Quem somos</a></li>
-
+                    <li><a href="./index.php" data-lang="footerHome">Home</a></li>
+                    <li><a href="./monitoramento.php" data-lang="footerMonitoring">Monitoramento</a></li>
+                    <li><a href="./calendario.php" data-lang="">Agenda</a></li>
+                    <li><a href="./servicos.php" data-lang="footerServices">Serviços</a></li>
+                    <li><a href="./quemSomos.php" data-lang="about">Quem somos</a></li>
                 </ul>
-
             </div>
 
+            <!-- Contato -->
             <div class="footerContato">
-
-                <h4>Contato</h4>
-
-                <p>Email: contato@bemestar360.com</p>
-                <p>Telefone: (11) 1234-5678</p>
-
+                <h4 data-lang="footerContactTitle">Contato</h4>
+                <p data-lang="footerEmail">Email: contato@bemestar360.com</p>
+                <p data-lang="footerPhone">Telefone: (11) 1234-5678</p>
                 <div class="footerSocials">
-
-                    <a href="#"><img src="./Img/face_icon.png"></a>
-                    <a href="#"><img src="./Img/insta_icon.webp"></a>
-                    <a href="#"><img src="./Img/X_icon.svg.png"></a>
-
+                    <a href="#"><img src="./Img/face_icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="./Img/insta_icon.webp" alt="Instagram"></a>
+                    <a href="#"><img src="./Img/X_icon.svg.png" alt="Twitter"></a>
                 </div>
-
             </div>
-
         </div>
 
+        <!-- Copyright -->
         <div class="footerBottom">
-
-            <p>&copy; 2025 Bem-Estar 360. Todos os direitos reservados.</p>
-
+            <p data-lang="footerCopy" data-lang="textFooter">&copy; 2025 Bem-Estar 360. Todos os direitos reservados.
+            </p>
         </div>
-
     </footer>
 
 

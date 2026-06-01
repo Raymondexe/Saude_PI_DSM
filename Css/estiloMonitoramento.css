@@ -187,20 +187,13 @@
 .calendar-container {
     width: 100%;
     max-width: 550px;
-
     background: rgba(255,255,255,.75);
-
     backdrop-filter: blur(14px);
-
     border-radius: 28px;
-
     padding: 26px;
-
     box-shadow:
         0 15px 35px rgba(0,0,0,.08);
-
     text-align: center;
-
     margin: 40px auto;
 }
 

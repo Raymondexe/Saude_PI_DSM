@@ -86,7 +86,7 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
     <!-- API (Usabilidade) -->
     <script src="https://seeb-widget.pages.dev/widget.js" defer></script>
-    
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="icon/icon_BemEstar360.ico">
 
@@ -107,7 +107,7 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
     <!-- Header -->
     <header class="TopoSite">
         <div class="Logo">
-            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+            <img class="ImgLogo" src="Img/logoBemEstar.png" alt="Logo Bem Estar 360">
         </div>
 
         <button class="menu-toggle" aria-label="Abrir menu">☰</button>
@@ -154,9 +154,20 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
     <section class="registroIndicador">
         <div class="container">
-            <h1 data-lang="heartTitle">Registre os seus Batimentos Cardíacos</h1>
-            <div class="leftImg">
-                <img src="./Img/medindoBatimentosCardiacos.avif" alt="Batimentos Cardíacos">
+
+            <div class="leftSide">
+
+                <h1>Registre os seus batimentos cardíacos</h1>
+
+                <p class="descricaoIndicador">
+                    Monitorar seus batimentos cardíacos ajuda a acompanhar sua condição
+                    física, identificar alterações e cuidar melhor da sua saúde.
+                </p>
+
+                <div class="leftImg">
+                    <img src="./Img/medindoBatimentosCardiacos.avif" alt="Batimentos Cardíacos">
+                </div>
+
             </div>
 
             <div class="rightForms">
@@ -179,8 +190,8 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                     <!-- Batimentos -->
                     <div class="input-group">
                         <label for="bpm" data-lang="bpmLabel">Batimentos por Minuto (bpm)</label>
-                        <input type="number" id="valorBatimentos" name="bpm" placeholder="Ex: 72" min="30"
-                            max="220" required data-lang-placeholder="bpmPlaceholder">
+                        <input type="number" id="valorBatimentos" name="bpm" placeholder="Ex: 72" min="30" max="220"
+                            required data-lang-placeholder="bpmPlaceholder">
                     </div>
 
                     <!-- Data e hora -->
@@ -206,8 +217,8 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                         Salvar Registro
                     </button>
 
-                    </form>
-                    <script src="./script_Registro/scriptRegistroBatimentos.js"></script>
+                </form>
+                <script src="./script_Registro/scriptRegistroBatimentos.js"></script>
             </div>
         </div>
     </section>
@@ -278,16 +289,16 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
         <div class="footerContainer">
             <!-- Logo e nome -->
             <div class="footerBrand">
-                <img src="Img/2.png" alt="Bem Estar 360" class="footerLogo">
-
+                <img src="Img/Footer.png" alt="Bem Estar 360" class="footerLogo">
             </div>
 
             <div class="footerLinks">
                 <ul>
-                    <li><a href="./index.html" data-lang="footerHome">Home</a></li>
-                    <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
-                    <li><a href="./servicos.html" data-lang="footerServices">Serviços</a></li>
-                    <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
+                    <li><a href="./index.php" data-lang="footerHome">Home</a></li>
+                    <li><a href="./monitoramento.php" data-lang="footerMonitoring">Monitoramento</a></li>
+                    <li><a href="./calendario.php" data-lang="">Agenda</a></li>
+                    <li><a href="./servicos.php" data-lang="footerServices">Serviços</a></li>
+                    <li><a href="./quemSomos.php" data-lang="about">Quem somos</a></li>
                 </ul>
             </div>
 
@@ -310,6 +321,7 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
             </p>
         </div>
     </footer>
+
     <script>
         document.getElementById("logout-btn").addEventListener("click", function () {
             const form = document.createElement("form");

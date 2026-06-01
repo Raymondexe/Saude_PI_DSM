@@ -104,7 +104,7 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
     <!-- Header -->
     <header class="TopoSite">
         <div class="Logo">
-            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+            <img class="ImgLogo" src="Img/logoBemEstar.png" alt="Logo Bem Estar 360">
         </div>
 
         <button class="menu-toggle" aria-label="Abrir menu">☰</button>
@@ -151,9 +151,20 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
     <section class="registroIndicador">
         <div class="container">
-            <h1>Registre a sua temperatura corporal</h1>
-            <div class="leftImg">
-                <img src="./Img/medindoTemperatura.webp" alt="Temperatura">
+
+            <div class="leftSide">
+
+                <h1>Registre a sua temperatura corporal</h1>
+
+                <p class="descricaoIndicador">
+                    Acompanhe sua temperatura corporal para identificar alterações,
+                    sintomas de febre e monitorar seu estado de saúde.
+                </p>
+
+                <div class="leftImg">
+                    <img src="./Img/medindoTemperatura.webp" alt="Temperatura">
+                </div>
+
             </div>
 
             <div class="rightForms">
@@ -179,6 +190,7 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                         <textarea id="observacoes" name="observacoes" rows="3"
                             placeholder="Ex: medi após atividade física..."></textarea>
                     </div>
+                    <br><br>
 
                     <button type="submit" id="salvarTemperatura">Salvar Registro</button>
                 </form>
@@ -226,16 +238,16 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
         <div class="footerContainer">
             <!-- Logo e nome -->
             <div class="footerBrand">
-                <img src="Img/2.png" alt="Bem Estar 360" class="footerLogo">
-
+                <img src="Img/Footer.png" alt="Bem Estar 360" class="footerLogo">
             </div>
 
             <div class="footerLinks">
                 <ul>
-                    <li><a href="./index.html" data-lang="footerHome">Home</a></li>
-                    <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
-                    <li><a href="./servicos.html" data-lang="footerServices">Serviços</a></li>
-                    <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
+                    <li><a href="./index.php" data-lang="footerHome">Home</a></li>
+                    <li><a href="./monitoramento.php" data-lang="footerMonitoring">Monitoramento</a></li>
+                    <li><a href="./calendario.php" data-lang="">Agenda</a></li>
+                    <li><a href="./servicos.php" data-lang="footerServices">Serviços</a></li>
+                    <li><a href="./quemSomos.php" data-lang="about">Quem somos</a></li>
                 </ul>
             </div>
 

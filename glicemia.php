@@ -105,7 +105,7 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
     <!-- Header -->
     <header class="TopoSite">
         <div class="Logo">
-            <img class="ImgLogo" src="Img/bemEstar.webp" alt="Logo Bem Estar 360">
+            <img class="ImgLogo" src="Img/logoBemEstar.png" alt="Logo Bem Estar 360">
         </div>
 
         <button class="menu-toggle" aria-label="Abrir menu">☰</button>
@@ -152,8 +152,23 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
     <section class="registroIndicador">
         <div class="container">
-            <h1>Registre a sua Glicemia</h1>
-            <div class="leftImg"> <img src="./Img/medindoGlicemia.webp" alt="Glicemia"> </div>
+
+            <div class="leftSide">
+
+                <h1>Registre a sua glicemia</h1>
+
+                <p class="descricaoIndicador">
+                    Monitore seus níveis de glicose regularmente para acompanhar sua saúde
+                    e identificar alterações importantes. Registre suas medições de forma
+                    simples e acompanhe sua evolução.
+                </p>
+
+                <div class="leftImg">
+                    <img src="./Img/medindoGlicemia.webp" alt="Glicemia">
+                </div>
+
+            </div>
+
             <div class="rightForms">
                 <form id="glicemiaForm" method="POST" action="php/usuario/registros/salvarGlicemia.php">
 
@@ -201,8 +216,8 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                     <button type="submit" id="salvarGlicemia">
                         Salvar Registro
                     </button>
+                </form>
             </div>
-            </form>
 
             <script src="./script_Registro/scriptRegistroGlicemia.js"></script>
         </div>

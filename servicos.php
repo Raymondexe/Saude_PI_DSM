@@ -1,3 +1,61 @@
+<?php
+session_start();
+include("php/config/conexao.php");
+
+$logado = isset($_SESSION['idLogin']);
+
+if (!$logado) {
+    header("Location: login.html");
+    exit;
+}
+
+$id = $_SESSION['idUsuario'];
+
+$stmt = $conn->prepare("
+    SELECT *
+    FROM tblUsuario
+    WHERE idUsuario = ?
+");
+
+$stmt->bind_param("i", $id);
+$stmt->execute();
+
+$result = $stmt->get_result();
+$usuario = $result->fetch_assoc();
+
+
+$nome = $usuario['nomeUsuario'] ?? '';
+$email = $usuario['emailUsuario'] ?? '';
+$telefone = $usuario['telefoneUsuario'] ?? '';
+$cpf = $usuario['cpfUsuario'] ?? '';
+$endereco = $usuario['enderecoUsuario'] ?? '';
+
+if (empty($usuario['codigoVinculo'])) {
+    $codigo = 'BSTR-' . strtoupper(substr(md5(uniqid()), 0, 6));
+
+    $stmtCodigo = $conn->prepare("
+        UPDATE tblUsuario 
+        SET codigoVinculo = ? 
+        WHERE idUsuario = ?
+    ");
+    $stmtCodigo->bind_param("si", $codigo, $id);
+    $stmtCodigo->execute();
+
+    $usuario['codigoVinculo'] = $codigo;
+}
+
+$codigoVinculo = $usuario['codigoVinculo'] ?? '';
+
+$fotoBanco = $usuario['foto'] ?? null;
+
+if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
+    $foto = "uploads/" . $fotoBanco;
+} else {
+    $foto = "Img/defaultUser.png";
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -11,7 +69,6 @@
 
     <!-- CSS externo -->
     <link rel="stylesheet" href="./Css/estiloServico.css">
-    
     <link rel="stylesheet" href="Css/estilo.css">
 
 </head>
@@ -21,7 +78,7 @@
     <!-- Header -->
     <header class="TopoSite">
         <div class="Logo">
-            <img class="ImgLogo" id="logoSite" src="./Img/logoBemEstar-clara.png" alt="Logo BemEstar360">
+            <img class="ImgLogo" src="Img/logoBemEstar.png" alt="Logo Bem Estar 360">
         </div>
 
         <button class="menu-toggle" aria-label="Abrir menu">☰</button>
@@ -30,10 +87,23 @@
             <ul>
                 <li><a href="./index.php" data-lang="home">Home</a></li>
                 <li><a href="./monitoramento.php" data-lang="monitoring">Monitoramento</a></li>
-                <li><a href="./calendario.php" data-lang="calendar">Agenda</a></li>
+                <li><a href="./calendario.php" data-lang="">Agenda</a></li>
                 <li><a href="./servicos.php" data-lang="services">Serviços</a></li>
                 <li><a href="./quemSomos.php" data-lang="about">Quem somos</a></li>
-                <li><a href="./login.php" data-lang="login">Login</a></li>
+
+                <?php if ($logado): ?>
+                    <li class="perfil-menu">
+                        <a href="/Saude_PI_DSM-main/perfil.php" id="perfil-btn" class="perfil-link">
+                            <img src="<?= $foto ?>" alt="Foto de perfil" class="foto-perfil">
+                            <span class="nome-perfil"><?= $nome ?></span>
+                        </a>
+                    </li>
+                    <button id="btnNotificacao" class="notificacao-btn">
+                        <img id="iconeNotificacao" src="Img/Corres_Fechada.png" alt="Notificações" class="Notificacao">
+                    </button>
+                <?php else: ?>
+                    <li><a href="./login.html" data-lang="login">Login</a></li>
+                <?php endif; ?>
 
                 <!-- Menu de Configurações -->
                 <li class="config-menu">
@@ -134,11 +204,11 @@
 
                 <div class="footerLinks">
                     <ul>
-                        <li><a href="./index.html" data-lang="footerHome">Home</a></li>
-                        <li><a href="./monitoramento.html" data-lang="footerMonitoring">Monitoramento</a></li>
-                        <li><a href="./calendario.html" data-lang="footerMonitoring">Agenda</a></li>
-                        <li><a href="./servicos.html" data-lang="footerServices">Serviços</a></li>
-                        <li><a href="./quemSomos.html" data-lang="about">Quem somos</a></li>
+                        <li><a href="./index.php" data-lang="footerHome">Home</a></li>
+                        <li><a href="./monitoramento.php" data-lang="footerMonitoring">Monitoramento</a></li>
+                        <li><a href="./calendario.php" data-lang="footerMonitoring">Agenda</a></li>
+                        <li><a href="./servicos.php" data-lang="footerServices">Serviços</a></li>
+                        <li><a href="./quemSomos.php" data-lang="about">Quem somos</a></li>
                     </ul>
                 </div>
 
