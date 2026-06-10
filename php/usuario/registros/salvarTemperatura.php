@@ -1,21 +1,38 @@
 <?php
+
 session_start();
+
 include("../../config/conexao.php");
 
 /*
-SESSION
+RESPONSÁVEL LOGADO
 */
-$idUsuario = $_SESSION["idUsuario"];
+$idResponsavel = $_SESSION["idUsuario"] ?? null;
+
+if (!$idResponsavel) {
+    die("Usuário não autenticado.");
+}
+
+/*
+USUÁRIO QUE RECEBERÁ O REGISTRO
+*/
+$idUsuarioRegistro =
+    $_POST["idUsuarioRegistro"] ?? $idResponsavel;
 
 /*
 DADOS
 */
-$temperatura = $_POST["valorTemperatura"] ?? null;
+$temperatura =
+    $_POST["valorTemperatura"] ?? null;
 
-$data = $_POST["data"] ?? null;
-$hora = $_POST["hora"] ?? null;
+$data =
+    $_POST["data"] ?? null;
 
-$observacao = $_POST["observacoes"] ?? "";
+$hora =
+    $_POST["hora"] ?? null;
+
+$observacao =
+    $_POST["observacoes"] ?? "";
 
 /*
 VALIDAÇÃO
@@ -29,9 +46,60 @@ if (
 }
 
 /*
+VALIDA SE É O PRÓPRIO USUÁRIO
+OU UM DEPENDENTE VINCULADO
+*/
+
+$ehDependente = false;
+
+if ($idUsuarioRegistro != $idResponsavel) {
+
+    $sqlValidacao = "
+    SELECT 1
+    FROM tblfamiliausuario fuResp
+
+    INNER JOIN tblfamiliausuario fuDep
+        ON fuResp.Familia_idFamilia =
+           fuDep.Familia_idFamilia
+
+    WHERE fuResp.Usuario_idUsuario = ?
+    AND fuResp.papel = 'responsavel'
+
+    AND fuDep.Usuario_idUsuario = ?
+    AND fuDep.papel = 'dependente'
+
+    LIMIT 1
+    ";
+
+    $stmtValida =
+        $conn->prepare($sqlValidacao);
+
+    $stmtValida->bind_param(
+        "ii",
+        $idResponsavel,
+        $idUsuarioRegistro
+    );
+
+    $stmtValida->execute();
+
+    $ehDependente =
+        $stmtValida
+            ->get_result()
+            ->num_rows > 0;
+}
+
+if (
+    $idUsuarioRegistro != $idResponsavel &&
+    !$ehDependente
+) {
+    die("Usuário inválido.");
+}
+
+/*
 DATA + HORA
 */
-$dataHora = $data . " " . $hora . ":00";
+$dataHora =
+    $data . " " . $hora . ":00";
 
 /*
 INSERT
@@ -64,7 +132,7 @@ BIND
 */
 $stmt->bind_param(
     "idss",
-    $idUsuario,
+    $idUsuarioRegistro,
     $temperatura,
     $dataHora,
     $observacao
@@ -75,19 +143,15 @@ EXECUTA
 */
 if ($stmt->execute()) {
 
-    echo "
-    <script>
-        alert('Temperatura registrada com sucesso!');
-        window.location.href='../../../temperatura.php';
-    </script>
-    ";
+    echo "sucesso";
 
 } else {
 
-    die('Erro execute: ' . $stmt->error);
+    echo "Erro ao salvar: " . $stmt->error;
 
 }
 
 $stmt->close();
 $conn->close();
+
 ?>

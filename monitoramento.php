@@ -454,12 +454,11 @@ $resultConvites->data_seek(0);
                             <span class="nome-perfil"><?= $nome ?></span>
                         </a>
                     </li>
-                    <button id="btnNotificacao" class="notificacao-btn">
-                        <img id="iconeNotificacao" src="Img/Corres_Fechada.png" alt="Notificações" class="Notificacao">
-                    </button>
+
                 <?php else: ?>
                     <li><a href="./login.html" data-lang="login">Login</a></li>
                 <?php endif; ?>
+
 
                 <!-- Menu de Configurações -->
                 <li class="config-menu">
@@ -478,7 +477,17 @@ $resultConvites->data_seek(0);
     <script src="script.js"></script>
     <script src="scriptTraducao.js"></script>
 
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
 
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 
 
 
@@ -516,7 +525,7 @@ $resultConvites->data_seek(0);
     <main class="conteudo">
 
         <section class="monitoramento-container">
-            <h2>Monitoramento em Tempo Real</h2>
+            <h2>Últimos registros</h2>
             <div class="cards">
                 <div class="card" id="card-batimentos">
                     <h3>❤️ Batimentos</h3>
@@ -585,11 +594,11 @@ $resultConvites->data_seek(0);
 
 
 
-        <div class="acoes-monitoramento">
+        <!-- <div class="acoes-monitoramento">
             <a href="monitoramento_pdf.php" class="btn-pdf">
                 📄 Baixar Histórico Completo
             </a>
-        </div>
+        </div> -->
 
     </main>
 

@@ -984,3 +984,164 @@ body.dark-mode .timer-controls button{
 .Notificacao:hover {
     transform: scale(1.08);
 }
+
+
+/* ==========================
+SELETOR DE USUÁRIO
+========================== */
+
+.family-dropdown{
+    position:relative;
+    margin-bottom:25px;
+}
+
+.family-selected{
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+
+    padding:14px 18px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+}
+
+.family-selected:hover{
+    border-color:#2563eb;
+    transform:translateY(-1px);
+}
+
+.family-avatar{
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.family-info{
+    flex:1;
+}
+
+.family-info strong{
+    display:block;
+    font-size:15px;
+    color:#111827;
+}
+
+.family-info span{
+    font-size:12px;
+    color:#6b7280;
+}
+
+.family-arrow{
+    font-size:22px;
+    transition:.25s;
+}
+
+.family-list{
+
+    position:absolute;
+    top:calc(100% + 10px);
+    left:0;
+
+    width:100%;
+
+    background:white;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.12);
+
+    overflow:hidden;
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:translateY(10px);
+
+    transition:.25s;
+
+    z-index:999;
+}
+
+.family-list.show{
+    opacity:1;
+    visibility:visible;
+    transform:none;
+}
+
+.family-option{
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    padding:14px 18px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.family-option:hover{
+    background:#f8fafc;
+}
+
+.family-option.ativo{
+    background:#eff6ff;
+}
+
+
+
+
+
+
+
+.dark-mode .seletor-usuario {
+
+    background: #1f1f1f;
+
+    border: 1px solid #3a3a3a;
+
+    box-shadow: none;
+
+}
+
+.dark-mode .seletor-usuario label {
+
+    color: #d1d5db;
+
+}
+
+.dark-mode .seletor-usuario select {
+
+    background: #2a2a2a;
+
+    border: 1px solid #404040;
+
+    color: #f5f5f5;
+
+}
+
+.dark-mode .seletor-usuario select:hover {
+
+    border-color: #666;
+
+}
+
+.dark-mode .seletor-usuario select:focus {
+
+    border-color: #888;
+
+    box-shadow: 0 0 0 4px rgba(255,255,255,.08);
+
+}

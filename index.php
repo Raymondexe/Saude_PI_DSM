@@ -121,9 +121,7 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                             <span class="nome-perfil"><?= $nome ?></span>
                         </a>
                     </li>
-                    <button id="btnNotificacao" class="notificacao-btn">
-                        <img id="iconeNotificacao" src="Img/Corres_Fechada.png" alt="Notificações" class="Notificacao">
-                    </button>
+
                 <?php else: ?>
                     <li><a href="./login.html" data-lang="login">Login</a></li>
                 <?php endif; ?>
@@ -144,6 +142,18 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
     <script src="script.js"></script>
     <script src="scriptTraducao.js"></script>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 
     <section class="welcome-section">
         <div class="welcome-wrapper animate-fade-in">

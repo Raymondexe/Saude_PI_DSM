@@ -124,12 +124,10 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                             <span class="nome-perfil">Dr(a) <?= $nome ?></span>
                         </a>
                     </li>
-                    <button id="btnNotificacao" class="notificacao-btn">
-                        <img id="iconeNotificacao" src="Img/Corres_Fechada.png" alt="Notificações" class="Notificacao">
-                    </button>
                 <?php else: ?>
                     <li><a href="./login.html" data-lang="login">Login</a></li>
                 <?php endif; ?>
+
 
                 <!-- Menu de Configurações -->
                 <li class="config-menu">
@@ -147,6 +145,18 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
     <script src="script.js"></script>
     <script src="scriptTraducao.js"></script>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 
     <section class="pro-welcome">
         <div class="pro-hero">
@@ -169,9 +179,6 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                         Iniciar Consulta
                     </button>
 
-                    <a href="consultas.php" class="btn-primary">
-                        📅 Consultas do dia
-                    </a>
 
                     <a href="dashboard.php" class="btn-secondary">
                         📊 Acessar Dashboard
@@ -207,13 +214,9 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
     </section>
 
     <div class="modal-consulta" id="modalBuscaPaciente">
-
         <div class="modal-content-consulta">
-
             <span class="fechar-modal" id="fecharBusca">&times;</span>
-
             <h2>Iniciar Consulta</h2>
-
             <p>
                 Digite o código único do paciente.
             </p>

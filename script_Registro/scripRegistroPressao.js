@@ -1,13 +1,26 @@
 const form = document.getElementById("pressaoForm");
 
 form.addEventListener("submit", async (e) => {
+
     e.preventDefault();
 
-    const sistolica = document.getElementById("sistolica").value;
-    const diastolica = document.getElementById("diastolica").value;
-    const data = document.getElementById("data").value;
-    const hora = document.getElementById("hora").value;
-    const observacoes = document.getElementById("observacoes").value;
+    const idUsuarioRegistro =
+        document.getElementById("idUsuarioRegistro").value;
+
+    const sistolica =
+        document.getElementById("sistolica").value;
+
+    const diastolica =
+        document.getElementById("diastolica").value;
+
+    const data =
+        document.getElementById("data").value;
+
+    const hora =
+        document.getElementById("hora").value;
+
+    const observacoes =
+        document.getElementById("observacoes").value;
 
     try {
 
@@ -20,6 +33,7 @@ form.addEventListener("submit", async (e) => {
                 },
 
                 body: new URLSearchParams({
+                    idUsuarioRegistro,
                     sistolica,
                     diastolica,
                     data,
@@ -31,7 +45,9 @@ form.addEventListener("submit", async (e) => {
 
         const resultado = await response.text();
 
-        if (resultado == "sucesso") {
+        if (
+            resultado.includes("sucesso")
+        ) {
 
             alert("Pressão registrada com sucesso!");
 
@@ -50,4 +66,5 @@ form.addEventListener("submit", async (e) => {
         alert("Erro ao salvar.");
 
     }
+
 });

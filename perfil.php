@@ -1256,6 +1256,18 @@ ORDER BY
     </div>
     </details>
 
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
     <div id="modalDependente" class="modal-dependente">
 
         <div class="modal-dependente-box">
@@ -1295,13 +1307,7 @@ ORDER BY
                 <div class="dependente-card-info">
                     <h4>Doenças crônicas</h4>
                     <span id="dependenteDoencas"></span>
-                </div>
-
-                <div class="dependente-card-info">
-                    <h4>Contato emergência</h4>
-                    <span id="dependenteEmergencia"></span>
-                </div>
-
+                </div>            
             </div>
 
             <div class="dependente-section">
@@ -1355,7 +1361,7 @@ ORDER BY
     </div>
 
 
-    <div id="modalDependente" class="modal-dependente">
+    <!-- <div id="modalDependente" class="modal-dependente">
 
         <div class="modal-dependente-content">
 
@@ -1367,7 +1373,7 @@ ORDER BY
 
         </div>
 
-    </div>
+    </div> -->
 
     </main>
     </div>
@@ -1799,76 +1805,98 @@ ORDER BY
 
 
 
-        function abrirModalDependente(usuario) {
+        window.abrirModalDependente = async function (idUsuario) {
 
-            document.getElementById("modalDependente")
-                .classList.add("active");
+            try {
 
-            document.body.style.overflow = "hidden";
+                const response = await fetch(
+                    `/Saude_PI_DSM-main/php/usuario/relacionamento/buscar_dependente.php?id=${idUsuario}`
+                );
 
-            /*
-            FOTO
-            */
+                const dados = await response.json();
 
-            let foto = "/Saude_PI_DSM-main/Img/defaultUser.png";
+                const usuario = dados.usuario;
+                const indicador = dados.indicador;
+                const evento = dados.evento;
 
-            if (usuario.foto && usuario.foto !== "") {
+                document.getElementById("modalDependente")
+                    .classList.add("active");
 
-                foto = `/Saude_PI_DSM-main/uploads/${usuario.foto}`;
+                document.body.style.overflow = "hidden";
+
+                let foto = "/Saude_PI_DSM-main/Img/defaultUser.png";
+
+                if (usuario?.foto) {
+                    foto = `/Saude_PI_DSM-main/uploads/${usuario.foto}`;
+                }
+
+                document.getElementById("dependenteFoto").src = foto;
+
+                document.getElementById("dependenteNome")
+                    .innerText = usuario?.nomeUsuario || "-";
+
+                document.getElementById("dependenteEmail")
+                    .innerText = usuario?.emailUsuario || "-";
+
+                document.getElementById("dependenteTelefone")
+                    .innerText = usuario?.telefoneUsuario || "-";
+
+                document.getElementById("dependenteTipoSanguineo")
+                    .innerText = usuario?.tipoSanguineo || "Não informado";
+
+                document.getElementById("dependenteAlergias")
+                    .innerText = usuario?.alergias || "Nenhuma";
+
+                document.getElementById("dependenteDoencas")
+                    .innerText = usuario?.doencasCronicas || "Nenhuma";
+
+                document.getElementById("dependenteEmergencia")
+                    .innerText = usuario?.contatoEmergencia || "Não informado";
+
+                /* REGISTROS */
+
+                document.getElementById("dependenteGlicemia")
+                    .innerText = indicador?.glicemia ?? "--";
+
+                document.getElementById("dependentePressao")
+                    .innerText = indicador?.pressao ?? "--";
+
+                document.getElementById("dependenteTemperatura")
+                    .innerText = indicador?.temperatura ?? "--";
+
+                document.getElementById("dependenteBpm")
+                    .innerText = indicador?.batimentos_cardiacos ?? "--";
+
+                /* EVENTO */
+
+                document.getElementById("dependenteEvento")
+                    .innerText = evento?.tipoEvento || "Nenhum evento";
+
+                document.getElementById("dependenteEventoData")
+                    .innerText = evento?.dataEvento || "";
+
+                document.getElementById("dependenteEventoLocal")
+                    .innerText = evento?.localEvento || "";
+
+            } catch (erro) {
+
+                console.error("Erro ao carregar dependente:", erro);
 
             }
 
-            document.getElementById("dependenteFoto")
-                .src = foto;
-
-            /*
-            HEADER
-            */
-
-            document.getElementById("dependenteNome")
-                .innerText = usuario.nomeUsuario || "-";
-
-            document.getElementById("dependenteEmail")
-                .innerText = usuario.emailUsuario || "-";
-
-            document.getElementById("dependenteTelefone")
-                .innerText = usuario.telefoneUsuario || "-";
-
-            /*
-            INFO
-            */
-
-            document.getElementById("dependenteTipoSanguineo")
-                .innerText = usuario.tipoSanguineo || "Não informado";
-
-            document.getElementById("dependenteAlergias")
-                .innerText = usuario.alergias || "Nenhuma";
-
-            document.getElementById("dependenteDoencas")
-                .innerText = usuario.doencasCronicas || "Nenhuma";
-
-            document.getElementById("dependenteEmergencia")
-                .innerText = usuario.contatoEmergencia || "Não informado";
-
-        }
+        };
 
         function fecharModalDependente() {
-
             document.getElementById("modalDependente")
                 .classList.remove("active");
-
             document.body.style.overflow = "auto";
-
         }
 
         window.addEventListener("click", function (e) {
-
             const modal = document.getElementById("modalDependente");
-
             if (e.target === modal) {
 
                 fecharModalDependente();
-
             }
 
         });

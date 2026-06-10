@@ -1,21 +1,69 @@
-document.addEventListener('DOMContentLoaded', () => {
+const form = document.getElementById("glicemiaForm");
 
-    const glicemiaForm = document.getElementById('glicemiaForm');
+form.addEventListener("submit", async (e) => {
 
-    glicemiaForm.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-        const valorGlicemia = document.getElementById('valorGlicemia').value;
-        const tipoMedicao = document.getElementById('tipoMedicao').value;
-        const data = document.getElementById('data').value;
-        const hora = document.getElementById('hora').value;
+    const idUsuarioRegistro =
+        document.getElementById("idUsuarioRegistro").value;
 
-        if(!valorGlicemia || !tipoMedicao || !data || !hora) {
+    const valorGlicemia =
+        document.getElementById("valorGlicemia").value;
 
-            e.preventDefault();
+    const tipoMedicao =
+        document.getElementById("tipoMedicao").value;
 
-            alert('Preencha todos os campos obrigatórios!');
+    const data =
+        document.getElementById("data").value;
+
+    const hora =
+        document.getElementById("hora").value;
+
+    const observacoes =
+        document.getElementById("observacoes").value;
+
+    try {
+
+        const response = await fetch(
+            "php/usuario/registros/salvarGlicemia.php",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                        "application/x-www-form-urlencoded"
+                },
+
+                body: new URLSearchParams({
+                    idUsuarioRegistro,
+                    valorGlicemia,
+                    tipoMedicao,
+                    data,
+                    hora,
+                    observacoes
+                })
+            }
+        );
+
+        const resultado = await response.text();
+
+        if (resultado.includes("sucesso")) {
+
+            alert("Glicemia registrada com sucesso!");
+
+            form.reset();
+
+        } else {
+
+            alert(resultado);
+
         }
 
-    });
+    } catch (erro) {
+
+        console.error(erro);
+
+        alert("Erro ao salvar.");
+
+    }
 
 });

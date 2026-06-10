@@ -53,6 +53,83 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 } else {
     $foto = "Img/defaultUser.png";
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| IDENTIFICA PAPEL DO USUÁRIO
+|--------------------------------------------------------------------------
+*/
+
+$idUsuario = $_SESSION['idUsuario'];
+
+$sqlPapel = "
+SELECT papel
+FROM tblfamiliausuario
+WHERE Usuario_idUsuario = ?
+AND statusMembro = 'ativo'
+LIMIT 1
+";
+
+$stmtPapel = $conn->prepare($sqlPapel);
+
+if (!$stmtPapel) {
+    die("Erro SQL Papel: " . $conn->error);
+}
+
+$stmtPapel->bind_param("i", $idUsuario);
+$stmtPapel->execute();
+
+$resultPapel = $stmtPapel->get_result();
+$dadosPapel = $resultPapel->fetch_assoc();
+
+$papelUsuario = $dadosPapel['papel'] ?? null;
+
+
+/*
+|--------------------------------------------------------------------------
+| BUSCAR DEPENDENTES (SOMENTE SE FOR RESPONSÁVEL)
+|--------------------------------------------------------------------------
+*/
+
+$dependentes = null;
+
+if ($papelUsuario === 'responsavel') {
+
+    $sqlDependentes = "
+    SELECT
+        u.idUsuario,
+        u.nomeUsuario,
+        u.foto
+    FROM tblfamiliausuario fuResp
+
+    INNER JOIN tblfamiliausuario fuDep
+        ON fuResp.Familia_idFamilia = fuDep.Familia_idFamilia
+
+    INNER JOIN tblusuario u
+        ON u.idUsuario = fuDep.Usuario_idUsuario
+
+    WHERE fuResp.Usuario_idUsuario = ?
+    AND fuResp.papel = 'responsavel'
+    AND fuResp.statusMembro = 'ativo'
+
+    AND fuDep.papel = 'dependente'
+    AND fuDep.statusMembro = 'ativo'
+    ";
+
+    $stmtDep = $conn->prepare($sqlDependentes);
+
+    if (!$stmtDep) {
+        die("Erro SQL Dependentes: " . $conn->error);
+    }
+
+    $stmtDep->bind_param("i", $idUsuario);
+    $stmtDep->execute();
+
+    $dependentes = $stmtDep->get_result();
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -122,9 +199,7 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                             <span class="nome-perfil"><?= $nome ?></span>
                         </a>
                     </li>
-                    <button id="btnNotificacao" class="notificacao-btn">
-                        <img id="iconeNotificacao" src="Img/Corres_Fechada.png" alt="Notificações" class="Notificacao">
-                    </button>
+
                 <?php else: ?>
                     <li><a href="./login.html" data-lang="login">Login</a></li>
                 <?php endif; ?>
@@ -145,6 +220,18 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
     <script src="script.js"></script>
     <!-- Pressão Arterial -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
 
 
     <section class="registroIndicador">
@@ -164,7 +251,62 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
             </div>
 
             <div class="rightForms">
+                <div class="family-dropdown">
+
+                    <div class="family-selected" id="familySelected">
+
+                        <img src="<?= $foto ?>" class="family-avatar">
+
+                        <div class="family-info">
+                            <strong><?= htmlspecialchars($nome) ?></strong>
+                            <span>Responsável</span>
+                        </div>
+
+                        <span class="family-arrow">⌄</span>
+
+                    </div>
+
+                    <div class="family-list" id="familyList">
+
+                        <div class="family-option ativo" data-id="<?= $idUsuario ?>">
+
+                            <img src="<?= $foto ?>" class="family-avatar">
+
+                            <div class="family-info">
+                                <strong><?= htmlspecialchars($nome) ?></strong>
+                                <span>Responsável</span>
+                            </div>
+
+                        </div>
+
+                        <?php while ($dep = $dependentes->fetch_assoc()): ?>
+
+                            <?php
+                            $fotoDep = !empty($dep['foto'])
+                                ? "uploads/" . $dep['foto']
+                                : "Img/defaultUser.png";
+                            ?>
+
+                            <div class="family-option" data-id="<?= $dep['idUsuario'] ?>">
+
+                                <img src="<?= $fotoDep ?>" class="family-avatar">
+
+                                <div class="family-info">
+                                    <strong><?= htmlspecialchars($dep['nomeUsuario']) ?></strong>
+                                    <span>Dependente</span>
+                                </div>
+
+                            </div>
+
+                        <?php endwhile; ?>
+
+                    </div>
+
+                </div>
+
                 <form id="pressaoForm">
+
+                    <input type="hidden" id="idUsuarioRegistro" name="idUsuarioRegistro" value="<?= $idUsuario ?>">
                     <div class="inputs-row">
                         <div class="input-group">
                             <label for="sistolica">Pressão Sistólica (mmHg)</label>
@@ -284,6 +426,48 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
             form.submit();
         });
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const selected =
+                document.getElementById("familySelected");
+
+            const list =
+                document.getElementById("familyList");
+
+            if (!selected || !list) {
+                console.error("Dropdown não encontrado");
+                return;
+            }
+
+            selected.addEventListener("click", () => {
+                list.classList.toggle("show");
+            });
+
+            document
+                .querySelectorAll(".family-option")
+                .forEach(option => {
+
+                    option.addEventListener("click", () => {
+
+                        document.getElementById(
+                            "idUsuarioRegistro"
+                        ).value = option.dataset.id;
+
+                        selected.innerHTML =
+                            option.innerHTML +
+                            '<span class="family-arrow">↓</span>';
+
+                        list.classList.remove("show");
+
+                    });
+
+                });
+
+        });
+
+
+        
     </script>
 </body>
 
