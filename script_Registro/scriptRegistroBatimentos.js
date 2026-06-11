@@ -1,15 +1,65 @@
-const inputBatimentos = document.getElementById('valorBatimentos');
-const botaoSalvar = document.getElementById('salvarBatimentos');
+const form = document.getElementById("batimentosForm");
 
-botaoSalvar.addEventListener('click', (e) => {
+form.addEventListener("submit", async (e) => {
 
-    const bpm = inputBatimentos.value;
+    e.preventDefault();
 
-    if (!bpm) {
+    const idUsuarioRegistro =
+        document.getElementById("idUsuarioRegistro").value;
 
-        e.preventDefault();
+    const bpm =
+        document.getElementById("valorBatimentos").value;
 
-        alert('Digite um valor válido!');
+    const data =
+        document.getElementById("data").value;
+
+    const hora =
+        document.getElementById("hora").value;
+
+    const observacoes =
+        document.getElementById("observacoes").value;
+
+    try {
+
+        const response = await fetch(
+            "php/usuario/registros/salvarBatimentos.php",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+
+                body: new URLSearchParams({
+                    idUsuarioRegistro,
+                    bpm,
+                    data,
+                    hora,
+                    observacoes
+                })
+            }
+        );
+
+        const resultado = await response.text();
+
+        if (resultado.includes("sucesso")) {
+
+            alert("Batimentos registrados com sucesso!");
+
+            form.reset();
+
+        } else {
+
+            alert(resultado);
+
+        }
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        alert("Erro ao salvar.");
+
     }
 
 });

@@ -114,8 +114,6 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
         <nav class="Navegacao">
             <ul>
                 <li><a href="./indexProfissional.php" data-lang="home">Home</a></li>
-                <li><a href="./calendario.php" data-lang="">Dashboard</a></li>
-                <li><a href="./calendario.php" data-lang="">Agenda</a></li>
 
                 <?php if ($logado): ?>
                     <li class="perfil-menu">
@@ -180,31 +178,48 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
                     </button>
 
 
-                    <a href="dashboard.php" class="btn-secondary">
+                    <button class="btn-secondary2" onclick="abrirDashboardProfissional()">
                         📊 Acessar Dashboard
-                    </a>
+                    </button>
+
+                    <button class="btn-secondary2" onclick="abrirAgendaProfissional()">
+                        🗓️ Acessar Agenda
+                    </button>
                 </div>
 
 
             </div>
 
             <div class="pro-hero-card">
+
                 <h3>Resumo rápido</h3>
+
                 <div class="mini-stats">
+
                     <div>
                         <span>Hoje</span>
-                        <strong>0 Consultas</strong>
+
+                        <strong id="resumoHoje">
+                            0 Consultas
+                        </strong>
                     </div>
 
                     <div>
                         <span>Semana</span>
-                        <strong>0 Pacientes</strong>
+
+                        <strong id="resumoSemana">
+                            0 Pacientes
+                        </strong>
                     </div>
 
                     <div>
                         <span>Status</span>
-                        <strong>Online</strong>
+
+                        <strong id="resumoStatus">
+                            Online
+                        </strong>
                     </div>
+
                 </div>
 
             </div>
@@ -212,6 +227,192 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
         </div>
 
     </section>
+
+    <div id="modalDashboard" class="dashboard-overlay">
+
+        <div class="dashboard-modal">
+
+            <button class="dashboard-close" onclick="fecharDashboardProfissional()">
+                ✕
+            </button>
+
+            <div class="dashboard-header">
+
+                <div>
+                    <h2>Dashboard Profissional</h2>
+
+                    <p>
+                        Bem-vindo(a), Dr(a).
+                        <?= htmlspecialchars($nome) ?>
+                    </p>
+                </div>
+
+                <div class="dashboard-date">
+                    <?= date('d/m/Y') ?>
+                </div>
+
+            </div>
+
+            <div class="dashboard-cards">
+
+                <div class="dashboard-card">
+                    <span>🩺 Próximo Compromisso</span>
+
+                    <strong id="dashboardEventoTitulo">
+                        Nenhum compromisso
+                    </strong>
+
+                    <small id="dashboardEventoData">
+                        —
+                    </small>
+                </div>
+
+                <div class="dashboard-card">
+                    <span>👥 Consultas Hoje</span>
+
+                    <strong id="dashboardHoje">
+                        0
+                    </strong>
+
+                    <small>atendimentos</small>
+                </div>
+
+                <div class="dashboard-card">
+                    <span>📅 Consultas Semana</span>
+
+                    <strong id="dashboardSemana">
+                        0
+                    </strong>
+
+                    <small>consultas</small>
+                </div>
+
+                <div class="dashboard-card">
+                    <span>👨‍⚕️ Pacientes Semana</span>
+
+                    <strong id="dashboardPacientes">
+                        0
+                    </strong>
+
+                    <small>pacientes únicos</small>
+                </div>
+
+            </div>
+
+            <div class="dashboard-section">
+
+                <h3>Produtividade da Semana</h3>
+
+                <div class="dashboard-chart" id="graficoSemana">
+
+                    <!-- preenchido via JS -->
+
+                </div>
+
+            </div>
+
+            <div class="dashboard-bottom">
+
+                <div class="dashboard-section">
+
+                    <h3>Próximas Consultas</h3>
+
+                    <div id="dashboardConsultasHoje">
+
+                        <div class="timeline-item">
+                            Nenhuma consulta agendada
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="dashboard-section">
+
+                    <h3>Alertas</h3>
+
+                    <div id="dashboardAlertas">
+
+                        <div class="alert-item">
+                            Nenhum alerta.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="modalAgendaProfissional" class="dashboard-overlay">
+
+        <div class="dashboard-modal agenda-modal">
+
+            <button class="dashboard-close" onclick="fecharAgendaProfissional()">
+                ✕
+            </button>
+
+            <div class="dashboard-header">
+
+                <div>
+                    <h2>Agenda Profissional</h2>
+                    <p>Gerencie seus compromissos e plantões</p>
+                </div>
+
+            </div>
+
+
+            <div class="agenda-form">
+
+                <input type="text" id="tituloEvento" placeholder="Título do evento">
+
+                <select id="tipoEventoProfissional">
+
+                    <option value="Plantão">Plantão</option>
+
+                    <option value="Falta">Falta</option>
+
+                    <option value="Férias">Férias</option>
+
+                    <option value="Reunião">Reunião</option>
+
+                    <option value="Compromisso">Compromisso</option>
+
+                </select>
+
+                <input type="date" id="dataEventoProfissional">
+
+                <input type="time" id="horaEventoProfissional">
+
+                <input type="text" id="localEventoProfissional" placeholder="Local">
+
+                <button class="btn-primary" onclick="salvarEventoProfissional()">
+
+                    Salvar Evento
+
+                </button>
+
+            </div>
+
+
+            <div class="dashboard-section">
+
+                <h3>Próximos Eventos</h3>
+
+                <div id="listaEventosProfissional">
+
+                    Carregando...
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <div class="modal-consulta" id="modalBuscaPaciente">
         <div class="modal-content-consulta">
@@ -300,7 +501,7 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
 
             <!-- <input type="file" id="receitaConsulta"> -->
 
-            <button class="btn-finalizar">
+            <button class="btn-finalizar" id="btnFinalizarConsulta">
                 Finalizar Consulta
             </button>
 
@@ -1658,6 +1859,376 @@ if (!empty($fotoBanco) && file_exists("uploads/" . $fotoBanco)) {
             }, 3000);
 
         }
+
+
+
+        async function abrirDashboardProfissional() {
+
+            document.getElementById("modalDashboard").style.display = "flex";
+
+            try {
+
+                const response = await fetch(
+                    "/Saude_PI_DSM-main/php/profissional/buscarDashboardProfissional.php"
+                );
+
+                const dados = await response.json();
+
+                /*
+                CARDS
+                */
+
+                document.getElementById("dashboardHoje").innerText =
+                    dados.consultasHoje;
+
+                document.getElementById("dashboardSemana").innerText =
+                    dados.consultasSemana;
+
+                document.getElementById("dashboardPacientes").innerText =
+                    dados.pacientesSemana;
+
+
+                /*
+                EVENTO
+                */
+
+                if (dados.evento) {
+
+                    document.getElementById("dashboardEventoTitulo")
+                        .innerText =
+                        dados.evento.tipoEvento;
+
+                    document.getElementById("dashboardEventoData")
+                        .innerText =
+                        `${dados.evento.dataEvento} • ${dados.evento.horarioEvento}`;
+
+                } else {
+
+                    document.getElementById("dashboardEventoTitulo")
+                        .innerText =
+                        "Nenhum compromisso";
+
+                    document.getElementById("dashboardEventoData")
+                        .innerText = "";
+
+                }
+
+
+                /*
+                GRÁFICO
+                */
+
+                const grafico = document.getElementById("graficoSemana");
+
+                grafico.innerHTML = "";
+
+                const dias = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+
+                dados.grafico.forEach(item => {
+
+                    const data = new Date(item.dia);
+
+                    const diaSemana = dias[data.getDay()];
+
+                    const altura = Math.max(item.total * 15, 20);
+
+                    grafico.innerHTML += `
+                <div class="fake-bar" style="height:${altura}px">
+
+                    <small>${item.total}</small>
+
+                    <span>${diaSemana}</span>
+
+                </div>
+            `;
+                });
+
+            }
+
+            catch (erro) {
+
+                console.error(erro);
+
+                alert("Erro ao carregar dashboard.");
+
+            }
+
+        }
+
+
+        function fecharDashboardProfissional() {
+
+            document.getElementById("modalDashboard").style.display = "none";
+
+        }
+
+
+        document
+            .getElementById("btnFinalizarConsulta")
+            .addEventListener("click", finalizarConsulta);
+
+        async function finalizarConsulta() {
+
+            if (!window.idPacienteAtual) {
+                alert("Paciente não encontrado.");
+                return;
+            }
+
+            const observacoes = document
+                .getElementById("observacoesConsulta")
+                .value;
+
+            const confirmar = confirm(
+                "Deseja realmente finalizar esta consulta?"
+            );
+
+            if (!confirmar) return;
+
+            try {
+
+                const response = await fetch(
+                    "/Saude_PI_DSM-main/php/profissional/finalizarConsulta.php",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type":
+                                "application/x-www-form-urlencoded"
+                        },
+
+                        body: new URLSearchParams({
+                            paciente: window.idPacienteAtual,
+                            observacoes: observacoes
+                        })
+                    }
+                );
+
+                const resultado = await response.text();
+
+                if (resultado.trim() === "sucesso") {
+
+                    alert("Consulta finalizada com sucesso!");
+
+                    location.reload();
+
+                } else {
+
+                    alert(resultado);
+
+                }
+
+            } catch (erro) {
+
+                console.error(erro);
+
+                alert("Erro ao finalizar consulta.");
+
+            }
+
+        }
+
+
+        async function carregarEventosProfissional() {
+
+            const response = await fetch(
+                "/Saude_PI_DSM-main/php/profissional/listarEventosProfissional.php"
+            );
+
+            const eventos = await response.json();
+
+            let html = "";
+
+            eventos.forEach(evento => {
+
+                html += `
+    <div class="timeline-item">
+
+        <div>
+
+            <strong>
+                ${evento.tipoEvento}
+            </strong>
+
+            <span>
+                📅 ${evento.dataEvento}
+                •
+                🕒 ${evento.horarioEvento}
+            </span>
+
+            <small>
+                📍 ${evento.localEvento || "Local não informado"}
+            </small>
+
+        </div>
+
+        <button
+            title="Excluir evento"
+            onclick="excluirEventoProfissional(${evento.idEvento})">
+            🗑️
+        </button>
+
+    </div>
+`;
+
+            });
+
+            if (!html) {
+
+                html = `
+        <div class="timeline-item vazio">
+
+            Nenhum evento agendado.
+
+        </div>
+    `;
+            }
+
+            document.getElementById(
+                "listaEventosProfissional"
+            ).innerHTML = html;
+
+        }
+
+
+        document.addEventListener("DOMContentLoaded", carregarResumoDashboard);
+
+        async function carregarResumoDashboard() {
+
+            try {
+
+                const response = await fetch(
+                    "/Saude_PI_DSM-main/php/profissional/buscarDashboardProfissional.php"
+                );
+
+                const dados = await response.json();
+
+                document.getElementById("resumoHoje").innerText =
+                    dados.consultasHoje + " Consultas";
+
+                document.getElementById("resumoSemana").innerText =
+                    dados.pacientesSemana + " Pacientes";
+
+                /*
+                STATUS
+                */
+
+                const status = document.getElementById("resumoStatus");
+
+                status.innerText = "Online";
+
+                /*
+                Opcional:
+                Se não houver compromisso hoje,
+                mostrar "Disponível"
+                */
+
+                if (!dados.evento) {
+                    status.innerText = "Disponível";
+                }
+
+            }
+
+            catch (erro) {
+
+                console.error("Erro ao carregar resumo:", erro);
+
+            }
+
+        }
+
+
+
+        async function abrirAgendaProfissional() {
+
+            document.getElementById(
+                "modalAgendaProfissional"
+            ).style.display = "flex";
+
+            carregarEventosProfissional();
+
+        }
+
+        function fecharAgendaProfissional() {
+
+            document.getElementById(
+                "modalAgendaProfissional"
+            ).style.display = "none";
+
+        }
+
+
+        async function salvarEventoProfissional() {
+
+            const dados = new URLSearchParams({
+
+                titulo:
+                    document.getElementById("tituloEvento").value,
+
+                tipoEvento:
+                    document.getElementById("tipoEventoProfissional").value,
+
+                dataEvento:
+                    document.getElementById("dataEventoProfissional").value,
+
+                horarioEvento:
+                    document.getElementById("horaEventoProfissional").value,
+
+                localEvento:
+                    document.getElementById("localEventoProfissional").value
+
+            });
+
+            const response = await fetch(
+
+                "/Saude_PI_DSM-main/php/profissional/salvarEventoProfissional.php",
+
+                {
+                    method: "POST",
+                    body: dados
+                }
+
+            );
+
+            const resultado = await response.text();
+
+            if (resultado === "ok") {
+
+                carregarEventosProfissional();
+
+            }
+
+            else {
+
+                alert(resultado);
+
+            }
+
+        }
+
+        async function excluirEventoProfissional(id) {
+
+            if (!confirm("Excluir evento?")) return;
+
+            await fetch(
+
+                "/Saude_PI_DSM-main/php/profissional/excluirEventoProfissional.php",
+
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/x-www-form-urlencoded"
+                    },
+
+                    body: "idEvento=" + id
+                }
+
+            );
+
+            carregarEventosProfissional();
+
+        }
+
 
     </script>
 
