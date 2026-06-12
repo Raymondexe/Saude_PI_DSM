@@ -1,12 +1,9 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db = "BemEstar360";
 
-$conn = new mysqli($host, $user, $pass, $db); 
+$databaseUrl = getenv('DATABASE_URL');
 
-if ($conn->connect_error) {
-    die("Erro na conexão: " . $conn->connect_error);
+$conn = pg_connect($databaseUrl . " sslmode=require");
+
+if (!$conn) {
+    die("Erro na conexão com o banco.");
 }
-?>
