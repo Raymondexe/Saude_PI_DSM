@@ -11,20 +11,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $senha = $_POST['senha'] ?? '';
 
     // Preparar SQL
-    $stmt = $conn->prepare("
-    SELECT 
-        l.idLogin,
-        l.usuario,
-        l.senha,
-        l.tipo_usuario,
-        u.idUsuario,
-        u.nomeUsuario,
-        u.foto
-    FROM tbllogin l
-    INNER JOIN tblusuario u 
-        ON u.idUsuario = l.Usuario_idUsuario
-    WHERE l.usuario = ?
-");
+    $sql = "
+SELECT 
+    l.idlogin,
+    l.usuario,
+    l.senha,
+    l.tipo_usuario,
+    u.idusuario,
+    u.nomeusuario,
+    u.foto
+FROM tbllogin l#
+INNER JOIN tblusuario u
+    ON u.idusuario = l.usuario_idusuario
+WHERE l.usuario = $1
+";
+
+$resultado = pg_query_params($conn, $sql, array($usuario));
+
+if (!$resultado) {
+    die("Erro na consulta: " . pg_last_error($conn));
+}
 
     if (!$stmt) {
         die("Erro no prepare: " . $conn->error);
@@ -35,9 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $resultado = $stmt->get_result();
 
-    if ($resultado->num_rows > 0) {
+    if (pg_num_rows($resultado) > 0) {
 
-        $dados = $resultado->fetch_assoc();
+        $dados = pg_fetch_assoc($resultado);
 
         if (password_verify($senha, $dados['senha'])) {
 
